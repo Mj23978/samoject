@@ -52,7 +52,7 @@ dependencies:
   linked_scroll_controller: ^0.2.0
   hotkey_manager: ^0.1.7
   textfield_tags: ^2.0.0
-  pluto_grid: ^5.1.0
+  rxdart: ^0.27.5
 
 dev_dependencies:
   flutter_test:
