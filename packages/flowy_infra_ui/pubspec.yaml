@@ -1,0 +1,54 @@
+name: flowy_infra_ui
+description: A new flutter plugin project.
+version: 0.0.1
+publish_to: "none"
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Thirdparty packages
+  textstyle_extensions: "2.0.0-nullsafety"
+  dartz: "0.10.1"
+  provider: ^6.0.1
+  styled_widget: "^0.3.1"
+  equatable: "^2.0.3"
+  animations: ^2.0.0
+  loading_indicator: ^3.0.1
+
+  # Federated Platform Interface
+  flowy_infra_ui_platform_interface:
+    path: flowy_infra_ui_platform_interface
+  flowy_infra_ui_web:
+    path: flowy_infra_ui_web
+
+  # Flowy packages
+  flowy_infra:
+    path: ../flowy_infra
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  plugin:
+    platforms:
+      # TODO: uncomment android part will fail the Linux build process, will resolve later
+      # android:
+      #   package: com.example.flowy_infra_ui
+      #   pluginClass: FlowyInfraUIPlugin
+      ios:
+        pluginClass: FlowyInfraUIPlugin
+      macos:
+        pluginClass: FlowyInfraUIPlugin
+      windows:
+        pluginClass: FlowyInfraUIPlugin
+      linux:
+        pluginClass: FlowyInfraUIPlugin
+      web:
+        default_package: flowy_infra_ui_web

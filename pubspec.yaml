@@ -1,0 +1,85 @@
+name: notion
+description: A new Flutter project.
+publish_to: "none"
+
+version: 0.5.0
+
+environment:
+  sdk: ">=2.17.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flowy_infra_ui:
+    path: packages/flowy_infra_ui
+  flowy_infra:
+    path: packages/flowy_infra
+
+  appflowy_board: ^0.0.7
+  appflowy_editor: ^0.0.4
+  font_awesome_flutter:
+  expandable: ^5.0.1
+  flutter_shapes:
+  flutter_feather_icons: ^2.0.0+1
+  tcard: ^1.3.5
+  fl_chart: ^0.36.3
+  flutter_slidable: ^0.6.0
+  beamer: ^1.4.1+1
+  cupertino_icons: ^1.0.2
+  dartx: ^1.1.0
+  dartz: ^0.10.1
+  easy_localization: ^3.0.0
+  flash: ^1.5.1
+  flutter_staggered_animations: ^1.0.0
+  flutter_svg: ^1.1.0
+  flutter_uix: ^0.1.2-nullsafety.2
+  freezed_annotation: ^2.0.3
+  google_fonts: ^3.0.1
+  hive_flutter: ^1.1.0
+  hooks_riverpod: ^1.0.4
+  flutter_hooks: ^0.18.4
+  ionicons: ^0.1.2
+  logger: ^1.1.0
+  responsive_builder: ^0.4.1
+  rive: ^0.8.4
+  flare_flutter:
+  rive_splash_screen: ^0.1.0
+  url_strategy: ^0.2.0
+  table_calendar: ^3.0.5
+  reorderables: ^0.5.0
+  linked_scroll_controller: ^0.2.0
+  hotkey_manager: ^0.1.7
+  textfield_tags: ^2.0.0
+  pluto_grid: ^5.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: "^0.9.1"
+  build_runner: ^2.1.2
+  freezed: ^2.0.3+1
+  json_serializable: ^6.2.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/memoji/
+    - assets/images/
+    - assets/images/home/
+    - assets/images/editor/
+    - assets/images/grid/
+    - assets/images/emoji/
+    - assets/images/grid/field/
+    - assets/images/grid/setting/
+    - assets/flare/
+    - assets/translations/
