@@ -16,6 +16,10 @@ dependencies:
     path: packages/flowy_infra_ui
   flowy_infra:
     path: packages/flowy_infra
+  samoject_list:
+    path: packages/samoject_list
+  samoject_table:
+    path: packages/samoject_table
 
   appflowy_board: ^0.0.7
   appflowy_editor: ^0.0.4
