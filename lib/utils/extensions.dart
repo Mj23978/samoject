@@ -1,7 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:notion/utils/helpers.dart';
+
+import 'helpers.dart';
 import 'color.dart';
 
 extension StringExt on String {

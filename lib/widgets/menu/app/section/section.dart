@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notion/widgets/menu/view.dart';
 import 'package:reorderables/reorderables.dart';
 
+import '../../view.dart';
 import 'item.dart';
 
 class ViewSection extends StatelessWidget {

@@ -14,8 +14,9 @@ import 'package:flowy_infra/image.dart';
 import 'package:flowy_infra_ui/style_widget/icon_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_uix/flutter_uix.dart';
-import 'package:notion/widgets/menu/app/section/item.dart';
-import 'package:notion/widgets/menu/view.dart';
+
+import 'app/section/item.dart';
+import 'view.dart';
 import 'app/menu_app.dart';
 import 'app/create_button.dart';
 import 'menu_user.dart';
