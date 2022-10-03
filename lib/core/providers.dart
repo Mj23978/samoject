@@ -3,7 +3,7 @@ import 'package:logger/logger.dart';
 
 import 'logger.dart';
 import 'notifiers/app_provider.dart';
-import 'notifiers/game_provider.dart';
+import 'notifiers/home_provider.dart';
 import 'notifiers/splash_provider.dart';
 
 final ProviderFamily<Logger, String> loggerProvider =
@@ -15,8 +15,8 @@ final appProvider = Provider(
   (ref) => AppProvider(),
 );
 
-final gameProvider = ChangeNotifierProvider((ref) {
-  return GameProvider(ref.watch(appProvider));
+final homeProvider = ChangeNotifierProvider((ref) {
+  return HomeProvider(ref.watch(appProvider));
 });
 
 final splashProvider = StateNotifierProvider<SplashNotifier, SplashState>((ref) {

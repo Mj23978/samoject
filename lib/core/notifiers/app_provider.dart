@@ -16,5 +16,4 @@ class AppProvider extends ChangeNotifier {
   void setRoles(List<String> input) {
     notifyListeners();
   }
-
 }

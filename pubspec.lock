@@ -225,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.1"
+  dropdown_search:
+    dependency: "direct main"
+    description:
+      name: dropdown_search
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.3"
   easy_localization:
     dependency: "direct main"
     description:
@@ -910,6 +917,13 @@ packages:
       relative: true
     source: path
     version: "0.0.2"
+  searchfield:
+    dependency: "direct main"
+    description:
+      name: searchfield
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0"
   shared_preferences:
     dependency: transitive
     description:

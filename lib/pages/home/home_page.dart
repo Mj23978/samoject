@@ -1,116 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_uix/flutter_uix.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:samoject_table/samoject_table.dart';
+import 'package:searchfield/searchfield.dart';
+
+import '../../core/providers.dart';
 
 class HomeView extends ConsumerWidget {
   HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ref) {
-    return Scaffold(
-      body: TableGridExamplePage(),
-    );
-  }
-}
-
-class TableGridExamplePage extends StatefulWidget {
-  const TableGridExamplePage({Key? key}) : super(key: key);
-
-  @override
-  State<TableGridExamplePage> createState() => _TableGridExamplePageState();
-}
-
-class _TableGridExamplePageState extends State<TableGridExamplePage> {
-  final List<SamojectTableColumn> columns = <SamojectTableColumn>[
-    SamojectTableColumn(
-      title: 'Id',
-      field: 'id',
-      type: SamojectTableColumnType.text(),
-    ),
-    SamojectTableColumn(
-      title: 'Name',
-      field: 'name',
-      type: SamojectTableColumnType.text(),
-    ),
-    SamojectTableColumn(
-      title: 'Age',
-      field: 'age',
-      type: SamojectTableColumnType.number(),
-    ),
-    SamojectTableColumn(
-      title: 'Role',
-      field: 'role',
-      type: SamojectTableColumnType.select(<String>[
-        'Programmer',
-        'Designer',
-        'Owner',
-      ]),
-    ),
-    SamojectTableColumn(
-      title: 'Joined',
-      field: 'joined',
-      type: SamojectTableColumnType.date(),
-    ),
-    SamojectTableColumn(
-      title: 'Working time',
-      field: 'working_time',
-      type: SamojectTableColumnType.time(),
-    ),
-  ];
-
-  final List<SamojectTableRow> rows = [
-    SamojectTableRow(
-      cells: {
-        'id': SamojectTableCell(value: 'user1'),
-        'name': SamojectTableCell(value: 'Mike'),
-        'age': SamojectTableCell(value: 20),
-        'role': SamojectTableCell(value: 'Programmer'),
-        'joined': SamojectTableCell(value: '2021-01-01'),
-        'working_time': SamojectTableCell(value: '09:00'),
-      },
-    ),
-    SamojectTableRow(
-      cells: {
-        'id': SamojectTableCell(value: 'user2'),
-        'name': SamojectTableCell(value: 'Jack'),
-        'age': SamojectTableCell(value: 25),
-        'role': SamojectTableCell(value: 'Designer'),
-        'joined': SamojectTableCell(value: '2021-02-01'),
-        'working_time': SamojectTableCell(value: '10:00'),
-      },
-    ),
-    SamojectTableRow(
-      cells: {
-        'id': SamojectTableCell(value: 'user3'),
-        'name': SamojectTableCell(value: 'Suzi'),
-        'age': SamojectTableCell(value: 40),
-        'role': SamojectTableCell(value: 'Owner'),
-        'joined': SamojectTableCell(value: '2021-03-01'),
-        'working_time': SamojectTableCell(value: '11:00'),
-      },
-    ),
-  ];
-
-  /// columnGroups that can group columns can be omitted.
-  final List<SamojectTableColumnGroup> columnGroups = [
-    SamojectTableColumnGroup(title: 'Id', fields: ['id'], expandedColumn: true),
-    SamojectTableColumnGroup(
-        title: 'User information', fields: ['name', 'age']),
-    SamojectTableColumnGroup(title: 'Status', children: [
-      SamojectTableColumnGroup(
-          title: 'A', fields: ['role'], expandedColumn: true),
-      SamojectTableColumnGroup(
-          title: 'Etc.', fields: ['joined', 'working_time']),
-    ]),
-  ];
-
-  /// [TableGridStateManager] has many methods and properties to dynamically manipulate the grid.
-  /// You can manipulate the grid dynamically at runtime by passing this through the [onLoaded] callback.
-  late final SamojectTableGridStateManager stateManager;
-
-  @override
-  Widget build(BuildContext context) {
+    final provider = ref.watch(homeProvider);
     return Scaffold(
       body: Column(
         children: [
@@ -144,7 +46,47 @@ class _TableGridExamplePageState extends State<TableGridExamplePage> {
                       Flexible(
                         flex: 2,
                         child: Container(
-                          color: Colors.blue,
+                          color: Colors.transparent,
+                          child: Row(
+                            children: [
+                              SizedBox(width: 10),
+                              Flexible(
+                                flex: 2,
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      left: 5, right: 5, top: 2, bottom: 1),
+                                  child: const TextField(
+                                    decoration: InputDecoration(
+                                        border: UnderlineInputBorder(
+                                            borderSide: BorderSide.none),
+                                        prefixIcon: Icon(Icons.search, size: 20),
+                                        prefixIconColor: Colors.black38,
+                                        labelText: '  Search Tasks ...',
+                                        labelStyle: TextStyle(fontSize: 10)),
+                                  ),
+                                ),
+                              ),
+                              AnimatedDropDownButton(),
+                              SizedBox(width: 4),
+                              RotatedBox(
+                                quarterTurns: 1,
+                                child: Divider(
+                                  height: 4,
+                                  color: Colors.black38,
+                                  indent: 7,
+                                  endIndent: 7,
+                                  thickness: 0.5,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 560 - 480,
+                              ),
+                              Flexible(
+                                flex: 6,
+                                child: Container(),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       Flexible(
@@ -152,16 +94,17 @@ class _TableGridExamplePageState extends State<TableGridExamplePage> {
                         child: Container(
                           padding: const EdgeInsets.all(15),
                           child: SamojectTableGrid(
-                            columns: columns,
-                            rows: rows,
+                            columns: provider.columns,
+                            rows: provider.rows,
                             // columnGroups: columnGroups,
                             onLoaded: (SamojectTableGridOnLoadedEvent event) {
-                              stateManager = event.stateManager;
+                              provider.setTableStateManager(event.stateManager);
                             },
                             onChanged: (SamojectTableGridOnChangedEvent event) {
                               print(event);
                             },
-                            configuration: const SamojectTableGridConfiguration(),
+                            configuration:
+                                const SamojectTableGridConfiguration(),
                           ),
                         ),
                       ),
@@ -173,6 +116,45 @@ class _TableGridExamplePageState extends State<TableGridExamplePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class AnimatedDropDownButton extends HookConsumerWidget {
+  final Duration duration;
+
+  const AnimatedDropDownButton({
+    this.duration = const Duration(milliseconds: 400),
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _controller = useAnimationController(duration: duration);
+    final bool _isDropdownOpen = useMemoized(() {
+      return false;
+    });
+    final Animation<double> _rotationAnimation = useMemoized(() {
+      return Tween<double>(begin: 0, end: 0.5).animate(_controller);
+    }, []);
+
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return InkWell(
+          onTap: () {
+            if (!_controller.isAnimating && _controller.isCompleted) {
+              _controller.reverse();
+            } else if (!_controller.isAnimating) {
+              _controller.forward();
+            }
+          },
+          child: RotationTransition(
+            turns: _rotationAnimation,
+            child: const Icon(Icons.keyboard_arrow_down, color: Colors.black38, size: 18,),
+          ),
+        );
+      },
     );
   }
 }
