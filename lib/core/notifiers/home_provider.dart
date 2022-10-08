@@ -1,14 +1,13 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+import 'package:info_popup/info_popup.dart';
 import 'package:samoject_table/samoject_table.dart';
 
 import '../../../utils/keys.dart';
 import 'app_provider.dart';
 
 class HomeProvider extends ChangeNotifier {
-  HomeProvider(this._appProvider) {
-  }
+  HomeProvider(this._appProvider);
 
   final AppProvider _appProvider;
   Box conf = Hive.box(DBKeys.hive_config);
@@ -100,9 +99,80 @@ class HomeProvider extends ChangeNotifier {
   /// You can manipulate the grid dynamically at runtime by passing this through the [onLoaded] callback.
   late final SamojectTableGridStateManager stateManager;
 
+  InfoPopupController? infoPopupCustomWidgetController;
+
+  final List<SpaceView> views = [
+    SpaceView('List'),
+    SpaceView('Board'),
+    SpaceView('Box'),
+    SpaceView('Calendar')
+  ];
+
+  final List<HomeFavorites> favorites = [
+    HomeFavorites('Get to know clickup'),
+  ];
+
+  bool titleHovered = false;
+  bool sideSearchHovered = false;
+
   setTableStateManager(sm) {
     stateManager = sm;
     notifyListeners();
   }
 
+  setSearchMArrowController(controller) {
+    infoPopupCustomWidgetController = controller;
+    notifyListeners();
+  }
+
+  onHoverView(String viewName, bool value) {
+    final view = views.singleWhere((element) => element.name == viewName);
+    view.onHovered = value;
+    notifyListeners();
+  }
+
+  onHoverFavorite(String favorite, bool value) {
+    final view = favorites.singleWhere((element) => element.name == favorite);
+    view.onHovered = value;
+    notifyListeners();
+  }
+
+  onSelectView(String viewName) {
+    final view = views.singleWhere((element) => element.name == viewName);
+    view.selected = !view.selected;
+    notifyListeners();
+  }
+
+  onTiltleHovered(value) {
+    titleHovered = value;
+    notifyListeners();
+  }
+
+  onSideSearchHovered(value) {
+    sideSearchHovered = value;
+    notifyListeners();
+  }
+
+}
+
+class SpaceView {
+  String name;
+  bool onHovered;
+  bool selected;
+
+  SpaceView(
+    this.name, {
+    this.onHovered = false,
+    this.selected = false,
+  });
+}
+
+class HomeFavorites {
+  String name;
+  bool onHovered;
+
+  HomeFavorites(
+    this.name, {
+    this.onHovered = false,
+  });
 }

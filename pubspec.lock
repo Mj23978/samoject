@@ -539,6 +539,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
+  info_popup:
+    dependency: "direct main"
+    description:
+      name: info_popup
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   intl:
     dependency: transitive
     description:
@@ -1252,5 +1259,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.17.1 <3.0.0"
+  dart: ">=2.17.3 <3.0.0"
   flutter: ">=3.0.0"

@@ -59,6 +59,8 @@ dependencies:
   textfield_tags: ^2.0.0
   rxdart: ^0.27.5
   searchfield: ^0.7.0
+  info_popup: ^1.2.0
+  just_the_tooltip: ^0.0.12
 
 dev_dependencies:
   flutter_test:
@@ -89,3 +91,4 @@ flutter:
     - assets/images/grid/setting/
     - assets/flare/
     - assets/translations/
+    - assets/icons/

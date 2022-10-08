@@ -1,160 +1,100 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_uix/flutter_uix.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:samoject_table/samoject_table.dart';
-import 'package:searchfield/searchfield.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 
-import '../../core/providers.dart';
-
-class HomeView extends ConsumerWidget {
-  HomeView({Key? key}) : super(key: key);
+class DefaultPageExample extends StatefulWidget {
+  const DefaultPageExample({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
-    final provider = ref.watch(homeProvider);
+  State<DefaultPageExample> createState() => _DefaultPageExampleState();
+}
+
+class _DefaultPageExampleState extends State<DefaultPageExample> {
+  final tooltipController = JustTheController();
+  var length = 10.0;
+  var color = Colors.pink;
+  var alignment = Alignment.center;
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 2), () {
+      tooltipController.showTooltip(immediately: false);
+    });
+
+    tooltipController.addListener(() {
+      // print('controller: ${tooltipController.value}');
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const margin = EdgeInsets.all(16.0);
+
     return Scaffold(
-      body: Column(
+      appBar: AppBar(),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          if (true)
-            Flexible(
-              flex: 1,
-              child: Container(
-                color: Colors.red,
-              ),
-            ),
-          Flexible(
-            flex: 19,
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.black,
-                  ),
-                ),
-                Flexible(
-                  flex: 8,
-                  child: Column(
-                    children: [
-                      Flexible(
-                        flex: 3,
-                        child: Container(
-                          color: Colors.yellow,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 2,
-                        child: Container(
-                          color: Colors.transparent,
-                          child: Row(
-                            children: [
-                              SizedBox(width: 10),
-                              Flexible(
-                                flex: 2,
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                      left: 5, right: 5, top: 2, bottom: 1),
-                                  child: const TextField(
-                                    decoration: InputDecoration(
-                                        border: UnderlineInputBorder(
-                                            borderSide: BorderSide.none),
-                                        prefixIcon: Icon(Icons.search, size: 20),
-                                        prefixIconColor: Colors.black38,
-                                        labelText: '  Search Tasks ...',
-                                        labelStyle: TextStyle(fontSize: 10)),
-                                  ),
-                                ),
-                              ),
-                              AnimatedDropDownButton(),
-                              SizedBox(width: 4),
-                              RotatedBox(
-                                quarterTurns: 1,
-                                child: Divider(
-                                  height: 4,
-                                  color: Colors.black38,
-                                  indent: 7,
-                                  endIndent: 7,
-                                  thickness: 0.5,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 560 - 480,
-                              ),
-                              Flexible(
-                                flex: 6,
-                                child: Container(),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        flex: 25,
-                        child: Container(
-                          padding: const EdgeInsets.all(15),
-                          child: SamojectTableGrid(
-                            columns: provider.columns,
-                            rows: provider.rows,
-                            // columnGroups: columnGroups,
-                            onLoaded: (SamojectTableGridOnLoadedEvent event) {
-                              provider.setTableStateManager(event.stateManager);
-                            },
-                            onChanged: (SamojectTableGridOnChangedEvent event) {
-                              print(event);
-                            },
-                            configuration:
-                                const SamojectTableGridConfiguration(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          ElevatedButton(
+            child: const Icon(Icons.add),
+            onPressed: () {
+              tooltipController.showTooltip(immediately: true);
+            },
+          ),
+          const SizedBox(width: 8),
+          ElevatedButton(
+            child: const Icon(Icons.remove),
+            onPressed: () {
+              tooltipController.hideTooltip(immediately: true);
+            },
           ),
         ],
       ),
-    );
-  }
-}
-
-class AnimatedDropDownButton extends HookConsumerWidget {
-  final Duration duration;
-
-  const AnimatedDropDownButton({
-    this.duration = const Duration(milliseconds: 400),
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = useAnimationController(duration: duration);
-    final bool _isDropdownOpen = useMemoized(() {
-      return false;
-    });
-    final Animation<double> _rotationAnimation = useMemoized(() {
-      return Tween<double>(begin: 0, end: 0.5).animate(_controller);
-    }, []);
-
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return InkWell(
-          onTap: () {
-            if (!_controller.isAnimating && _controller.isCompleted) {
-              _controller.reverse();
-            } else if (!_controller.isAnimating) {
-              _controller.forward();
-            }
-          },
-          child: RotationTransition(
-            turns: _rotationAnimation,
-            child: const Icon(Icons.keyboard_arrow_down, color: Colors.black38, size: 18,),
+      body: SizedBox.expand(
+        child: AnimatedAlign(
+          duration: const Duration(milliseconds: 1500),
+          alignment: alignment,
+          child: JustTheTooltip(
+            onShow: () {
+              // print('onShow');
+            },
+            onDismiss: () {
+              // print('onDismiss');
+            },
+            backgroundColor: color,
+            controller: tooltipController,
+            tailLength: length,
+            tailBaseWidth: 20.0,
+            isModal: true,
+            preferredDirection: AxisDirection.up,
+            margin: margin,
+            borderRadius: BorderRadius.circular(8.0),
+            offset: 0,
+            child: Material(
+              color: Colors.grey.shade800,
+              shape: const CircleBorder(),
+              elevation: 4.0,
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            content: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 200.0),
+                child: const Text(
+                  'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor.',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
