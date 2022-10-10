@@ -1,283 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_uix/flutter_uix.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:info_popup/info_popup.dart';
-import 'package:samoject_table/samoject_table.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 
 import '../../core/notifiers/home_provider.dart';
 import '../../core/providers.dart';
-
-const Key infoPopupTextExampleKey = Key('info_popup_text_example');
-const String infoPopupTextExampleText = 'This is a popup';
-
-const Key infoPopupCustomExampleKey = Key('info_popup_custom_example');
-const String infoPopupCustomExampleText = 'This is a custom widget';
-
-const Key infoPopupLongTextExampleKey = Key('info_popup_long_text_example');
-const String infoPopupLongTextExampleText = '''
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra. Consectetur adipiscing elit ut aliquam purus sit. Nisl vel pretium lectus quam. Et odio pellentesque diam volutpat commodo. Diam vulputate ut pharetra sit amet aliquam id diam maecenas. Malesuada fames ac turpis egestas. Et sollicitudin ac orci phasellus egestas tellus rutrum. Pretium lectus quam id leo in. Semper risus in hendrerit gravida. Nullam ac tortor vitae purus faucibus ornare suspendisse sed. Non tellus orci ac auctor. Quis risus sed vulputate odio ut enim blandit.
-\n
-Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Aenean et tortor at risus viverra adipiscing at in. Augue eget arcu dictum varius duis at consectetur. Est pellentesque elit ullamcorper dignissim cras. At consectetur lorem donec massa sapien faucibus et. Sit amet venenatis urna cursus eget. Dignissim cras tincidunt lobortis feugiat vivamus. Eget arcu dictum varius duis at. Aenean pharetra magna ac placerat. Enim nec dui nunc mattis enim ut tellus elementum. Laoreet suspendisse interdum consectetur libero. Tellus mauris a diam maecenas sed enim. Tortor posuere ac ut consequat semper viverra nam libero. Tellus molestie nunc non blandit massa.
-''';
-
-const Key infoPopupArrowGapExampleKey = Key('info_popup_arrow_gap_example');
-const String infoPopupArrowGapExampleText = infoPopupLongTextExampleText;
-
-class HomeView extends ConsumerWidget {
-  const HomeView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, ref) {
-    final provider = ref.watch(homeProvider);
-    return Scaffold(
-      body: Column(
-        children: [
-          if (true)
-            Flexible(
-              flex: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey.shade900,
-                ),
-                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-                child: HomeFavoritesSection(
-                  provider: provider,
-                ),
-              ),
-            ),
-          Flexible(
-            flex: 19,
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 2,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blueGrey.shade900,
-                    ),
-                    height: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 4),
-                    child: Column(
-                      children: [
-                        Material(
-                          type: MaterialType.transparency,
-                          child: Container(
-                            margin: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 4,
-                            ),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/icons/app-logo.svg',
-                                  height: 20,
-                                  width: 20,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Samoject",
-                                  style: GoogleFonts.gemunuLibre(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Spacer(),
-                                InkWell(
-                                  onTap: () {},
-                                  onHover: (value) {},
-                                  hoverColor: Colors.blue.withOpacity(0.15),
-                                  borderRadius: BorderRadius.circular(3),
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 3, vertical: 3),
-                                    child: Icon(
-                                      Icons.settings,
-                                      color: Colors.teal.shade700,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 2),
-                                InkWell(
-                                  onTap: () {},
-                                  hoverColor: Colors.blue.withOpacity(0.15),
-                                  onHover: (value) {},
-                                  borderRadius: BorderRadius.circular(3),
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 3, vertical: 3),
-                                    child: Icon(
-                                      Icons.keyboard_double_arrow_left_sharp,
-                                      color: Colors.blue,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 6),
-                          decoration: BoxDecoration(
-                              color: Colors.blueGrey.shade800,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: TextButton(
-                            onPressed: () {},
-                            onHover: provider.onSideSearchHovered,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 2, horizontal: 6),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: provider.sideSearchHovered
-                                        ? Colors.blue
-                                        : Colors.black45,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "Search",
-                                    style: TextStyle(
-                                        color: provider.sideSearchHovered
-                                            ? Colors.blue
-                                            : Colors.black45,
-                                        fontSize: 12),
-                                  ),
-                                  Spacer(),
-                                  Text(
-                                    "Ctrl+K",
-                                    style: TextStyle(
-                                        color: provider.sideSearchHovered
-                                            ? Colors.blue
-                                            : Colors.black45,
-                                        fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SideMenuSimpleItem(
-                          name: "Home",
-                          provider: provider,
-                          iconData: Icons.home_outlined,
-                        ),
-                        SideMenuSimpleItem(
-                            name: "Notifications",
-                            provider: provider,
-                            iconData: Icons.notifications_outlined),
-                        SideMenuSimpleItem(
-                          name: " Goals",
-                          provider: provider,
-                          iconData: FontAwesomeIcons.trophy,
-                          iconSize: 15,
-                        ),
-                        SideMenuSimpleItem(
-                          name: "Show less",
-                          provider: provider,
-                          iconData: Icons.arrow_upward_outlined,
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Divider(
-                          color: Colors.blueGrey,
-                          thickness: 0.5,
-                          height: 0,
-                        ),
-                        SideMenuSectionItem(
-                          name: "Spaces",
-                          showSearch: false,
-                          provider: provider,
-                        ),
-                        Divider(
-                          color: Colors.blueGrey,
-                          thickness: 0.5,
-                          height: 0,
-                        ),
-                        SideMenuSectionItem(
-                          name: "Dashboards",
-                          showSearch: false,
-                          provider: provider,
-                        ),
-                        Divider(
-                          color: Colors.blueGrey,
-                          thickness: 0.5,
-                          height: 0,
-                        ),
-                        SideMenuSectionItem(
-                          name: "Docs",
-                          showSearch: false,
-                          provider: provider,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 8,
-                  child: Column(
-                    children: [
-                      Flexible(
-                        flex: 3,
-                        child: Container(
-                          color: Colors.transparent,
-                          child: SpaceHeaderViews(
-                            provider: provider,
-                          ),
-                        ),
-                      ),
-                      Divider(height: 2),
-                      Flexible(
-                        flex: 2,
-                        child: Container(
-                          color: Colors.transparent,
-                          child: SpaceActionBar(),
-                        ),
-                      ),
-                      Flexible(
-                        flex: 25,
-                        child: Container(
-                          padding: const EdgeInsets.all(15),
-                          child: SamojectTableGrid(
-                            columns: provider.columns,
-                            rows: provider.rows,
-                            // columnGroups: columnGroups,
-                            onLoaded: (SamojectTableGridOnLoadedEvent event) {
-                              provider.setTableStateManager(event.stateManager);
-                            },
-                            onChanged: print,
-                            configuration:
-                                const SamojectTableGridConfiguration(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class SideMenuSectionItem extends StatelessWidget {
   final String name;
@@ -507,17 +237,37 @@ class SpaceHeaderViews extends StatelessWidget {
               SizedBox(
                 width: 2,
               ),
-              Opacity(
-                opacity: provider.titleHovered ? 1 : 0,
-                child: InkWell(
-                  onTap: () {},
-                  borderRadius: BorderRadius.circular(3),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 3, vertical: 3),
-                    child: Icon(
-                      Icons.more_horiz_outlined,
-                      color: Colors.black38,
-                      size: 15,
+              JustTheTooltip(
+                onShow: () {},
+                onDismiss: () {},
+                backgroundColor: Colors.white,
+                controller: provider.spaceTitleMoreController,
+                tailLength: 0,
+                tailBaseWidth: 0.0,
+                isModal: true,
+                preferredDirection: AxisDirection.down,
+                margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                borderRadius: BorderRadius.circular(8.0),
+                offset: 10,
+                content: SpaceHeaderMoreTooltip(),
+                child: Opacity(
+                  opacity: (provider.titleHovered ||
+                          provider.spaceTitleMoreController.value ==
+                              TooltipStatus.isShowing)
+                      ? 1
+                      : 0,
+                  child: InkWell(
+                    onTap: () {
+                      provider.spaceTitleMoreController.showTooltip();
+                    },
+                    borderRadius: BorderRadius.circular(3),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 3, vertical: 3),
+                      child: Icon(
+                        Icons.more_horiz_outlined,
+                        color: Colors.black38,
+                        size: 15,
+                      ),
                     ),
                   ),
                 ),
@@ -724,7 +474,12 @@ class SpaceHeaderView extends StatelessWidget {
 }
 
 class SpaceActionBar extends StatelessWidget {
-  const SpaceActionBar({Key? key}) : super(key: key);
+  final HomeProvider provider;
+
+  const SpaceActionBar({
+    Key? key,
+    required this.provider,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -743,7 +498,14 @@ class SpaceActionBar extends StatelessWidget {
                 labelStyle: TextStyle(fontSize: 10)),
           ),
         ),
-        AnimatedDropDownButton(),
+        AnimatedDropDownButton(
+          animationKey: Key("SpaceSearchMenu"),
+          content: SpaceActionTraySearchItems(),
+          tooltipController: provider.spaceActionTraySearchController,
+          onTap: () {
+            // provider.spaceActionTraySearchController.showTooltip();
+          },
+        ),
         const SizedBox(width: 4),
         ConstrainedBox(
           constraints: BoxConstraints(maxHeight: 30),
@@ -796,6 +558,23 @@ class SpaceActionBar extends StatelessWidget {
   }
 }
 
+class SpaceActionTraySearchItems extends ConsumerWidget {
+  const SpaceActionTraySearchItems({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final provider = ref.watch(homeProvider);
+    return AppPopupMenu(
+      title: "SEARCH IN",
+      width: 180,
+      items: provider.spaceActionTraySearchAction,
+      provider: provider,
+      numberOfSection: provider.spaceActionTraySearchAction.last.section + 1,
+      addHeight: 10,
+    );
+  }
+}
+
 class SpaceActionIcon extends StatelessWidget {
   final String name;
   final IconData? iconData;
@@ -836,19 +615,25 @@ class SpaceActionIcon extends StatelessWidget {
 
 class AnimatedDropDownButton extends HookConsumerWidget {
   final Duration duration;
+  final Function? onTap;
+  final Function? onDismiss;
+  final Key animationKey;
+  final JustTheController tooltipController;
+  final Widget content;
 
   const AnimatedDropDownButton({
+    required this.animationKey,
+    required this.tooltipController,
+    required this.content,
     this.duration = const Duration(milliseconds: 200),
+    this.onTap,
+    this.onDismiss,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useAnimationController(duration: duration);
-    InfoPopupController? infoPopupCustomWidgetController;
-    final bool isDropdownOpen = useMemoized(() {
-      return false;
-    });
     final Animation<double> rotationAnimation = useMemoized(() {
       return Tween<double>(begin: 0, end: 0.5).animate(controller);
     }, []);
@@ -857,46 +642,33 @@ class AnimatedDropDownButton extends HookConsumerWidget {
       animation: controller,
       builder: (context, child) {
         return InkWell(
-          key: infoPopupCustomExampleKey,
-          onTap: () {
+          key: Key("animationKey"),
+          onTap: () {            
             if (!controller.isAnimating && controller.isCompleted) {
               controller.reverse();
+              if (onDismiss != null) {
+                onDismiss!();
+              }
             } else if (!controller.isAnimating) {
               controller.forward();
-              if (infoPopupCustomWidgetController != null) {
-                infoPopupCustomWidgetController!.show();
-              }
+              // if (onTap != null) {
+              //   onTap!();
+              // }
             }
           },
-          child: InfoPopupWidget(
-            onControllerCreated: (InfoPopupController controller) {
-              infoPopupCustomWidgetController ??= controller;
-            },
-            infoPopupDismissed: () {
-              if (!controller.isAnimating && controller.isCompleted) {
-                controller.reverse();
-              }
-            },
-            arrowTheme: const InfoPopupArrowTheme(
-              color: Colors.black87,
-              arrowDirection: ArrowDirection.down,
-            ),
-            infoWidget: Container(
-              width: context.percentWidth * 90,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Center(
-                child: Text(
-                  infoPopupCustomExampleText,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+          child: JustTheTooltip(
+            onShow: () {},
+            onDismiss: () {},
+            backgroundColor: Colors.white,
+            controller: tooltipController,
+            tailLength: 0,
+            tailBaseWidth: 0.0,
+            isModal: true,
+            preferredDirection: AxisDirection.down,
+            margin: EdgeInsets.only(top: 100),
+            borderRadius: BorderRadius.circular(8.0),
+            offset: 10,
+            content: content,
             child: RotationTransition(
               turns: rotationAnimation,
               child: const Icon(
@@ -910,4 +682,201 @@ class AnimatedDropDownButton extends HookConsumerWidget {
       },
     );
   }
+}
+
+class SpaceHeaderMoreTooltip extends ConsumerWidget {
+  const SpaceHeaderMoreTooltip({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final provider = ref.watch(homeProvider);
+    return AppPopupMenu(
+      items: provider.spaceTitleMoreAction,
+      provider: provider,
+      numberOfSection: provider.spaceTitleMoreAction.last.section + 1,
+    );
+  }
+}
+
+class AppPopupMenu extends StatelessWidget {
+  final List<AppPopupMenuItem> items;
+  final HomeProvider provider;
+  final String? title;
+  final double width;
+  final double addHeight;
+  final int numberOfSection;
+
+  const AppPopupMenu({
+    Key? key,
+    required this.items,
+    required this.provider,
+    this.title,
+    this.width = 200,
+    this.addHeight = 0,
+    this.numberOfSection = 1,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    int section = 0;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: width),
+        child: Container(
+          constraints: BoxConstraints(
+            maxHeight: (items.length * 32) +
+                (title != null ? 30 : 10) +
+                (numberOfSection * 6) +
+                addHeight,
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 6),
+              if (title != null) ...[
+                Align(
+                  alignment: Alignment(-0.8, 0),
+                  child: Text(
+                    title!,
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                SizedBox(height: 8)
+              ],
+              for (var i = 0; i < items.length; i++) ...[
+                ...() {
+                  if (items[i].section > section) {
+                    section++;
+                    return [
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Divider(
+                        height: 2,
+                        thickness: 1.5,
+                        indent: 4,
+                        endIndent: 4,
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                    ];
+                  }
+                  return [
+                    SizedBox(
+                      height: 4,
+                    )
+                  ];
+                }(),
+                wrapWithTooltip(
+                    items[i].subItems.isNotEmpty,
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: width),
+                      child: TextButton(
+                        onPressed: () async {
+                          if (items[i].subItems.isNotEmpty) {
+                            if (items[i].controller == null) {
+                              items[i].controller = JustTheController();
+                            }
+                            items[i].controller?.showTooltip();
+                          }
+                          if (items[i].addSwitch == true) {
+                            provider.setPopupMenuItemsSwitch(
+                              items,
+                              i,
+                              !items[i].switchValue,
+                            );
+                          }
+                        },
+                        style: ButtonStyle(
+                            // padding: MaterialStateProperty.all(
+                            //   EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+                            // ),
+                            ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ...(items[i].prefixWidgets),
+                            if (items[i].isNew)
+                              Container(
+                                margin: EdgeInsets.only(left: 4),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 3),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(2),
+                                    color: Colors.purple.shade100
+                                        .withOpacity(0.7)),
+                                child: Text(
+                                  "New",
+                                  style: TextStyle(
+                                    color: Colors.purple,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ),
+                            Spacer(),
+                            if (items[i].addSwitch)
+                              SizedBox(
+                                height: 32,
+                                width: 45,
+                                child: FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Switch(
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    value: items[i].switchValue,
+                                    onChanged: (value) =>
+                                        provider.setPopupMenuItemsSwitch(
+                                      items,
+                                      i,
+                                      value,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ...(items[i].suffixWidgets),
+                            if (items[i].subItems.isNotEmpty)
+                              Icon(Icons.arrow_forward_ios_rounded, size: 10),
+                          ],
+                        ),
+                      ),
+                    ),
+                    AppPopupMenu(
+                      items: items[i].subItems,
+                      provider: provider,
+                      title: items[i].subItemsHeader,
+                      width: 185,
+                      numberOfSection: items[i].subItems.isNotEmpty
+                          ? items[i].subItems.last.section + 1
+                          : 1,
+                    ),
+                    items[i].controller),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+Widget wrapWithTooltip(
+    bool wrap, Widget child, Widget content, JustTheController? controller) {
+  return wrap
+      ? JustTheTooltip(
+          onShow: () {},
+          onDismiss: () {},
+          backgroundColor: Colors.white,
+          controller: controller,
+          tailLength: 0,
+          tailBaseWidth: 0.0,
+          isModal: true,
+          preferredDirection: AxisDirection.right,
+          margin: EdgeInsets.only(top: 100),
+          borderRadius: BorderRadius.circular(8.0),
+          offset: 10,
+          content: content,
+          child: child,
+        )
+      : child;
 }

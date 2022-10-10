@@ -1,6 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:info_popup/info_popup.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:samoject_table/samoject_table.dart';
 
 import '../../../utils/keys.dart';
@@ -113,10 +116,451 @@ class HomeProvider extends ChangeNotifier {
   ];
 
   bool titleHovered = false;
+  bool sidebarHovered = false;
   bool sideSearchHovered = false;
+  JustTheController sidebarSettingsMenuController = JustTheController();
+  JustTheController spaceTitleMoreController = JustTheController();
+  JustTheController spaceActionTraySearchController = JustTheController();
+
+  List<AppPopupMenuItem> sidebarSettingsPopupItems = [
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.archive_outlined, size: 15),
+        SizedBox(width: 8),
+        Text('Show Archived',
+            style: TextStyle(fontSize: 12, color: Colors.black)),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.keyboard_arrow_up_rounded, size: 15),
+        SizedBox(width: 8),
+        Text('Collapse All Folders',
+            style: TextStyle(fontSize: 12, color: Colors.black)),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.table_chart_outlined, size: 15),
+        SizedBox(width: 8),
+        Text('Layout Size & Style',
+            style: TextStyle(fontSize: 12, color: Colors.black)),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.dark_mode_outlined, size: 15),
+        SizedBox(width: 8),
+        Text('Dark Side (bar)',
+            style: TextStyle(fontSize: 12, color: Colors.black)),
+      ],
+      suffixWidgets: [],
+      addSwitch: true,
+    ),
+  ];
+
+  List<AppPopupMenuItem> spaceTitleMoreAction = [
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.add, size: 15),
+        SizedBox(width: 8),
+        Text(
+          'Create new',
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      controller: JustTheController(),
+      subItems: [
+        AppPopupMenuItem(
+          prefixWidgets: [
+            SvgPicture.asset(
+              'assets/icons/list_add.svg',
+              height: 18,
+              width: 18,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'List',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+          suffixWidgets: [],
+        ),
+        AppPopupMenuItem(
+          section: 1,
+          prefixWidgets: [
+            SizedBox(width: 2),
+            SvgPicture.asset(
+              'assets/icons/add_document2.svg',
+              height: 18,
+              width: 18,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Doc',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+          suffixWidgets: [],
+        ),
+        AppPopupMenuItem(
+          section: 1,
+          prefixWidgets: [
+            SvgPicture.asset(
+              'assets/icons/form_office.svg',
+              height: 20,
+              width: 20,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Form',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+          suffixWidgets: [],
+        ),
+        AppPopupMenuItem(
+          section: 1,
+          isNew: true,
+          prefixWidgets: [
+            SvgPicture.asset(
+              'assets/icons/whiteboard2.svg',
+              height: 20,
+              width: 20,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Whiteboard',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+          suffixWidgets: [],
+        ),
+        AppPopupMenuItem(
+          section: 2,
+          prefixWidgets: [
+            SvgPicture.asset(
+              'assets/icons/folder_add2.svg',
+              height: 18,
+              width: 18,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Folder',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+          suffixWidgets: [],
+        ),
+        AppPopupMenuItem(
+          section: 3,
+          prefixWidgets: [
+            Icon(FontAwesomeIcons.wandMagicSparkles, size: 16),
+            SizedBox(width: 10),
+            Text(
+              'From Template',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+          suffixWidgets: [],
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.edit, size: 18),
+        SizedBox(width: 8),
+        Text(
+          'Rename',
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.water_drop_outlined, size: 18),
+        SizedBox(width: 8),
+        Text(
+          'Color & Avatar',
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.link, size: 18),
+        SizedBox(width: 8),
+        Text(
+          "Copy Link",
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Icon(Icons.copy, size: 18),
+        SizedBox(width: 8),
+        Text(
+          "Duplicate",
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      section: 1,
+      prefixWidgets: [
+        Icon(Icons.star_outline, size: 18),
+        SizedBox(width: 8),
+        Text(
+          "Add to Favorites",
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      section: 1,
+      prefixWidgets: [
+        Icon(FontAwesomeIcons.eyeSlash, size: 14),
+        SizedBox(width: 12),
+        Text(
+          "Hide in my sidebar",
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+        section: 2,
+        prefixWidgets: [
+          Icon(FontAwesomeIcons.wandMagicSparkles, size: 16),
+          SizedBox(width: 10),
+          Text(
+            'Templates',
+            style: TextStyle(fontSize: 12, color: Colors.black),
+          ),
+        ],
+        controller: JustTheController(),
+        suffixWidgets: [],
+        subItemsHeader: "Templates",
+        subItems: [
+          AppPopupMenuItem(
+            prefixWidgets: [
+              Icon(Icons.table_chart_outlined, size: 18),
+              SizedBox(width: 8),
+              Text(
+                'Browse Templates',
+                style: TextStyle(fontSize: 12, color: Colors.black),
+              ),
+            ],
+            suffixWidgets: [],
+          ),
+          AppPopupMenuItem(
+            prefixWidgets: [
+              Icon(Icons.save_outlined, size: 18),
+              SizedBox(width: 8),
+              Text(
+                'Save as Template',
+                style: TextStyle(fontSize: 12, color: Colors.black),
+              ),
+            ],
+            suffixWidgets: [],
+          ),
+          AppPopupMenuItem(
+            prefixWidgets: [
+              Icon(Icons.sync_outlined, size: 18),
+              SizedBox(width: 8),
+              Text(
+                'Update existing Template',
+                style: TextStyle(fontSize: 12, color: Colors.black),
+              ),
+            ],
+            suffixWidgets: [],
+          ),
+        ]),
+    AppPopupMenuItem(
+      section: 2,
+      prefixWidgets: [
+        Icon(Icons.settings_outlined, size: 18),
+        SizedBox(width: 8),
+        Text(
+          'More Seetings',
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      controller: JustTheController(),
+      subItems: [
+        AppPopupMenuItem(
+          prefixWidgets: [
+            Icon(Icons.settings_outlined, size: 18),
+            SizedBox(width: 8),
+            Text(
+              'All Space Seetings',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+        ),
+        AppPopupMenuItem(
+          section: 1,
+          prefixWidgets: [
+            SvgPicture.asset(
+              'assets/icons/robot_space.svg',
+              height: 22,
+              width: 22,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 6),
+            Text(
+              'Automations',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+        ),
+        AppPopupMenuItem(
+          section: 1,
+          prefixWidgets: [
+            SizedBox(width: 2),
+            SvgPicture.asset(
+              'assets/icons/edit_note.svg',
+              height: 16,
+              width: 16,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Custom Task Fields',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+        ),
+        AppPopupMenuItem(
+          section: 1,
+          prefixWidgets: [
+            SvgPicture.asset(
+              'assets/icons/minus_square.svg',
+              height: 18,
+              width: 18,
+              color: Colors.blue,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Task statuses',
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+        ),
+        AppPopupMenuItem(
+          section: 2,
+          prefixWidgets: [
+            Icon(
+              Icons.sort_by_alpha_outlined,
+              size: 20,
+            ),
+            SizedBox(width: 8),
+            Text(
+              "Sort A to Z",
+              style: TextStyle(fontSize: 12, color: Colors.black),
+            ),
+          ],
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      section: 3,
+      prefixWidgets: [
+        Icon(Icons.share_outlined, size: 18),
+        SizedBox(width: 8),
+        Text(
+          'Sharing & Permission',
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      section: 3,
+      prefixWidgets: [
+        Icon(Icons.archive_outlined, size: 18),
+        SizedBox(width: 8),
+        Text(
+          "Archive",
+          style: TextStyle(fontSize: 12, color: Colors.black),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+    AppPopupMenuItem(
+      section: 3,
+      prefixWidgets: [
+        Icon(
+          Icons.delete_outline_outlined,
+          size: 18,
+          color: Colors.red,
+        ),
+        SizedBox(width: 8),
+        Text(
+          "Delete",
+          style: TextStyle(fontSize: 12, color: Colors.red),
+        ),
+      ],
+      suffixWidgets: [],
+    ),
+  ];
+
+  List<AppPopupMenuItem> spaceActionTraySearchAction = [
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Text('Task Name', style: TextStyle(fontSize: 12, color: Colors.black)),
+      ],
+      suffixWidgets: [],
+      addSwitch: true,
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Text('Task Description',
+            style: TextStyle(fontSize: 12, color: Colors.black)),
+      ],
+      suffixWidgets: [],
+      addSwitch: true,
+    ),
+    AppPopupMenuItem(
+      prefixWidgets: [
+        Text('Custom Fields',
+            style: TextStyle(fontSize: 12, color: Colors.black)),
+      ],
+      suffixWidgets: [],
+      addSwitch: true,
+    ),
+  ];
+
+  bool settingsSwitch = false;
+
+  toggleSwitch(value) {
+    settingsSwitch = value;
+    notifyListeners();
+  }
 
   setTableStateManager(sm) {
     stateManager = sm;
+    notifyListeners();
+  }
+
+  setPopupMenuItemsSwitch(List<AppPopupMenuItem> items, int index, bool value) {
+    items[index].switchValue = value;
     notifyListeners();
   }
 
@@ -137,6 +581,11 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  onHoverSidebar(bool value) {
+    sidebarHovered = value;
+    notifyListeners();
+  }
+
   onSelectView(String viewName) {
     final view = views.singleWhere((element) => element.name == viewName);
     view.selected = !view.selected;
@@ -152,7 +601,6 @@ class HomeProvider extends ChangeNotifier {
     sideSearchHovered = value;
     notifyListeners();
   }
-
 }
 
 class SpaceView {
@@ -174,5 +622,29 @@ class HomeFavorites {
   HomeFavorites(
     this.name, {
     this.onHovered = false,
+  });
+}
+
+class AppPopupMenuItem {
+  List<Widget> suffixWidgets;
+  List<Widget> prefixWidgets;
+  JustTheController? controller;
+  List<AppPopupMenuItem> subItems;
+  String? subItemsHeader;
+  bool addSwitch;
+  bool switchValue;
+  bool isNew;
+  int section;
+
+  AppPopupMenuItem({
+    this.prefixWidgets = const [],
+    this.suffixWidgets = const [],
+    this.subItems = const [],
+    this.addSwitch = false,
+    this.switchValue = false,
+    this.isNew = false,
+    this.section = 0,
+    this.controller,
+    this.subItemsHeader,
   });
 }
