@@ -249,7 +249,11 @@ class SpaceHeaderViews extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
                 borderRadius: BorderRadius.circular(8.0),
                 offset: 10,
-                content: SpaceHeaderMoreTooltip(),
+                content: AppPopupMenu(
+                  items: provider.spaceTitleMoreAction,
+                  numberOfSection:
+                      provider.spaceTitleMoreAction.last.section + 1,
+                ),
                 child: Opacity(
                   opacity: (provider.titleHovered ||
                           provider.spaceTitleMoreController.value ==
@@ -317,6 +321,7 @@ class SpaceHeaderViews extends StatelessWidget {
         SpaceActionIcon(
           name: 'View',
           iconData: Icons.add,
+          onTap: () {},
         ),
         Spacer(),
         Container(
@@ -500,7 +505,14 @@ class SpaceActionBar extends StatelessWidget {
         ),
         AnimatedDropDownButton(
           animationKey: Key("SpaceSearchMenu"),
-          content: SpaceActionTraySearchItems(),
+          content: AppPopupMenu(
+            title: "SEARCH IN",
+            width: 170,
+            items: provider.spaceActionTraySearchAction,
+            numberOfSection:
+                provider.spaceActionTraySearchAction.last.section + 1,
+            addHeight: 10,
+          ),
           tooltipController: provider.spaceActionTraySearchController,
           onTap: () {
             // provider.spaceActionTraySearchController.showTooltip();
@@ -521,56 +533,117 @@ class SpaceActionBar extends StatelessWidget {
           ),
         ),
         Spacer(),
-        SpaceActionIcon(name: "Filter", iconData: Icons.filter_list),
         SpaceActionIcon(
-            name: "Group By : Status",
-            iconData: FontAwesomeIcons.layerGroup,
-            iconDataSize: 15),
-        SpaceActionIcon(
-          name: "Subtasks : Seprately",
-          icon: SvgPicture.asset(
-            'assets/icons/subtask.svg',
-            height: 20,
-            width: 20,
-            color: Colors.black38,
-          ),
-        ),
-        SpaceActionIcon(
-          name: "Show",
-          iconData: FontAwesomeIcons.eye,
-          iconDataSize: 15,
-        ),
-        InkWell(
+          name: "Filter",
+          iconData: Icons.filter_list,
           onTap: () {},
-          borderRadius: BorderRadius.circular(3),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            child: Icon(
-              Icons.more_horiz_outlined,
+        ),
+        wrapWithMenu(
+          wrap: true,
+          preferredDirection: AxisDirection.down,
+          child: SpaceActionIcon(
+            name: "Sort by",
+            icon: SvgPicture.asset(
+              'assets/icons/arrows_down_top.svg',
+              height: 16,
+              width: 16,
+              color: Colors.black45,
+            ),
+            onTap: () {
+              provider.spaceActionTraySortByController.showTooltip();
+            },
+          ),
+          content: AppPopupMenu(
+            width: 130,
+            items: provider.spaceActionTraySortBy,
+            title: "SORT BY",
+          ),
+          controller: provider.spaceActionTraySortByController,
+        ),
+        wrapWithMenu(
+          wrap: true,
+          preferredDirection: AxisDirection.down,
+          child: SpaceActionIcon(
+            name: "Group by : Status",
+            iconData: FontAwesomeIcons.layerGroup,
+            iconDataSize: 15,
+            onTap: () {
+              provider.spaceActionTrayGroupbyController.showTooltip();
+            },
+          ),
+          content: AppPopupMenu(
+            width: 170,
+            items: provider.spaceActionTrayGroupbyActions,
+            title: "GROUP BY",
+          ),
+          controller: provider.spaceActionTrayGroupbyController,
+        ),
+        wrapWithMenu(
+          wrap: true,
+          preferredDirection: AxisDirection.down,
+          child: SpaceActionIcon(
+            name: "Subtasks",
+            icon: SvgPicture.asset(
+              'assets/icons/subtask.svg',
+              height: 20,
+              width: 20,
               color: Colors.black38,
-              size: 15,
+            ),
+            onTap: () {
+              provider.spaceActionTraySubtasksController.showTooltip();
+            },
+          ),
+          content: AppPopupMenu(
+            width: 150,
+            items: provider.spaceActionTraySubtasksAction,
+            title: "SHOW SUBTASKS",
+          ),
+          controller: provider.spaceActionTraySubtasksController,
+        ),
+        wrapWithMenu(
+          wrap: true,
+          preferredDirection: AxisDirection.down,
+          child: SpaceActionIcon(
+            name: "Show",
+            iconData: FontAwesomeIcons.eye,
+            iconDataSize: 15,
+            onTap: () {
+              provider.spaceActionTrayShowController.showTooltip();
+            },
+          ),
+          content: AppPopupMenu(
+            items: provider.spaceActionTrayShowActions,
+            title: "SHOW",
+            addHeight: 40,
+          ),
+          controller: provider.spaceActionTrayShowController,
+        ),
+        wrapWithMenu(
+          wrap: true,
+          preferredDirection: AxisDirection.down,
+          child: InkWell(
+            onTap: () {
+              provider.spaceActionTrayMoreController.showTooltip();
+            },
+            borderRadius: BorderRadius.circular(3),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: Icon(
+                Icons.more_horiz_outlined,
+                color: Colors.black38,
+                size: 15,
+              ),
             ),
           ),
+          content: AppPopupMenu(
+            items: provider.spaceActionTrayMoreActions,
+            title: "VIEW SETTINGS",
+            addHeight: 40,
+          ),
+          controller: provider.spaceActionTrayMoreController,
         ),
         SizedBox(width: 10),
       ],
-    );
-  }
-}
-
-class SpaceActionTraySearchItems extends ConsumerWidget {
-  const SpaceActionTraySearchItems({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, ref) {
-    final provider = ref.watch(homeProvider);
-    return AppPopupMenu(
-      title: "SEARCH IN",
-      width: 180,
-      items: provider.spaceActionTraySearchAction,
-      provider: provider,
-      numberOfSection: provider.spaceActionTraySearchAction.last.section + 1,
-      addHeight: 10,
     );
   }
 }
@@ -580,10 +653,12 @@ class SpaceActionIcon extends StatelessWidget {
   final IconData? iconData;
   final double iconDataSize;
   final Widget? icon;
+  final Function() onTap;
 
   const SpaceActionIcon({
     Key? key,
     required this.name,
+    required this.onTap,
     this.iconData,
     this.iconDataSize = 18,
     this.icon,
@@ -592,22 +667,20 @@ class SpaceActionIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
-      child: Container(
-        child: Row(
-          children: [
-            if (icon != null)
-              icon!
-            else if (iconData != null)
-              Icon(
-                iconData!,
-                color: Colors.black38,
-                size: iconDataSize,
-              ),
-            SizedBox(width: 8),
-            Text(name, style: TextStyle(fontSize: 12, color: Colors.black54)),
-          ],
-        ),
+      onPressed: onTap,
+      child: Row(
+        children: [
+          if (icon != null)
+            icon!
+          else if (iconData != null)
+            Icon(
+              iconData!,
+              color: Colors.black45,
+              size: iconDataSize,
+            ),
+          SizedBox(width: 8),
+          Text(name, style: TextStyle(fontSize: 12, color: Colors.black54)),
+        ],
       ),
     );
   }
@@ -625,7 +698,7 @@ class AnimatedDropDownButton extends HookConsumerWidget {
     required this.animationKey,
     required this.tooltipController,
     required this.content,
-    this.duration = const Duration(milliseconds: 200),
+    this.duration = const Duration(milliseconds: 100),
     this.onTap,
     this.onDismiss,
     Key? key,
@@ -642,23 +715,24 @@ class AnimatedDropDownButton extends HookConsumerWidget {
       animation: controller,
       builder: (context, child) {
         return InkWell(
-          key: Key("animationKey"),
-          onTap: () {            
-            if (!controller.isAnimating && controller.isCompleted) {
+          key: animationKey,
+          onTap: () {},
+          child: JustTheTooltip(
+            onShow: () {
+              controller.forward();
+              if (onTap != null) {
+                onTap!();
+              }
+            },
+            onDismiss: () {
               controller.reverse();
               if (onDismiss != null) {
                 onDismiss!();
               }
-            } else if (!controller.isAnimating) {
-              controller.forward();
-              // if (onTap != null) {
-              //   onTap!();
-              // }
-            }
-          },
-          child: JustTheTooltip(
-            onShow: () {},
-            onDismiss: () {},
+              if (onDismiss != null) {
+                onDismiss!();
+              }
+            },
             backgroundColor: Colors.white,
             controller: tooltipController,
             tailLength: 0,
@@ -684,23 +758,8 @@ class AnimatedDropDownButton extends HookConsumerWidget {
   }
 }
 
-class SpaceHeaderMoreTooltip extends ConsumerWidget {
-  const SpaceHeaderMoreTooltip({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, ref) {
-    final provider = ref.watch(homeProvider);
-    return AppPopupMenu(
-      items: provider.spaceTitleMoreAction,
-      provider: provider,
-      numberOfSection: provider.spaceTitleMoreAction.last.section + 1,
-    );
-  }
-}
-
-class AppPopupMenu extends StatelessWidget {
+class AppPopupMenu extends ConsumerWidget {
   final List<AppPopupMenuItem> items;
-  final HomeProvider provider;
   final String? title;
   final double width;
   final double addHeight;
@@ -709,7 +768,6 @@ class AppPopupMenu extends StatelessWidget {
   const AppPopupMenu({
     Key? key,
     required this.items,
-    required this.provider,
     this.title,
     this.width = 200,
     this.addHeight = 0,
@@ -717,7 +775,8 @@ class AppPopupMenu extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final provider = ref.watch(homeProvider);
     int section = 0;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -768,89 +827,98 @@ class AppPopupMenu extends StatelessWidget {
                     )
                   ];
                 }(),
-                wrapWithTooltip(
-                    items[i].subItems.isNotEmpty,
-                    ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: width),
-                      child: TextButton(
-                        onPressed: () async {
-                          if (items[i].subItems.isNotEmpty) {
-                            if (items[i].controller == null) {
-                              items[i].controller = JustTheController();
-                            }
-                            items[i].controller?.showTooltip();
+                wrapWithMenu(
+                  wrap: items[i].subItems.isNotEmpty,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: width),
+                    child: TextButton(
+                      onPressed: () async {
+                        if (items[i].subItems.isNotEmpty) {
+                          if (items[i].controller == null) {
+                            items[i].controller = JustTheController();
                           }
-                          if (items[i].addSwitch == true) {
-                            provider.setPopupMenuItemsSwitch(
-                              items,
-                              i,
-                              !items[i].switchValue,
-                            );
-                          }
-                        },
-                        style: ButtonStyle(
-                            // padding: MaterialStateProperty.all(
-                            //   EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-                            // ),
+                          items[i].controller?.showTooltip();
+                        }
+                        if (items[i].addSwitch == true) {
+                          provider.setPopupMenuItemsSwitch(
+                            items,
+                            i,
+                            !items[i].switchValue,
+                          );
+                        }
+                        if (items[i].addSelect == true) {
+                          provider.setPopupMenuItemsSelect(
+                            items,
+                            i,
+                            !items[i].selectValue,
+                          );
+                        }
+                      },
+                      style: ButtonStyle(
+                          // padding: MaterialStateProperty.all(
+                          //   EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+                          // ),
+                          ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ...(items[i].prefixWidgets),
+                          if (items[i].isNew)
+                            Container(
+                              margin: EdgeInsets.only(left: 4),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 3),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(2),
+                                  color:
+                                      Colors.purple.shade100.withOpacity(0.7)),
+                              child: Text(
+                                "New",
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                  fontSize: 10,
+                                ),
+                              ),
                             ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ...(items[i].prefixWidgets),
-                            if (items[i].isNew)
-                              Container(
-                                margin: EdgeInsets.only(left: 4),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 3),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(2),
-                                    color: Colors.purple.shade100
-                                        .withOpacity(0.7)),
-                                child: Text(
-                                  "New",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                    fontSize: 10,
+                          Spacer(),
+                          if (items[i].addSwitch)
+                            SizedBox(
+                              height: 32,
+                              width: 45,
+                              child: FittedBox(
+                                fit: BoxFit.fill,
+                                child: Switch(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  value: items[i].switchValue,
+                                  onChanged: (value) =>
+                                      provider.setPopupMenuItemsSwitch(
+                                    items,
+                                    i,
+                                    value,
                                   ),
                                 ),
                               ),
-                            Spacer(),
-                            if (items[i].addSwitch)
-                              SizedBox(
-                                height: 32,
-                                width: 45,
-                                child: FittedBox(
-                                  fit: BoxFit.fill,
-                                  child: Switch(
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    value: items[i].switchValue,
-                                    onChanged: (value) =>
-                                        provider.setPopupMenuItemsSwitch(
-                                      items,
-                                      i,
-                                      value,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ...(items[i].suffixWidgets),
-                            if (items[i].subItems.isNotEmpty)
-                              Icon(Icons.arrow_forward_ios_rounded, size: 10),
-                          ],
-                        ),
+                            ),
+                          if (items[i].selectValue && items[i].addSelect)
+                            Icon(Icons.check, size: 20),
+                          ...(items[i].suffixWidgets),
+                          if (items[i].subItems.isNotEmpty)
+                            Icon(Icons.arrow_forward_ios_rounded, size: 10),
+                        ],
                       ),
                     ),
-                    AppPopupMenu(
-                      items: items[i].subItems,
-                      provider: provider,
-                      title: items[i].subItemsHeader,
-                      width: 185,
-                      numberOfSection: items[i].subItems.isNotEmpty
-                          ? items[i].subItems.last.section + 1
-                          : 1,
-                    ),
-                    items[i].controller),
+                  ),
+                  content: AppPopupMenu(
+                    items: items[i].subItems,
+                    title: items[i].subItemsHeader,
+                    width: 185,
+                    numberOfSection: items[i].subItems.isNotEmpty
+                        ? items[i].subItems.last.section + 1
+                        : 1,
+                  ),
+                  controller: items[i].controller,
+                ),
               ],
             ],
           ),
@@ -860,8 +928,13 @@ class AppPopupMenu extends StatelessWidget {
   }
 }
 
-Widget wrapWithTooltip(
-    bool wrap, Widget child, Widget content, JustTheController? controller) {
+Widget wrapWithMenu({
+  bool wrap = true,
+  required Widget child,
+  required Widget content,
+  JustTheController? controller,
+  AxisDirection preferredDirection = AxisDirection.right,
+}) {
   return wrap
       ? JustTheTooltip(
           onShow: () {},
@@ -871,11 +944,39 @@ Widget wrapWithTooltip(
           tailLength: 0,
           tailBaseWidth: 0.0,
           isModal: true,
-          preferredDirection: AxisDirection.right,
+          preferredDirection: preferredDirection,
           margin: EdgeInsets.only(top: 100),
           borderRadius: BorderRadius.circular(8.0),
           offset: 10,
           content: content,
+          child: child,
+        )
+      : child;
+}
+
+Widget wrapWithTooltip({
+  bool wrap = true,
+  required String description,
+  required Widget child,
+  AxisDirection axis = AxisDirection.up,
+}) {
+  return wrap
+      ? JustTheTooltip(
+          content: Container(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+            child: Text(
+              description,
+              style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.white70,
+                  fontWeight: FontWeight.w500),
+            ),
+          ),
+          backgroundColor: Colors.black87,
+          offset: 0,
+          tailBaseWidth: 8,
+          tailLength: 4,
+          preferredDirection: axis,
           child: child,
         )
       : child;

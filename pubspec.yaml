@@ -61,6 +61,7 @@ dependencies:
   searchfield: ^0.7.0
   info_popup: ^1.2.0
   just_the_tooltip: ^0.0.12
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:
