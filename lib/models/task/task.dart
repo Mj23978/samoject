@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:samoject/models/task_status/task_status.dart';
 
 part 'task.freezed.dart';
 part 'task.g.dart';
@@ -9,10 +10,12 @@ class Task with _$Task {
   const factory Task({
     required String id,
     required String taskName,
-    @Default("starting") String status,
+    required String creatorId,
+    @Default([]) List<String> assignesId,
+    @Default(TaskStatus.idea()) TaskStatus status,
     @Default("") String taskDetailsId,
     @Default("") String taskDetailsHash,
-    @Default([]) List<Task> subTaks,
+    @Default([]) List<Task> subTasks,
     @Default({}) Map<String, dynamic> attributes,
   }) = _Task;
 

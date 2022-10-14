@@ -74,6 +74,11 @@ Color string2Color(String colorString) {
   return Color(value);
 }
 
+String color2String(Color color) {
+  return color.toString();
+}
+
+
 String indexToString(int index) {
   switch (index) {
     case 0:

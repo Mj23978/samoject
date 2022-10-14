@@ -729,9 +729,6 @@ class AnimatedDropDownButton extends HookConsumerWidget {
               if (onDismiss != null) {
                 onDismiss!();
               }
-              if (onDismiss != null) {
-                onDismiss!();
-              }
             },
             backgroundColor: Colors.white,
             controller: tooltipController,
@@ -934,11 +931,12 @@ Widget wrapWithMenu({
   required Widget content,
   JustTheController? controller,
   AxisDirection preferredDirection = AxisDirection.right,
+  Function()? onDismiss, 
 }) {
   return wrap
       ? JustTheTooltip(
           onShow: () {},
-          onDismiss: () {},
+          onDismiss: onDismiss,
           backgroundColor: Colors.white,
           controller: controller,
           tailLength: 0,
@@ -972,6 +970,7 @@ Widget wrapWithTooltip({
                   fontWeight: FontWeight.w500),
             ),
           ),
+          
           backgroundColor: Colors.black87,
           offset: 0,
           tailBaseWidth: 8,

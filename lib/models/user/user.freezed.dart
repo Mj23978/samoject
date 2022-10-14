@@ -20,8 +20,14 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  String get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   bool get activ => throw _privateConstructorUsedError;
+  List<Task> get createdTasks => throw _privateConstructorUsedError;
+  List<Task> get assignedTasks => throw _privateConstructorUsedError;
+  List<Comment> get comments => throw _privateConstructorUsedError;
   String? get roleName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +39,16 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({String username, bool activ, String? roleName});
+  $Res call(
+      {String id,
+      String username,
+      String? firstName,
+      String? lastName,
+      bool activ,
+      List<Task> createdTasks,
+      List<Task> assignedTasks,
+      List<Comment> comments,
+      String? roleName});
 }
 
 /// @nodoc
@@ -46,19 +61,49 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? activ = freezed,
+    Object? createdTasks = freezed,
+    Object? assignedTasks = freezed,
+    Object? comments = freezed,
     Object? roleName = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
       activ: activ == freezed
           ? _value.activ
           : activ // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdTasks: createdTasks == freezed
+          ? _value.createdTasks
+          : createdTasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      assignedTasks: assignedTasks == freezed
+          ? _value.assignedTasks
+          : assignedTasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      comments: comments == freezed
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
       roleName: roleName == freezed
           ? _value.roleName
           : roleName // ignore: cast_nullable_to_non_nullable
@@ -72,7 +117,16 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
       __$$_UserCopyWithImpl<$Res>;
   @override
-  $Res call({String username, bool activ, String? roleName});
+  $Res call(
+      {String id,
+      String username,
+      String? firstName,
+      String? lastName,
+      bool activ,
+      List<Task> createdTasks,
+      List<Task> assignedTasks,
+      List<Comment> comments,
+      String? roleName});
 }
 
 /// @nodoc
@@ -86,19 +140,49 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? activ = freezed,
+    Object? createdTasks = freezed,
+    Object? assignedTasks = freezed,
+    Object? comments = freezed,
     Object? roleName = freezed,
   }) {
     return _then(_$_User(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       username: username == freezed
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      firstName: firstName == freezed
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: lastName == freezed
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
       activ: activ == freezed
           ? _value.activ
           : activ // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdTasks: createdTasks == freezed
+          ? _value._createdTasks
+          : createdTasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      assignedTasks: assignedTasks == freezed
+          ? _value._assignedTasks
+          : assignedTasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      comments: comments == freezed
+          ? _value._comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as List<Comment>,
       roleName: roleName == freezed
           ? _value.roleName
           : roleName // ignore: cast_nullable_to_non_nullable
@@ -110,22 +194,64 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_User extends _User {
-  const _$_User({required this.username, this.activ = true, this.roleName})
-      : super._();
+  const _$_User(
+      {required this.id,
+      required this.username,
+      this.firstName,
+      this.lastName,
+      this.activ = true,
+      final List<Task> createdTasks = const [],
+      final List<Task> assignedTasks = const [],
+      final List<Comment> comments = const [],
+      this.roleName})
+      : _createdTasks = createdTasks,
+        _assignedTasks = assignedTasks,
+        _comments = comments,
+        super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
+  final String id;
+  @override
   final String username;
+  @override
+  final String? firstName;
+  @override
+  final String? lastName;
   @override
   @JsonKey()
   final bool activ;
+  final List<Task> _createdTasks;
+  @override
+  @JsonKey()
+  List<Task> get createdTasks {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_createdTasks);
+  }
+
+  final List<Task> _assignedTasks;
+  @override
+  @JsonKey()
+  List<Task> get assignedTasks {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assignedTasks);
+  }
+
+  final List<Comment> _comments;
+  @override
+  @JsonKey()
+  List<Comment> get comments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_comments);
+  }
+
   @override
   final String? roleName;
 
   @override
   String toString() {
-    return 'User(username: $username, activ: $activ, roleName: $roleName)';
+    return 'User(id: $id, username: $username, firstName: $firstName, lastName: $lastName, activ: $activ, createdTasks: $createdTasks, assignedTasks: $assignedTasks, comments: $comments, roleName: $roleName)';
   }
 
   @override
@@ -133,8 +259,16 @@ class _$_User extends _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_User &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.firstName, firstName) &&
+            const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.activ, activ) &&
+            const DeepCollectionEquality()
+                .equals(other._createdTasks, _createdTasks) &&
+            const DeepCollectionEquality()
+                .equals(other._assignedTasks, _assignedTasks) &&
+            const DeepCollectionEquality().equals(other._comments, _comments) &&
             const DeepCollectionEquality().equals(other.roleName, roleName));
   }
 
@@ -142,8 +276,14 @@ class _$_User extends _User {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(firstName),
+      const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(activ),
+      const DeepCollectionEquality().hash(_createdTasks),
+      const DeepCollectionEquality().hash(_assignedTasks),
+      const DeepCollectionEquality().hash(_comments),
       const DeepCollectionEquality().hash(roleName));
 
   @JsonKey(ignore: true)
@@ -161,17 +301,35 @@ class _$_User extends _User {
 
 abstract class _User extends User {
   const factory _User(
-      {required final String username,
+      {required final String id,
+      required final String username,
+      final String? firstName,
+      final String? lastName,
       final bool activ,
+      final List<Task> createdTasks,
+      final List<Task> assignedTasks,
+      final List<Comment> comments,
       final String? roleName}) = _$_User;
   const _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
+  String get id;
+  @override
   String get username;
   @override
+  String? get firstName;
+  @override
+  String? get lastName;
+  @override
   bool get activ;
+  @override
+  List<Task> get createdTasks;
+  @override
+  List<Task> get assignedTasks;
+  @override
+  List<Comment> get comments;
   @override
   String? get roleName;
   @override

@@ -22,10 +22,12 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 mixin _$Task {
   String get id => throw _privateConstructorUsedError;
   String get taskName => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
+  String get creatorId => throw _privateConstructorUsedError;
+  List<String> get assignesId => throw _privateConstructorUsedError;
+  TaskStatus get status => throw _privateConstructorUsedError;
   String get taskDetailsId => throw _privateConstructorUsedError;
   String get taskDetailsHash => throw _privateConstructorUsedError;
-  List<Task> get subTaks => throw _privateConstructorUsedError;
+  List<Task> get subTasks => throw _privateConstructorUsedError;
   Map<String, dynamic> get attributes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,11 +42,15 @@ abstract class $TaskCopyWith<$Res> {
   $Res call(
       {String id,
       String taskName,
-      String status,
+      String creatorId,
+      List<String> assignesId,
+      TaskStatus status,
       String taskDetailsId,
       String taskDetailsHash,
-      List<Task> subTaks,
+      List<Task> subTasks,
       Map<String, dynamic> attributes});
+
+  $TaskStatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -59,10 +65,12 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? taskName = freezed,
+    Object? creatorId = freezed,
+    Object? assignesId = freezed,
     Object? status = freezed,
     Object? taskDetailsId = freezed,
     Object? taskDetailsHash = freezed,
-    Object? subTaks = freezed,
+    Object? subTasks = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_value.copyWith(
@@ -74,10 +82,18 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.taskName
           : taskName // ignore: cast_nullable_to_non_nullable
               as String,
+      creatorId: creatorId == freezed
+          ? _value.creatorId
+          : creatorId // ignore: cast_nullable_to_non_nullable
+              as String,
+      assignesId: assignesId == freezed
+          ? _value.assignesId
+          : assignesId // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskStatus,
       taskDetailsId: taskDetailsId == freezed
           ? _value.taskDetailsId
           : taskDetailsId // ignore: cast_nullable_to_non_nullable
@@ -86,15 +102,22 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.taskDetailsHash
           : taskDetailsHash // ignore: cast_nullable_to_non_nullable
               as String,
-      subTaks: subTaks == freezed
-          ? _value.subTaks
-          : subTaks // ignore: cast_nullable_to_non_nullable
+      subTasks: subTasks == freezed
+          ? _value.subTasks
+          : subTasks // ignore: cast_nullable_to_non_nullable
               as List<Task>,
       attributes: attributes == freezed
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
+  }
+
+  @override
+  $TaskStatusCopyWith<$Res> get status {
+    return $TaskStatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value));
+    });
   }
 }
 
@@ -106,11 +129,16 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   $Res call(
       {String id,
       String taskName,
-      String status,
+      String creatorId,
+      List<String> assignesId,
+      TaskStatus status,
       String taskDetailsId,
       String taskDetailsHash,
-      List<Task> subTaks,
+      List<Task> subTasks,
       Map<String, dynamic> attributes});
+
+  @override
+  $TaskStatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -126,10 +154,12 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? taskName = freezed,
+    Object? creatorId = freezed,
+    Object? assignesId = freezed,
     Object? status = freezed,
     Object? taskDetailsId = freezed,
     Object? taskDetailsHash = freezed,
-    Object? subTaks = freezed,
+    Object? subTasks = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$_Task(
@@ -141,10 +171,18 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.taskName
           : taskName // ignore: cast_nullable_to_non_nullable
               as String,
+      creatorId: creatorId == freezed
+          ? _value.creatorId
+          : creatorId // ignore: cast_nullable_to_non_nullable
+              as String,
+      assignesId: assignesId == freezed
+          ? _value._assignesId
+          : assignesId // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TaskStatus,
       taskDetailsId: taskDetailsId == freezed
           ? _value.taskDetailsId
           : taskDetailsId // ignore: cast_nullable_to_non_nullable
@@ -153,9 +191,9 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.taskDetailsHash
           : taskDetailsHash // ignore: cast_nullable_to_non_nullable
               as String,
-      subTaks: subTaks == freezed
-          ? _value._subTaks
-          : subTaks // ignore: cast_nullable_to_non_nullable
+      subTasks: subTasks == freezed
+          ? _value._subTasks
+          : subTasks // ignore: cast_nullable_to_non_nullable
               as List<Task>,
       attributes: attributes == freezed
           ? _value._attributes
@@ -171,12 +209,15 @@ class _$_Task extends _Task {
   const _$_Task(
       {required this.id,
       required this.taskName,
-      this.status = "starting",
+      required this.creatorId,
+      final List<String> assignesId = const [],
+      this.status = const TaskStatus.idea(),
       this.taskDetailsId = "",
       this.taskDetailsHash = "",
-      final List<Task> subTaks = const [],
+      final List<Task> subTasks = const [],
       final Map<String, dynamic> attributes = const {}})
-      : _subTaks = subTaks,
+      : _assignesId = assignesId,
+        _subTasks = subTasks,
         _attributes = attributes,
         super._();
 
@@ -187,20 +228,30 @@ class _$_Task extends _Task {
   @override
   final String taskName;
   @override
+  final String creatorId;
+  final List<String> _assignesId;
+  @override
   @JsonKey()
-  final String status;
+  List<String> get assignesId {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assignesId);
+  }
+
+  @override
+  @JsonKey()
+  final TaskStatus status;
   @override
   @JsonKey()
   final String taskDetailsId;
   @override
   @JsonKey()
   final String taskDetailsHash;
-  final List<Task> _subTaks;
+  final List<Task> _subTasks;
   @override
   @JsonKey()
-  List<Task> get subTaks {
+  List<Task> get subTasks {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subTaks);
+    return EqualUnmodifiableListView(_subTasks);
   }
 
   final Map<String, dynamic> _attributes;
@@ -213,7 +264,7 @@ class _$_Task extends _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, taskName: $taskName, status: $status, taskDetailsId: $taskDetailsId, taskDetailsHash: $taskDetailsHash, subTaks: $subTaks, attributes: $attributes)';
+    return 'Task(id: $id, taskName: $taskName, creatorId: $creatorId, assignesId: $assignesId, status: $status, taskDetailsId: $taskDetailsId, taskDetailsHash: $taskDetailsHash, subTasks: $subTasks, attributes: $attributes)';
   }
 
   @override
@@ -223,12 +274,15 @@ class _$_Task extends _Task {
             other is _$_Task &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.taskName, taskName) &&
+            const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
+            const DeepCollectionEquality()
+                .equals(other._assignesId, _assignesId) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.taskDetailsId, taskDetailsId) &&
             const DeepCollectionEquality()
                 .equals(other.taskDetailsHash, taskDetailsHash) &&
-            const DeepCollectionEquality().equals(other._subTaks, _subTaks) &&
+            const DeepCollectionEquality().equals(other._subTasks, _subTasks) &&
             const DeepCollectionEquality()
                 .equals(other._attributes, _attributes));
   }
@@ -239,10 +293,12 @@ class _$_Task extends _Task {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(taskName),
+      const DeepCollectionEquality().hash(creatorId),
+      const DeepCollectionEquality().hash(_assignesId),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(taskDetailsId),
       const DeepCollectionEquality().hash(taskDetailsHash),
-      const DeepCollectionEquality().hash(_subTaks),
+      const DeepCollectionEquality().hash(_subTasks),
       const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
@@ -262,10 +318,12 @@ abstract class _Task extends Task {
   const factory _Task(
       {required final String id,
       required final String taskName,
-      final String status,
+      required final String creatorId,
+      final List<String> assignesId,
+      final TaskStatus status,
       final String taskDetailsId,
       final String taskDetailsHash,
-      final List<Task> subTaks,
+      final List<Task> subTasks,
       final Map<String, dynamic> attributes}) = _$_Task;
   const _Task._() : super._();
 
@@ -276,13 +334,17 @@ abstract class _Task extends Task {
   @override
   String get taskName;
   @override
-  String get status;
+  String get creatorId;
+  @override
+  List<String> get assignesId;
+  @override
+  TaskStatus get status;
   @override
   String get taskDetailsId;
   @override
   String get taskDetailsHash;
   @override
-  List<Task> get subTaks;
+  List<Task> get subTasks;
   @override
   Map<String, dynamic> get attributes;
   @override
