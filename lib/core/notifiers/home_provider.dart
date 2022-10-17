@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:samoject_table/samoject_table.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../models/favorites/favorites.dart';
 import '../../models/space/space.dart';
@@ -107,7 +108,7 @@ class HomeProvider extends ChangeNotifier {
   ];
 
   final List<Favorites> favorites = [
-    Favorites(name: 'Get to know clickup'),
+    Favorites(name: 'Get to know clickup', id: Uuid().v4()),
   ];
 
   bool titleHovered = false;

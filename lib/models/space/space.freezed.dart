@@ -35,7 +35,6 @@ Space _$SpaceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Space {
-  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
@@ -47,9 +46,7 @@ mixin _$Space {
     required TResult Function(
             String id, String name, bool onHovered, bool selected)
         boxSettings,
-    required TResult Function(
-            String id, String name, bool onHovered, bool selected)
-        view,
+    required TResult Function(String name, bool onHovered, bool selected) view,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,8 +58,7 @@ mixin _$Space {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,8 +70,7 @@ mixin _$Space {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,7 +111,7 @@ mixin _$Space {
 abstract class $SpaceCopyWith<$Res> {
   factory $SpaceCopyWith(Space value, $Res Function(Space) then) =
       _$SpaceCopyWithImpl<$Res>;
-  $Res call({String id, String name});
+  $Res call({String name});
 }
 
 /// @nodoc
@@ -129,14 +124,9 @@ class _$SpaceCopyWithImpl<$Res> implements $SpaceCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -256,9 +246,7 @@ class _$_Space extends _Space {
     required TResult Function(
             String id, String name, bool onHovered, bool selected)
         boxSettings,
-    required TResult Function(
-            String id, String name, bool onHovered, bool selected)
-        view,
+    required TResult Function(String name, bool onHovered, bool selected) view,
   }) {
     return $default(id, name, subSpaces);
   }
@@ -273,8 +261,7 @@ class _$_Space extends _Space {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
   }) {
     return $default?.call(id, name, subSpaces);
   }
@@ -289,8 +276,7 @@ class _$_Space extends _Space {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -356,7 +342,6 @@ abstract class _Space extends Space {
 
   factory _Space.fromJson(Map<String, dynamic> json) = _$_Space.fromJson;
 
-  @override
   String get id;
   @override
   String get name;
@@ -484,9 +469,7 @@ class _$SpaceSettings extends SpaceSettings {
     required TResult Function(
             String id, String name, bool onHovered, bool selected)
         boxSettings,
-    required TResult Function(
-            String id, String name, bool onHovered, bool selected)
-        view,
+    required TResult Function(String name, bool onHovered, bool selected) view,
   }) {
     return settings(id, name, onHovered, selected);
   }
@@ -501,8 +484,7 @@ class _$SpaceSettings extends SpaceSettings {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
   }) {
     return settings?.call(id, name, onHovered, selected);
   }
@@ -517,8 +499,7 @@ class _$SpaceSettings extends SpaceSettings {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
     required TResult orElse(),
   }) {
     if (settings != null) {
@@ -586,7 +567,6 @@ abstract class SpaceSettings extends Space {
   factory SpaceSettings.fromJson(Map<String, dynamic> json) =
       _$SpaceSettings.fromJson;
 
-  @override
   String get id;
   @override
   String get name;
@@ -702,9 +682,7 @@ class _$SpaceBox extends SpaceBox {
     required TResult Function(
             String id, String name, bool onHovered, bool selected)
         boxSettings,
-    required TResult Function(
-            String id, String name, bool onHovered, bool selected)
-        view,
+    required TResult Function(String name, bool onHovered, bool selected) view,
   }) {
     return box(id, name, parentId);
   }
@@ -719,8 +697,7 @@ class _$SpaceBox extends SpaceBox {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
   }) {
     return box?.call(id, name, parentId);
   }
@@ -735,8 +712,7 @@ class _$SpaceBox extends SpaceBox {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
     required TResult orElse(),
   }) {
     if (box != null) {
@@ -802,7 +778,6 @@ abstract class SpaceBox extends Space {
 
   factory SpaceBox.fromJson(Map<String, dynamic> json) = _$SpaceBox.fromJson;
 
-  @override
   String get id;
   @override
   String get name;
@@ -931,9 +906,7 @@ class _$SpaceBoxSettings extends SpaceBoxSettings {
     required TResult Function(
             String id, String name, bool onHovered, bool selected)
         boxSettings,
-    required TResult Function(
-            String id, String name, bool onHovered, bool selected)
-        view,
+    required TResult Function(String name, bool onHovered, bool selected) view,
   }) {
     return boxSettings(id, name, onHovered, selected);
   }
@@ -948,8 +921,7 @@ class _$SpaceBoxSettings extends SpaceBoxSettings {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
   }) {
     return boxSettings?.call(id, name, onHovered, selected);
   }
@@ -964,8 +936,7 @@ class _$SpaceBoxSettings extends SpaceBoxSettings {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
     required TResult orElse(),
   }) {
     if (boxSettings != null) {
@@ -1033,7 +1004,6 @@ abstract class SpaceBoxSettings extends Space {
   factory SpaceBoxSettings.fromJson(Map<String, dynamic> json) =
       _$SpaceBoxSettings.fromJson;
 
-  @override
   String get id;
   @override
   String get name;
@@ -1051,7 +1021,7 @@ abstract class _$$SpaceViewCopyWith<$Res> implements $SpaceCopyWith<$Res> {
           _$SpaceView value, $Res Function(_$SpaceView) then) =
       __$$SpaceViewCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, bool onHovered, bool selected});
+  $Res call({String name, bool onHovered, bool selected});
 }
 
 /// @nodoc
@@ -1066,16 +1036,11 @@ class __$$SpaceViewCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? onHovered = freezed,
     Object? selected = freezed,
   }) {
     return _then(_$SpaceView(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1096,8 +1061,7 @@ class __$$SpaceViewCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SpaceView extends SpaceView {
   const _$SpaceView(
-      {required this.id,
-      required this.name,
+      {required this.name,
       this.onHovered = false,
       this.selected = false,
       final String? $type})
@@ -1107,8 +1071,6 @@ class _$SpaceView extends SpaceView {
   factory _$SpaceView.fromJson(Map<String, dynamic> json) =>
       _$$SpaceViewFromJson(json);
 
-  @override
-  final String id;
   @override
   final String name;
   @override
@@ -1123,7 +1085,7 @@ class _$SpaceView extends SpaceView {
 
   @override
   String toString() {
-    return 'Space.view(id: $id, name: $name, onHovered: $onHovered, selected: $selected)';
+    return 'Space.view(name: $name, onHovered: $onHovered, selected: $selected)';
   }
 
   @override
@@ -1131,7 +1093,6 @@ class _$SpaceView extends SpaceView {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SpaceView &&
-            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.onHovered, onHovered) &&
             const DeepCollectionEquality().equals(other.selected, selected));
@@ -1141,7 +1102,6 @@ class _$SpaceView extends SpaceView {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(onHovered),
       const DeepCollectionEquality().hash(selected));
@@ -1162,11 +1122,9 @@ class _$SpaceView extends SpaceView {
     required TResult Function(
             String id, String name, bool onHovered, bool selected)
         boxSettings,
-    required TResult Function(
-            String id, String name, bool onHovered, bool selected)
-        view,
+    required TResult Function(String name, bool onHovered, bool selected) view,
   }) {
-    return view(id, name, onHovered, selected);
+    return view(name, onHovered, selected);
   }
 
   @override
@@ -1179,10 +1137,9 @@ class _$SpaceView extends SpaceView {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
   }) {
-    return view?.call(id, name, onHovered, selected);
+    return view?.call(name, onHovered, selected);
   }
 
   @override
@@ -1195,12 +1152,11 @@ class _$SpaceView extends SpaceView {
     TResult Function(String id, String name, int? parentId)? box,
     TResult Function(String id, String name, bool onHovered, bool selected)?
         boxSettings,
-    TResult Function(String id, String name, bool onHovered, bool selected)?
-        view,
+    TResult Function(String name, bool onHovered, bool selected)? view,
     required TResult orElse(),
   }) {
     if (view != null) {
-      return view(id, name, onHovered, selected);
+      return view(name, onHovered, selected);
     }
     return orElse();
   }
@@ -1255,16 +1211,13 @@ class _$SpaceView extends SpaceView {
 
 abstract class SpaceView extends Space {
   const factory SpaceView(
-      {required final String id,
-      required final String name,
+      {required final String name,
       final bool onHovered,
       final bool selected}) = _$SpaceView;
   const SpaceView._() : super._();
 
   factory SpaceView.fromJson(Map<String, dynamic> json) = _$SpaceView.fromJson;
 
-  @override
-  String get id;
   @override
   String get name;
   bool get onHovered;

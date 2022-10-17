@@ -74,7 +74,6 @@ Map<String, dynamic> _$$SpaceBoxSettingsToJson(_$SpaceBoxSettings instance) =>
     };
 
 _$SpaceView _$$SpaceViewFromJson(Map<String, dynamic> json) => _$SpaceView(
-      id: json['id'] as String,
       name: json['name'] as String,
       onHovered: json['onHovered'] as bool? ?? false,
       selected: json['selected'] as bool? ?? false,
@@ -83,7 +82,6 @@ _$SpaceView _$$SpaceViewFromJson(Map<String, dynamic> json) => _$SpaceView(
 
 Map<String, dynamic> _$$SpaceViewToJson(_$SpaceView instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'name': instance.name,
       'onHovered': instance.onHovered,
       'selected': instance.selected,

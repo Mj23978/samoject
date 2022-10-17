@@ -6,6 +6,7 @@ class Keys {
 }
 
 class DBKeys {
+  static const String app_config = 'app';
   static const String hive_config = 'config';
   static const String users = 'users';
 }

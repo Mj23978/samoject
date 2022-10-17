@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'core/providers.dart';
+import 'models/app_configs/app_configs.dart';
 import 'pages/not_found/not_found_view.dart';
 import 'pages/routes.dart';
 import 'utils/helpers.dart';
@@ -19,12 +20,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   setPathUrlStrategy();
+
   if (!kIsWeb) {
     final appDocDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocDir.path);
   } else {
     Hive.initFlutter();
   }
+  await Hive.openBox<AppConfigs>(DBKeys.app_config);
   await Hive.openBox(DBKeys.hive_config);
   await Hive.openBox(DBKeys.users);
   initConfig();

@@ -1,12 +1,11 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
-import 'package:samoject/core/notifiers/app_provider.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../models/auth/auth_value_objects.dart';
 import '../../models/errors.dart';
 import '../../models/user/user.dart';
 import '../states/auth_failures.dart';
+import 'app_provider.dart';
 import 'auth_i_facade.dart';
 
 class MockAuthFacade implements IAuthFacade {
@@ -24,6 +23,7 @@ class MockAuthFacade implements IAuthFacade {
         password!.valueObject!.fold((l) => throw UnExpectedValueError(l), id);
     try {
       User user = User(
+        id: Uuid().v4(),
         email: emailAddressString,
         password: passwordString,
         username: "${emailAddressString.split('@')[0]}}",

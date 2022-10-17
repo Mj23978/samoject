@@ -1,13 +1,18 @@
-import 'package:flutter/cupertino.dart';
-import 'package:samoject/models/app_configs/app_configs.dart';
-import 'package:samoject/models/workspace/workspace.dart';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../utils/keys.dart';
+import '../../models/app_configs/app_configs.dart';
+import '../../models/workspace/workspace.dart';
 import '../../config/samples/sample_data.dart';
 import '../../models/project/project.dart';
 import '../../models/task/task.dart';
 import '../../models/user/user.dart';
 
 class AppProvider extends ChangeNotifier {
+  
+  Box<AppConfigs> appBox = Hive.box<AppConfigs>(DBKeys.app_config);
   AppConfigs? appConfigs;
   User? me;
   List<User> users = [];
@@ -59,17 +64,20 @@ class AppProvider extends ChangeNotifier {
   close() async {}
 
   initApp() async {
-    final settings = ProjectSettings();
+    final settings = ProjectSettings(id: Uuid().v4());
     project = Project(
+      id: Uuid().v4(),
       name: "Samoject Project",
       settings: settings,
     );
     workspaces.add(Workspace(
+            id: Uuid().v4(),
       name: "Samoject Workspace",
     ));
-    // if () {
-    appConfigs = AppConfigs(id: 20);
-    // }
+    if (appBox.get("configs") != null) {
+      appConfigs = AppConfigs(id: Uuid().v4());
+      appBox.put("configs", appConfigs!);
+    }
     if (!appConfigs!.initialized) {
       me ??= mj;
       me = setUserData(me!);

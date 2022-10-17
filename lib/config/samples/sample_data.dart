@@ -5,12 +5,39 @@ import 'package:uuid/uuid.dart';
 
 import '../../models/task_details/task_details.dart';
 
-User mj = User(id: Uuid().v4(),username: 'Mj78', roleName: "Developer");
-User hoji = User(id: Uuid().v4(),username: 'Hojji Joon', roleName: "Developer");
-User mobin = User(id: Uuid().v4(),username: 'Agha Zade', roleName: "Developer");
-User shahraki = User(id: Uuid().v4(),username: 'Soton', roleName: "Developer");
-User moslem = User(id: Uuid().v4(),username: 'Foundation', roleName: "Project Owner");
-User morteza = User(id: Uuid().v4(),username: 'Mori', roleName: "Developer");
+User mj = User(
+  id: Uuid().v4(),
+  username: 'Mj78',
+  roleName: "Developer",
+  date: DateTime.now(),
+);
+User hoji = User(
+  id: Uuid().v4(),
+  username: 'Hojji Joon',
+  roleName: "Developer",
+  date: DateTime.now(),
+);
+User mobin = User(
+  id: Uuid().v4(),
+  username: 'Agha Zade',
+  roleName: "Developer",
+  date: DateTime.now(),
+);
+User shahraki = User(
+    id: Uuid().v4(),
+    username: 'Soton',
+    roleName: "Developer",
+    date: DateTime.now());
+User moslem = User(
+    id: Uuid().v4(),
+    username: 'Foundation',
+    roleName: "Project Owner",
+    date: DateTime.now());
+User morteza = User(
+    id: Uuid().v4(),
+    username: 'Mori',
+    roleName: "Developer",
+    date: DateTime.now());
 
 TaskDetails taskDetails1 = TaskDetails(id: Uuid().v4(), hash: 'hash');
 
@@ -224,7 +251,7 @@ Task task21 = Task(
   taskDetailsHash: taskDetails1.hash,
 );
 
-Task task22= Task(
+Task task22 = Task(
   id: Uuid().v4(),
   taskName: "Create Docs and Dashboards Sections",
   status: TaskStatus.todo(),

@@ -14,8 +14,11 @@ class User with _$User {
   const factory User({
     required String id,
     required String username,
+    required DateTime date,
     String? firstName,
     String? lastName,
+    String? password,
+    String? email,
     @Default(true) bool activ,
     @Default([]) List<Task> createdTasks,
     @Default([]) List<Task> assignedTasks,

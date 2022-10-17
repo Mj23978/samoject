@@ -38,7 +38,6 @@ class Space with _$Space {
 
   
   const factory Space.view({
-    required String id,
     required String name,
     @Default(false) bool onHovered,
     @Default(false) bool selected,

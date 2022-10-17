@@ -22,8 +22,11 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   bool get activ => throw _privateConstructorUsedError;
   List<Task> get createdTasks => throw _privateConstructorUsedError;
   List<Task> get assignedTasks => throw _privateConstructorUsedError;
@@ -43,8 +46,11 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String username,
+      DateTime date,
       String? firstName,
       String? lastName,
+      String? password,
+      String? email,
       bool activ,
       List<Task> createdTasks,
       List<Task> assignedTasks,
@@ -65,8 +71,11 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? username = freezed,
+    Object? date = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? password = freezed,
+    Object? email = freezed,
     Object? activ = freezed,
     Object? createdTasks = freezed,
     Object? assignedTasks = freezed,
@@ -83,6 +92,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -90,6 +103,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       activ: activ == freezed
           ? _value.activ
@@ -127,8 +148,11 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String username,
+      DateTime date,
       String? firstName,
       String? lastName,
+      String? password,
+      String? email,
       bool activ,
       List<Task> createdTasks,
       List<Task> assignedTasks,
@@ -150,8 +174,11 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? username = freezed,
+    Object? date = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? password = freezed,
+    Object? email = freezed,
     Object? activ = freezed,
     Object? createdTasks = freezed,
     Object? assignedTasks = freezed,
@@ -168,6 +195,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -175,6 +206,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       lastName: lastName == freezed
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
       activ: activ == freezed
           ? _value.activ
@@ -210,8 +249,11 @@ class _$_User extends _User {
   const _$_User(
       {required this.id,
       required this.username,
+      required this.date,
       this.firstName,
       this.lastName,
+      this.password,
+      this.email,
       this.activ = true,
       final List<Task> createdTasks = const [],
       final List<Task> assignedTasks = const [],
@@ -231,9 +273,15 @@ class _$_User extends _User {
   @override
   final String username;
   @override
+  final DateTime date;
+  @override
   final String? firstName;
   @override
   final String? lastName;
+  @override
+  final String? password;
+  @override
+  final String? email;
   @override
   @JsonKey()
   final bool activ;
@@ -274,7 +322,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, firstName: $firstName, lastName: $lastName, activ: $activ, createdTasks: $createdTasks, assignedTasks: $assignedTasks, comments: $comments, workspaces: $workspaces, roleName: $roleName)';
+    return 'User(id: $id, username: $username, date: $date, firstName: $firstName, lastName: $lastName, password: $password, email: $email, activ: $activ, createdTasks: $createdTasks, assignedTasks: $assignedTasks, comments: $comments, workspaces: $workspaces, roleName: $roleName)';
   }
 
   @override
@@ -284,8 +332,11 @@ class _$_User extends _User {
             other is _$_User &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.date, date) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.activ, activ) &&
             const DeepCollectionEquality()
                 .equals(other._createdTasks, _createdTasks) &&
@@ -303,8 +354,11 @@ class _$_User extends _User {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(date),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(activ),
       const DeepCollectionEquality().hash(_createdTasks),
       const DeepCollectionEquality().hash(_assignedTasks),
@@ -329,8 +383,11 @@ abstract class _User extends User {
   const factory _User(
       {required final String id,
       required final String username,
+      required final DateTime date,
       final String? firstName,
       final String? lastName,
+      final String? password,
+      final String? email,
       final bool activ,
       final List<Task> createdTasks,
       final List<Task> assignedTasks,
@@ -346,9 +403,15 @@ abstract class _User extends User {
   @override
   String get username;
   @override
+  DateTime get date;
+  @override
   String? get firstName;
   @override
   String? get lastName;
+  @override
+  String? get password;
+  @override
+  String? get email;
   @override
   bool get activ;
   @override

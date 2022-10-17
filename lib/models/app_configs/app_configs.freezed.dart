@@ -20,12 +20,16 @@ AppConfigs _$AppConfigsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AppConfigs {
+  @HiveField(0)
+  String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   bool get splashShowed => throw _privateConstructorUsedError;
+  @HiveField(2)
   bool get initialized => throw _privateConstructorUsedError;
-  @JsonKey(
-      fromJson: (String value) => {Locale.fromSubtags()},
-      toJson: (Locale value) => value.toLanguageTag())
+  @JsonKey(fromJson: string2Locale, toJson: locale2String)
+  @HiveField(3)
   Locale get locale => throw _privateConstructorUsedError;
+  @HiveField(4)
   User? get me => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,11 +44,17 @@ abstract class $AppConfigsCopyWith<$Res> {
           AppConfigs value, $Res Function(AppConfigs) then) =
       _$AppConfigsCopyWithImpl<$Res>;
   $Res call(
-      {bool splashShowed,
-      bool initialized,
-      @JsonKey(fromJson: (String value) => {Locale.fromSubtags()}, toJson: (Locale value) => value.toLanguageTag())
+      {@HiveField(0)
+          String id,
+      @HiveField(1)
+          bool splashShowed,
+      @HiveField(2)
+          bool initialized,
+      @JsonKey(fromJson: string2Locale, toJson: locale2String)
+      @HiveField(3)
           Locale locale,
-      User? me});
+      @HiveField(4)
+          User? me});
 
   $UserCopyWith<$Res>? get me;
 }
@@ -59,12 +69,17 @@ class _$AppConfigsCopyWithImpl<$Res> implements $AppConfigsCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? splashShowed = freezed,
     Object? initialized = freezed,
     Object? locale = freezed,
     Object? me = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       splashShowed: splashShowed == freezed
           ? _value.splashShowed
           : splashShowed // ignore: cast_nullable_to_non_nullable
@@ -104,11 +119,17 @@ abstract class _$$_AppConfigsCopyWith<$Res>
       __$$_AppConfigsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool splashShowed,
-      bool initialized,
-      @JsonKey(fromJson: (String value) => {Locale.fromSubtags()}, toJson: (Locale value) => value.toLanguageTag())
+      {@HiveField(0)
+          String id,
+      @HiveField(1)
+          bool splashShowed,
+      @HiveField(2)
+          bool initialized,
+      @JsonKey(fromJson: string2Locale, toJson: locale2String)
+      @HiveField(3)
           Locale locale,
-      User? me});
+      @HiveField(4)
+          User? me});
 
   @override
   $UserCopyWith<$Res>? get me;
@@ -126,12 +147,17 @@ class __$$_AppConfigsCopyWithImpl<$Res> extends _$AppConfigsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? splashShowed = freezed,
     Object? initialized = freezed,
     Object? locale = freezed,
     Object? me = freezed,
   }) {
     return _then(_$_AppConfigs(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       splashShowed: splashShowed == freezed
           ? _value.splashShowed
           : splashShowed // ignore: cast_nullable_to_non_nullable
@@ -154,35 +180,47 @@ class __$$_AppConfigsCopyWithImpl<$Res> extends _$AppConfigsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 0, adapterName: 'AppConfigsDB')
 class _$_AppConfigs extends _AppConfigs {
   const _$_AppConfigs(
-      {this.splashShowed = false,
-      this.initialized = false,
-      @JsonKey(fromJson: (String value) => {Locale.fromSubtags()}, toJson: (Locale value) => value.toLanguageTag())
+      {@HiveField(0)
+          required this.id,
+      @HiveField(1)
+          this.splashShowed = false,
+      @HiveField(2)
+          this.initialized = false,
+      @JsonKey(fromJson: string2Locale, toJson: locale2String)
+      @HiveField(3)
           this.locale = const Locale('en', 'EN'),
-      this.me})
+      @HiveField(4)
+          this.me})
       : super._();
 
   factory _$_AppConfigs.fromJson(Map<String, dynamic> json) =>
       _$$_AppConfigsFromJson(json);
 
   @override
+  @HiveField(0)
+  final String id;
+  @override
   @JsonKey()
+  @HiveField(1)
   final bool splashShowed;
   @override
   @JsonKey()
+  @HiveField(2)
   final bool initialized;
   @override
-  @JsonKey(
-      fromJson: (String value) => {Locale.fromSubtags()},
-      toJson: (Locale value) => value.toLanguageTag())
+  @JsonKey(fromJson: string2Locale, toJson: locale2String)
+  @HiveField(3)
   final Locale locale;
   @override
+  @HiveField(4)
   final User? me;
 
   @override
   String toString() {
-    return 'AppConfigs(splashShowed: $splashShowed, initialized: $initialized, locale: $locale, me: $me)';
+    return 'AppConfigs(id: $id, splashShowed: $splashShowed, initialized: $initialized, locale: $locale, me: $me)';
   }
 
   @override
@@ -190,6 +228,7 @@ class _$_AppConfigs extends _AppConfigs {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppConfigs &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.splashShowed, splashShowed) &&
             const DeepCollectionEquality()
@@ -202,6 +241,7 @@ class _$_AppConfigs extends _AppConfigs {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(splashShowed),
       const DeepCollectionEquality().hash(initialized),
       const DeepCollectionEquality().hash(locale),
@@ -222,26 +262,37 @@ class _$_AppConfigs extends _AppConfigs {
 
 abstract class _AppConfigs extends AppConfigs {
   const factory _AppConfigs(
-      {final bool splashShowed,
-      final bool initialized,
-      @JsonKey(fromJson: (String value) => {Locale.fromSubtags()}, toJson: (Locale value) => value.toLanguageTag())
+      {@HiveField(0)
+          required final String id,
+      @HiveField(1)
+          final bool splashShowed,
+      @HiveField(2)
+          final bool initialized,
+      @JsonKey(fromJson: string2Locale, toJson: locale2String)
+      @HiveField(3)
           final Locale locale,
-      final User? me}) = _$_AppConfigs;
+      @HiveField(4)
+          final User? me}) = _$_AppConfigs;
   const _AppConfigs._() : super._();
 
   factory _AppConfigs.fromJson(Map<String, dynamic> json) =
       _$_AppConfigs.fromJson;
 
   @override
+  @HiveField(0)
+  String get id;
+  @override
+  @HiveField(1)
   bool get splashShowed;
   @override
+  @HiveField(2)
   bool get initialized;
   @override
-  @JsonKey(
-      fromJson: (String value) => {Locale.fromSubtags()},
-      toJson: (Locale value) => value.toLanguageTag())
+  @JsonKey(fromJson: string2Locale, toJson: locale2String)
+  @HiveField(3)
   Locale get locale;
   @override
+  @HiveField(4)
   User? get me;
   @override
   @JsonKey(ignore: true)
