@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:samoject/models/task_status/task_status.dart';
+
+import '../task_status/task_status.dart';
 
 part 'task.freezed.dart';
 part 'task.g.dart';
@@ -7,6 +8,7 @@ part 'task.g.dart';
 @freezed
 class Task with _$Task {
   const Task._();
+  
   const factory Task({
     required String id,
     required String taskName,

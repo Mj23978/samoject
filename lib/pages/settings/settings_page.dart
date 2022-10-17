@@ -73,10 +73,10 @@ class SettingsView extends ConsumerWidget {
                           onValuePicked: (language) {
                             EasyLocalization.of(context)!.setLocale(
                                 Locale(language.isoCode, language.countryCode));
-                            app.conf.put(
-                                "local",
-                                Locale(language.isoCode, language.countryCode)
-                                    .toString());
+                            // app.conf.put(
+                            //     "local",
+                            //     Locale(language.isoCode, language.countryCode)
+                            //         .toString());
                             contr.dismiss();
                           },
                         ),

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../utils/helpers.dart';
 
-class NotFoundPage extends StatelessWidget {
+class NotFoundPage extends HookConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    final state = context.beamingHistory.reversed.toList()[1].state as BeamState;
+  Widget build(BuildContext context, ref) {
+    final beamingHistory = context.beamingHistory.reversed.toList();
+    final lastPage = beamingHistory.length > 1 ? beamingHistory[1] : beamingHistory[0];
+    final state = lastPage.state as BeamState;
+    final retryCount = useState(0);
     return Scaffold(
       body: Center(
         child: Column(
@@ -20,19 +25,15 @@ class NotFoundPage extends StatelessWidget {
                   'Back to ${state.uri}',
                   style: textStyle(context, 16, weight: FontWeight.w400)),
               onPressed: () {
-                // if (context.) {
+                if (retryCount.value == 0) {
+                  retryCount.value = retryCount.value + 1;
                   context.beamBack();
-                // } else {
-                // context.beamToNamed(
-                //   context.beamLocationHistory.reversed
-                //       .toList()[1]
-                //       .state
-                //       .uri
-                //       .toString(),
-                //   stacked: false,
-                //   replaceCurrent: true,
-                // );
-                // }
+                } else {
+                context.beamToNamed(
+                  state.uri.path,
+                  stacked: false,
+                );
+                }
               },
             )
           ],

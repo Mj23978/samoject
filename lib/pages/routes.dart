@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'auth/login_page.dart';
 import 'home/home_page.dart';
 import 'settings/settings_page.dart';
 import 'splash_view.dart';
@@ -13,6 +14,7 @@ class HomeLocation extends BeamLocation<BeamState> {
   @override
   List<Pattern> get pathPatterns => [
     '/',
+    '/auth',
     '/home',  
     '/settings',  
   ];
@@ -23,6 +25,8 @@ class HomeLocation extends BeamLocation<BeamState> {
       BeamPage(key: ValueKey("Splash"), child: SplashView()),
       if (state.uri.pathSegments.contains("home"))
         BeamPage(key: ValueKey("Home"), child: HomeView()),
+      if (state.uri.pathSegments.contains("auth"))
+        BeamPage(key: ValueKey("Auth"), child: LoginPage()),
       if (state.uri.pathSegments.contains("settings"))
         BeamPage(key: ValueKey("Settings"), child: SettingsView()),
     ];

@@ -2,12 +2,14 @@ import 'package:beamer/beamer.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
+import 'core/providers.dart';
 import 'pages/not_found/not_found_view.dart';
 import 'pages/routes.dart';
 import 'utils/helpers.dart';
@@ -24,11 +26,11 @@ void main() async {
     Hive.initFlutter();
   }
   await Hive.openBox(DBKeys.hive_config);
-  await Hive.openBox(DBKeys.home_players);
+  await Hive.openBox(DBKeys.users);
   initConfig();
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale("en", "US"), Locale("fa", "IR")],
+      supportedLocales: const [Locale("en", "US"), Locale("fa", "IR")],
       path: 'assets/translations',
       fallbackLocale: Locale("en", "US"),
       child: ProviderScope(
@@ -38,24 +40,31 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
-  final parser = BeamerParser();
-  final routerDelegate = BeamerDelegate(
-    initialPath: '/home',
-    locationBuilder: BeamerLocationBuilder(beamLocations: [
-      HomeLocation(),
-    ]),
-    notFoundPage: BeamPage(key: ValueKey("404"), child: NotFoundPage()),
-    // guards: [
-    //   BeamGuard(
-    //     pathPatterns: ['/$firstRoute/$secondRoute'],
-    //     check: (_, __) => read(navigationToSecondProvider).state,
-    //   ),
-    // ],
-  );
-
+class MyApp extends HookConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final app = ref.read(appProvider);
+    useMemoized(() async {
+      await app.initApp();
+      print(app.appConfigs);
+    }, []);
+    final parser = useMemoized(BeamerParser.new);
+    final routerDelegate = useMemoized(() {
+      return BeamerDelegate(
+        initialPath: (app.appConfigs?.splashShowed ?? false) ? '/home' : '/',
+        locationBuilder: BeamerLocationBuilder(beamLocations: [
+          HomeLocation(),
+        ]),
+        notFoundPage: BeamPage(key: ValueKey("404"), child: NotFoundPage()),
+        // guards: [
+        //   BeamGuard(
+        //     pathPatterns: ['/$firstRoute/$secondRoute'],
+        //     check: (_, __) => read(navigationToSecondProvider).state,
+        //   ),
+        // ],
+      );
+    });
+
     return ValueListenableBuilder<Box>(
         valueListenable: Hive.box(DBKeys.hive_config).listenable(),
         builder: (context, box, child) {
