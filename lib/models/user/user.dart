@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../comment/comment.dart';
+import '../project/project.dart';
 import '../task/task.dart';
-import '../workspace/workspace.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -24,7 +24,7 @@ class User with _$User {
     @Default([]) List<Task> createdTasks,
     @Default([]) List<Task> assignedTasks,
     @Default([]) List<Comment> comments,
-    @Default([]) List<Workspace> workspaces,
+    @Default([]) List<Project> projects,
     String? roleName,
   }) = _User;
 

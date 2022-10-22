@@ -23,6 +23,9 @@ mixin _$Project {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   ProjectSettings get settings => throw _privateConstructorUsedError;
+  List<Space> get spaces => throw _privateConstructorUsedError;
+  List<Task> get tasks => throw _privateConstructorUsedError;
+  List<User> get users => throw _privateConstructorUsedError;
   String? get localId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +38,13 @@ abstract class $ProjectCopyWith<$Res> {
   factory $ProjectCopyWith(Project value, $Res Function(Project) then) =
       _$ProjectCopyWithImpl<$Res>;
   $Res call(
-      {String id, String name, ProjectSettings settings, String? localId});
+      {String id,
+      String name,
+      ProjectSettings settings,
+      List<Space> spaces,
+      List<Task> tasks,
+      List<User> users,
+      String? localId});
 
   $ProjectSettingsCopyWith<$Res> get settings;
 }
@@ -53,6 +62,9 @@ class _$ProjectCopyWithImpl<$Res> implements $ProjectCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? settings = freezed,
+    Object? spaces = freezed,
+    Object? tasks = freezed,
+    Object? users = freezed,
     Object? localId = freezed,
   }) {
     return _then(_value.copyWith(
@@ -68,6 +80,18 @@ class _$ProjectCopyWithImpl<$Res> implements $ProjectCopyWith<$Res> {
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as ProjectSettings,
+      spaces: spaces == freezed
+          ? _value.spaces
+          : spaces // ignore: cast_nullable_to_non_nullable
+              as List<Space>,
+      tasks: tasks == freezed
+          ? _value.tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
       localId: localId == freezed
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
@@ -90,7 +114,13 @@ abstract class _$$_ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       __$$_ProjectCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id, String name, ProjectSettings settings, String? localId});
+      {String id,
+      String name,
+      ProjectSettings settings,
+      List<Space> spaces,
+      List<Task> tasks,
+      List<User> users,
+      String? localId});
 
   @override
   $ProjectSettingsCopyWith<$Res> get settings;
@@ -110,6 +140,9 @@ class __$$_ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? settings = freezed,
+    Object? spaces = freezed,
+    Object? tasks = freezed,
+    Object? users = freezed,
     Object? localId = freezed,
   }) {
     return _then(_$_Project(
@@ -125,6 +158,18 @@ class __$$_ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
               as ProjectSettings,
+      spaces: spaces == freezed
+          ? _value._spaces
+          : spaces // ignore: cast_nullable_to_non_nullable
+              as List<Space>,
+      tasks: tasks == freezed
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      users: users == freezed
+          ? _value._users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<User>,
       localId: localId == freezed
           ? _value.localId
           : localId // ignore: cast_nullable_to_non_nullable
@@ -140,8 +185,14 @@ class _$_Project extends _Project {
       {required this.id,
       required this.name,
       required this.settings,
+      final List<Space> spaces = const [],
+      final List<Task> tasks = const [],
+      final List<User> users = const [],
       this.localId})
-      : super._();
+      : _spaces = spaces,
+        _tasks = tasks,
+        _users = users,
+        super._();
 
   factory _$_Project.fromJson(Map<String, dynamic> json) =>
       _$$_ProjectFromJson(json);
@@ -152,12 +203,36 @@ class _$_Project extends _Project {
   final String name;
   @override
   final ProjectSettings settings;
+  final List<Space> _spaces;
+  @override
+  @JsonKey()
+  List<Space> get spaces {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_spaces);
+  }
+
+  final List<Task> _tasks;
+  @override
+  @JsonKey()
+  List<Task> get tasks {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  final List<User> _users;
+  @override
+  @JsonKey()
+  List<User> get users {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_users);
+  }
+
   @override
   final String? localId;
 
   @override
   String toString() {
-    return 'Project(id: $id, name: $name, settings: $settings, localId: $localId)';
+    return 'Project(id: $id, name: $name, settings: $settings, spaces: $spaces, tasks: $tasks, users: $users, localId: $localId)';
   }
 
   @override
@@ -168,6 +243,9 @@ class _$_Project extends _Project {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.settings, settings) &&
+            const DeepCollectionEquality().equals(other._spaces, _spaces) &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            const DeepCollectionEquality().equals(other._users, _users) &&
             const DeepCollectionEquality().equals(other.localId, localId));
   }
 
@@ -178,6 +256,9 @@ class _$_Project extends _Project {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(settings),
+      const DeepCollectionEquality().hash(_spaces),
+      const DeepCollectionEquality().hash(_tasks),
+      const DeepCollectionEquality().hash(_users),
       const DeepCollectionEquality().hash(localId));
 
   @JsonKey(ignore: true)
@@ -198,6 +279,9 @@ abstract class _Project extends Project {
       {required final String id,
       required final String name,
       required final ProjectSettings settings,
+      final List<Space> spaces,
+      final List<Task> tasks,
+      final List<User> users,
       final String? localId}) = _$_Project;
   const _Project._() : super._();
 
@@ -209,6 +293,12 @@ abstract class _Project extends Project {
   String get name;
   @override
   ProjectSettings get settings;
+  @override
+  List<Space> get spaces;
+  @override
+  List<Task> get tasks;
+  @override
+  List<User> get users;
   @override
   String? get localId;
   @override

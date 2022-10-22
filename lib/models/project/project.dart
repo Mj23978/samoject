@@ -1,5 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../space/space.dart';
+import '../task/task.dart';
+import '../user/user.dart';
+
 part 'project.freezed.dart';
 part 'project.g.dart';
 
@@ -11,6 +15,9 @@ class Project with _$Project {
     required String id,
     required String name,
     required ProjectSettings settings,
+    @Default([]) List<Space> spaces,
+    @Default([]) List<Task> tasks,
+    @Default([]) List<User> users,
     String? localId,
   }) = _Project;
 

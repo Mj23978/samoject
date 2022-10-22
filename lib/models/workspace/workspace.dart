@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../project/project.dart';
-import '../space/space.dart';
+import '../user/user.dart';
 
 part 'workspace.freezed.dart';
 part 'workspace.g.dart';
@@ -13,8 +13,8 @@ class Workspace with _$Workspace {
   const factory Workspace({
     required String id,
     required String name,
-    @Default([]) List<Project> project,
-    @Default([]) List<Space> spaces,
+    required User belongsTo,
+    @Default([]) List<Project> projects,
   }) = _Workspace;
 
   factory Workspace.fromJson(Map<String, dynamic> json) => _$WorkspaceFromJson(json);

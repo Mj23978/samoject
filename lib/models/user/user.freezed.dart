@@ -31,7 +31,7 @@ mixin _$User {
   List<Task> get createdTasks => throw _privateConstructorUsedError;
   List<Task> get assignedTasks => throw _privateConstructorUsedError;
   List<Comment> get comments => throw _privateConstructorUsedError;
-  List<Workspace> get workspaces => throw _privateConstructorUsedError;
+  List<Project> get projects => throw _privateConstructorUsedError;
   String? get roleName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ abstract class $UserCopyWith<$Res> {
       List<Task> createdTasks,
       List<Task> assignedTasks,
       List<Comment> comments,
-      List<Workspace> workspaces,
+      List<Project> projects,
       String? roleName});
 }
 
@@ -80,7 +80,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? createdTasks = freezed,
     Object? assignedTasks = freezed,
     Object? comments = freezed,
-    Object? workspaces = freezed,
+    Object? projects = freezed,
     Object? roleName = freezed,
   }) {
     return _then(_value.copyWith(
@@ -128,10 +128,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.comments
           : comments // ignore: cast_nullable_to_non_nullable
               as List<Comment>,
-      workspaces: workspaces == freezed
-          ? _value.workspaces
-          : workspaces // ignore: cast_nullable_to_non_nullable
-              as List<Workspace>,
+      projects: projects == freezed
+          ? _value.projects
+          : projects // ignore: cast_nullable_to_non_nullable
+              as List<Project>,
       roleName: roleName == freezed
           ? _value.roleName
           : roleName // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       List<Task> createdTasks,
       List<Task> assignedTasks,
       List<Comment> comments,
-      List<Workspace> workspaces,
+      List<Project> projects,
       String? roleName});
 }
 
@@ -183,7 +183,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? createdTasks = freezed,
     Object? assignedTasks = freezed,
     Object? comments = freezed,
-    Object? workspaces = freezed,
+    Object? projects = freezed,
     Object? roleName = freezed,
   }) {
     return _then(_$_User(
@@ -231,10 +231,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value._comments
           : comments // ignore: cast_nullable_to_non_nullable
               as List<Comment>,
-      workspaces: workspaces == freezed
-          ? _value._workspaces
-          : workspaces // ignore: cast_nullable_to_non_nullable
-              as List<Workspace>,
+      projects: projects == freezed
+          ? _value._projects
+          : projects // ignore: cast_nullable_to_non_nullable
+              as List<Project>,
       roleName: roleName == freezed
           ? _value.roleName
           : roleName // ignore: cast_nullable_to_non_nullable
@@ -258,12 +258,12 @@ class _$_User extends _User {
       final List<Task> createdTasks = const [],
       final List<Task> assignedTasks = const [],
       final List<Comment> comments = const [],
-      final List<Workspace> workspaces = const [],
+      final List<Project> projects = const [],
       this.roleName})
       : _createdTasks = createdTasks,
         _assignedTasks = assignedTasks,
         _comments = comments,
-        _workspaces = workspaces,
+        _projects = projects,
         super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -309,12 +309,12 @@ class _$_User extends _User {
     return EqualUnmodifiableListView(_comments);
   }
 
-  final List<Workspace> _workspaces;
+  final List<Project> _projects;
   @override
   @JsonKey()
-  List<Workspace> get workspaces {
+  List<Project> get projects {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_workspaces);
+    return EqualUnmodifiableListView(_projects);
   }
 
   @override
@@ -322,7 +322,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, date: $date, firstName: $firstName, lastName: $lastName, password: $password, email: $email, active: $active, createdTasks: $createdTasks, assignedTasks: $assignedTasks, comments: $comments, workspaces: $workspaces, roleName: $roleName)';
+    return 'User(id: $id, username: $username, date: $date, firstName: $firstName, lastName: $lastName, password: $password, email: $email, active: $active, createdTasks: $createdTasks, assignedTasks: $assignedTasks, comments: $comments, projects: $projects, roleName: $roleName)';
   }
 
   @override
@@ -343,8 +343,7 @@ class _$_User extends _User {
             const DeepCollectionEquality()
                 .equals(other._assignedTasks, _assignedTasks) &&
             const DeepCollectionEquality().equals(other._comments, _comments) &&
-            const DeepCollectionEquality()
-                .equals(other._workspaces, _workspaces) &&
+            const DeepCollectionEquality().equals(other._projects, _projects) &&
             const DeepCollectionEquality().equals(other.roleName, roleName));
   }
 
@@ -363,7 +362,7 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(_createdTasks),
       const DeepCollectionEquality().hash(_assignedTasks),
       const DeepCollectionEquality().hash(_comments),
-      const DeepCollectionEquality().hash(_workspaces),
+      const DeepCollectionEquality().hash(_projects),
       const DeepCollectionEquality().hash(roleName));
 
   @JsonKey(ignore: true)
@@ -392,7 +391,7 @@ abstract class _User extends User {
       final List<Task> createdTasks,
       final List<Task> assignedTasks,
       final List<Comment> comments,
-      final List<Workspace> workspaces,
+      final List<Project> projects,
       final String? roleName}) = _$_User;
   const _User._() : super._();
 
@@ -421,7 +420,7 @@ abstract class _User extends User {
   @override
   List<Comment> get comments;
   @override
-  List<Workspace> get workspaces;
+  List<Project> get projects;
   @override
   String? get roleName;
   @override

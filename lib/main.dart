@@ -29,7 +29,7 @@ void main() async {
   await Hive.openBox(DBKeys.app_config);
   await Hive.openBox(DBKeys.hive_config);
   await Hive.openBox(DBKeys.users);
-  initConfig();
+
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale("en", "US"), Locale("fa", "IR")],
@@ -46,13 +46,14 @@ class MyApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final app = ref.read(appProvider);
+    final me = useState((app.configsStore.getMe()));
     useMemoized(() async {
       await app.initApp();
     }, []);
     final parser = useMemoized(BeamerParser.new);
     final routerDelegate = useMemoized(() {
       return BeamerDelegate(
-        initialPath: (app.configsStore.showSplash ?? false) ? (app.configsStore.me != null) ? '/home' : '/auth' : '/',
+        initialPath: app.configsStore.getSplash() ? (me.value != null) ? '/home' : '/auth' : '/',
         locationBuilder: BeamerLocationBuilder(beamLocations: [
           HomeLocation(),
         ]),
@@ -86,20 +87,7 @@ class MyApp extends HookConsumerWidget {
               ...context.localizationDelegates,
             ],
             debugShowCheckedModeBanner: false,
-            theme: mDefaultTheme,
           );
         });
-  }
-}
-
-final ThemeData mDefaultTheme = ThemeData(
-  primaryColor: string2Color('#0a0a0a'),
-);
-
-initConfig() {
-  Box conf = Hive.box(DBKeys.hive_config);
-  if (!conf.get("initialized", defaultValue: false)) {
-    conf.put("initialized", true);
-    conf.put("local", Locale("fa", "IR").toString());
   }
 }

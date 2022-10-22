@@ -27,8 +27,8 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
               ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      workspaces: (json['workspaces'] as List<dynamic>?)
-              ?.map((e) => Workspace.fromJson(e as Map<String, dynamic>))
+      projects: (json['projects'] as List<dynamic>?)
+              ?.map((e) => Project.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       roleName: json['roleName'] as String?,
@@ -46,6 +46,6 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'createdTasks': instance.createdTasks,
       'assignedTasks': instance.assignedTasks,
       'comments': instance.comments,
-      'workspaces': instance.workspaces,
+      'projects': instance.projects,
       'roleName': instance.roleName,
     };

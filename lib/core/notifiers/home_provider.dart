@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
-import 'package:samoject_table/samoject_table.dart';
+// import 'package:samoject_table/samoject_table.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/favorites/favorites.dart';
@@ -13,99 +13,8 @@ class HomeProvider extends ChangeNotifier {
 
   final AppProvider _appProvider;
 
-  final List<SamojectTableColumn> columns = <SamojectTableColumn>[
-    SamojectTableColumn(
-      title: 'Id',
-      field: 'id',
-      type: SamojectTableColumnType.text(),
-    ),
-    SamojectTableColumn(
-      title: 'Name',
-      field: 'name',
-      type: SamojectTableColumnType.text(),
-    ),
-    SamojectTableColumn(
-      title: 'Age',
-      field: 'age',
-      type: SamojectTableColumnType.number(),
-    ),
-    SamojectTableColumn(
-      title: 'Role',
-      field: 'role',
-      type: SamojectTableColumnType.select(<String>[
-        'Programmer',
-        'Designer',
-        'Owner',
-      ]),
-    ),
-    SamojectTableColumn(
-      title: 'Joined',
-      field: 'joined',
-      type: SamojectTableColumnType.date(),
-    ),
-    SamojectTableColumn(
-      title: 'Working time',
-      field: 'working_time',
-      type: SamojectTableColumnType.time(),
-    ),
-  ];
-
-  final List<SamojectTableRow> rows = [
-    SamojectTableRow(
-      cells: {
-        'id': SamojectTableCell(value: 'user1'),
-        'name': SamojectTableCell(value: 'Mike'),
-        'age': SamojectTableCell(value: 20),
-        'role': SamojectTableCell(value: 'Programmer'),
-        'joined': SamojectTableCell(value: '2021-01-01'),
-        'working_time': SamojectTableCell(value: '09:00'),
-      },
-    ),
-    SamojectTableRow(
-      cells: {
-        'id': SamojectTableCell(value: 'user2'),
-        'name': SamojectTableCell(value: 'Jack'),
-        'age': SamojectTableCell(value: 25),
-        'role': SamojectTableCell(value: 'Designer'),
-        'joined': SamojectTableCell(value: '2021-02-01'),
-        'working_time': SamojectTableCell(value: '10:00'),
-      },
-    ),
-    SamojectTableRow(
-      cells: {
-        'id': SamojectTableCell(value: 'user3'),
-        'name': SamojectTableCell(value: 'Suzi'),
-        'age': SamojectTableCell(value: 40),
-        'role': SamojectTableCell(value: 'Owner'),
-        'joined': SamojectTableCell(value: '2021-03-01'),
-        'working_time': SamojectTableCell(value: '11:00'),
-      },
-    ),
-  ];
-
-  /// columnGroups that can group columns can be omitted.
-  final List<SamojectTableColumnGroup> columnGroups = [
-    SamojectTableColumnGroup(title: 'Id', fields: ['id'], expandedColumn: true),
-    SamojectTableColumnGroup(
-        title: 'User information', fields: ['name', 'age']),
-    SamojectTableColumnGroup(title: 'Status', children: [
-      SamojectTableColumnGroup(
-          title: 'A', fields: ['role'], expandedColumn: true),
-      SamojectTableColumnGroup(
-          title: 'Etc.', fields: ['joined', 'working_time']),
-    ]),
-  ];
-
-  /// [TableGridStateManager] has many methods and properties to dynamically manipulate the grid.
-  /// You can manipulate the grid dynamically at runtime by passing this through the [onLoaded] callback.
-  late final SamojectTableGridStateManager stateManager;
-
-  final List<SpaceView> views = [
-    SpaceView(name: 'List'),
-    SpaceView(name: 'Board'),
-    SpaceView(name: 'Box'),
-    SpaceView(name: 'Calendar')
-  ];
+  final List<Space> spaces = [];
+  Space? selectedSpace;
 
   final List<Favorites> favorites = [
     Favorites(name: 'Get to know clickup', id: Uuid().v4()),
@@ -126,6 +35,12 @@ class HomeProvider extends ChangeNotifier {
   bool settingsSwitch = false;
   bool pinFavorites = true;
 
+  initSpaces() {
+    if (spaces.isEmpty) {
+      spaces.addAll(_appProvider.selectedProject!.spaces);
+    }
+  }
+
   toggleSwitch(bool value) {
     settingsSwitch = value;
     notifyListeners();
@@ -136,10 +51,10 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setTableStateManager(SamojectTableGridStateManager sm) {
-    stateManager = sm;
-    notifyListeners();
-  }
+  // setTableStateManager(SamojectTableGridStateManager sm) {
+  //   stateManager = sm;
+  //   notifyListeners();
+  // }
 
   setPopupMenuItemsSwitch(List<SpaceMenuButton> items, int index, bool value) {
     items[index].switchValue = value;
@@ -151,14 +66,30 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  onHoverView(String viewName, bool value) {
-    SpaceView view = views.singleWhere((element) => element.name == viewName);
-    view = view.copyWith(onHovered: value);
+  onHoverView(String spaceName, bool value) {
+    initSpaces();
+    Space space = spaces.singleWhere(
+      (element) =>
+          element.map((value) => value.name,
+              box: (value) => value.name,
+              boxSettings: (v) => '',
+              view: (v) => '') ==
+          spaceName,
+    );
+    Space newspace = space.map(
+      (v) => v,
+      box: (v) => v.copyWith(view: v.view.copyWith(onHovered: value)),
+      boxSettings: (v) => v,
+      view: (v) => v,
+    );
+    spaces.remove(space);
+    spaces.add(newspace);
     notifyListeners();
   }
 
   onHoverFavorite(String favoriteName, bool value) {
-    Favorites favorite = favorites.singleWhere((element) => element.name == favoriteName);
+    Favorites favorite =
+        favorites.singleWhere((element) => element.name == favoriteName);
     favorite = favorite.copyWith(onHovered: value);
     notifyListeners();
   }
@@ -168,9 +99,25 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  onSelectView(String viewName) {
-    SpaceView view = views.singleWhere((element) => element.name == viewName);
-    view = view.copyWith(selected: !view.selected);
+  onSelectView(String spaceName) {
+    initSpaces();
+    Space space = spaces.singleWhere(
+      (element) =>
+          element.map((value) => value.name,
+              box: (value) => value.name,
+              boxSettings: (v) => '',
+              view: (v) => '') ==
+          spaceName,
+    );
+    Space newspace = space.map(
+      (v) => v,
+      box: (v) => v.copyWith(view: v.view.copyWith(selected: !v.view.selected)),
+      boxSettings: (v) => v,
+      view: (v) => v,
+    );
+    spaces.remove(space);
+    spaces.add(newspace);
+    selectedSpace = newspace;
     notifyListeners();
   }
 
@@ -184,3 +131,89 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+// final List<SamojectTableColumn> columns = <SamojectTableColumn>[
+//   SamojectTableColumn(
+//     title: 'Id',
+//     field: 'id',
+//     type: SamojectTableColumnType.text(),
+//   ),
+//   SamojectTableColumn(
+//     title: 'Name',
+//     field: 'name',
+//     type: SamojectTableColumnType.text(),
+//   ),
+//   SamojectTableColumn(
+//     title: 'Age',
+//     field: 'age',
+//     type: SamojectTableColumnType.number(),
+//   ),
+//   SamojectTableColumn(
+//     title: 'Role',
+//     field: 'role',
+//     type: SamojectTableColumnType.select(<String>[
+//       'Programmer',
+//       'Designer',
+//       'Owner',
+//     ]),
+//   ),
+//   SamojectTableColumn(
+//     title: 'Joined',
+//     field: 'joined',
+//     type: SamojectTableColumnType.date(),
+//   ),
+//   SamojectTableColumn(
+//     title: 'Working time',
+//     field: 'working_time',
+//     type: SamojectTableColumnType.time(),
+//   ),
+// ];
+
+// final List<SamojectTableRow> rows = [
+//   SamojectTableRow(
+//     cells: {
+//       'id': SamojectTableCell(value: 'user1'),
+//       'name': SamojectTableCell(value: 'Mike'),
+//       'age': SamojectTableCell(value: 20),
+//       'role': SamojectTableCell(value: 'Programmer'),
+//       'joined': SamojectTableCell(value: '2021-01-01'),
+//       'working_time': SamojectTableCell(value: '09:00'),
+//     },
+//   ),
+//   SamojectTableRow(
+//     cells: {
+//       'id': SamojectTableCell(value: 'user2'),
+//       'name': SamojectTableCell(value: 'Jack'),
+//       'age': SamojectTableCell(value: 25),
+//       'role': SamojectTableCell(value: 'Designer'),
+//       'joined': SamojectTableCell(value: '2021-02-01'),
+//       'working_time': SamojectTableCell(value: '10:00'),
+//     },
+//   ),
+//   SamojectTableRow(
+//     cells: {
+//       'id': SamojectTableCell(value: 'user3'),
+//       'name': SamojectTableCell(value: 'Suzi'),
+//       'age': SamojectTableCell(value: 40),
+//       'role': SamojectTableCell(value: 'Owner'),
+//       'joined': SamojectTableCell(value: '2021-03-01'),
+//       'working_time': SamojectTableCell(value: '11:00'),
+//     },
+//   ),
+// ];
+
+// /// columnGroups that can group columns can be omitted.
+// final List<SamojectTableColumnGroup> columnGroups = [
+//   SamojectTableColumnGroup(title: 'Id', fields: ['id'], expandedColumn: true),
+//   SamojectTableColumnGroup(title: 'User information', fields: ['name', 'age']),
+//   SamojectTableColumnGroup(title: 'Status', children: [
+//     SamojectTableColumnGroup(
+//         title: 'A', fields: ['role'], expandedColumn: true),
+//     SamojectTableColumnGroup(title: 'Etc.', fields: ['joined', 'working_time']),
+//   ]),
+// ];
+
+// /// [TableGridStateManager] has many methods and properties to dynamically manipulate the grid.
+// /// You can manipulate the grid dynamically at runtime by passing this through the [onLoaded] callback.
+// late final SamojectTableGridStateManager stateManager;

@@ -42,7 +42,7 @@ Map<String, dynamic> _$$CompleteToJson(_$Complete instance) =>
 _$TODO _$$TODOFromJson(Map<String, dynamic> json) => _$TODO(
       name: json['name'] as String? ?? 'Todo',
       color: json['color'] == null
-          ? const Color(0xffaeea00)
+          ? Colors.yellow
           : string2Color(json['color'] as String),
       attributes: json['attributes'] as Map<String, dynamic>? ?? const {},
       $type: json['runtimeType'] as String?,

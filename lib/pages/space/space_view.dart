@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
+import 'package:samoject/core/providers.dart';
 
 import '../../core/notifiers/home_provider.dart';
+import '../../models/space/space.dart';
 import '../../widgets/buttons/space_menu_button.dart';
 import '../../widgets/overlays/animated_dropdown_button.dart';
 import '../../widgets/overlays/menu_with_buttons.dart';
@@ -105,7 +109,6 @@ class SpaceHeaderViews extends StatelessWidget {
         SpaceHeaderView(
           name: "List",
           iconData: Icons.list,
-          provider: provider,
         ),
         SpaceHeaderView(
           name: "Board",
@@ -115,7 +118,6 @@ class SpaceHeaderViews extends StatelessWidget {
             width: 18,
             color: Colors.black38,
           ),
-          provider: provider,
         ),
         SpaceHeaderView(
           name: "Box",
@@ -125,7 +127,6 @@ class SpaceHeaderViews extends StatelessWidget {
             width: 20,
             color: Colors.black38,
           ),
-          provider: provider,
         ),
         ConstrainedBox(
           constraints: BoxConstraints(maxHeight: 40),
@@ -204,16 +205,14 @@ class SpaceHeaderViews extends StatelessWidget {
   }
 }
 
-class SpaceHeaderView extends StatelessWidget {
+class SpaceHeaderView extends HookConsumerWidget {
   final String name;
   final IconData? iconData;
   final double? iconSize;
   final Widget? icon;
-  final HomeProvider provider;
 
   const SpaceHeaderView({
     required this.name,
-    required this.provider,
     this.icon,
     this.iconData,
     this.iconSize = 20,
@@ -221,8 +220,19 @@ class SpaceHeaderView extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final view = provider.views.singleWhere((e) => e.name == name);
+  Widget build(BuildContext context, ref) {
+    final provider = ref.watch(homeProvider);
+    useMemoized(provider.initSpaces);
+    final view = provider.spaces.singleWhere(
+      (e) =>
+          e.map(
+            (v) => v.name,
+            box: (v) => v.name,
+            boxSettings: (v) => '',
+            view: (v) => '',
+          ) ==
+          name,
+    );
     return Row(
       children: [
         ConstrainedBox(
@@ -244,7 +254,7 @@ class SpaceHeaderView extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border(
             top: BorderSide(width: 3, color: Colors.transparent),
-            bottom: view.onHovered || view.selected
+            bottom: view.isHovered() || view.isSelected()
                 ? BorderSide(color: Colors.blue, width: 3)
                 : BorderSide(color: Colors.transparent, width: 3),
           )),
@@ -277,7 +287,7 @@ class SpaceHeaderView extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                if (view.onHovered && view.selected)
+                if (view.isHovered() && view.isSelected())
                   GestureDetector(
                     onTap: () {},
                     child: Container(

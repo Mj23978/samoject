@@ -62,10 +62,16 @@ Future baseFlash(
 
 Color string2Color(String colorString) {
   int value = 0x00000000;
+  if (colorString.startsWith('Color')) {
+    colorString = colorString.substring(8, colorString.length - 1);
+  }
   if (colorString.isNotEmpty) {
     if (colorString[0] == '#') {
       colorString = colorString.substring(1);
     }
+    // if(colorString.startsWith("0X")) {
+    //   return Color(colorString);
+    // }
     value = int.tryParse(colorString, radix: 16)!;
     if (value < 0xFF000000) {
       value += 0xFF000000;

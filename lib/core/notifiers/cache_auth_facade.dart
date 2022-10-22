@@ -46,11 +46,11 @@ class MockAuthFacade implements IAuthFacade {
     final passwordString =
         password!.valueObject!.fold((l) => throw UnExpectedValueError(l), id);
     try {
-      if (app.configsStore.me == null) {
+      if (app.configsStore.getMe() == null) {
         return (left(AuthFailures.invalidEmailAndPasswordCombination()));
       }
-      if (app.configsStore.me!.email == emailAddressString &&
-          (app.configsStore.me!.password == null || app.configsStore.me!.password == passwordString)) {
+      if (app.configsStore.getMe()!.email == emailAddressString &&
+          (app.configsStore.getMe()!.password == null || app.configsStore.getMe()!.password == passwordString)) {
         return right(unit);
       }
       throw Error();
@@ -61,7 +61,7 @@ class MockAuthFacade implements IAuthFacade {
 
   @override
   Future<User?> getSignedInUser() async {
-    return app.configsStore.me;
+    return app.configsStore.getMe();
   }
 
   @override

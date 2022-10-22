@@ -7,6 +7,7 @@ import 'notifiers/app_provider.dart';
 import 'notifiers/auth_state_controller.dart';
 import 'notifiers/cache_auth_facade.dart';
 import 'notifiers/home_provider.dart';
+import 'notifiers/space_provider.dart';
 import 'notifiers/splash_provider.dart';
 import 'states/auth_states.dart';
 
@@ -27,6 +28,10 @@ final appProvider = Provider(
 
 final homeProvider = ChangeNotifierProvider((ref) {
   return HomeProvider(ref.watch(appProvider));
+});
+
+final spaceProvider = ChangeNotifierProvider((ref) {
+  return SpaceProvider(ref.watch(homeProvider));
 });
 
 final splashProvider =

@@ -23,6 +23,7 @@ mixin _$Task {
   String get id => throw _privateConstructorUsedError;
   String get taskName => throw _privateConstructorUsedError;
   String get creatorId => throw _privateConstructorUsedError;
+  String? get projectId => throw _privateConstructorUsedError;
   List<String> get assignesId => throw _privateConstructorUsedError;
   TaskStatus get status => throw _privateConstructorUsedError;
   String get taskDetailsId => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $TaskCopyWith<$Res> {
       {String id,
       String taskName,
       String creatorId,
+      String? projectId,
       List<String> assignesId,
       TaskStatus status,
       String taskDetailsId,
@@ -66,6 +68,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object? id = freezed,
     Object? taskName = freezed,
     Object? creatorId = freezed,
+    Object? projectId = freezed,
     Object? assignesId = freezed,
     Object? status = freezed,
     Object? taskDetailsId = freezed,
@@ -86,6 +89,10 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String,
+      projectId: projectId == freezed
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as String?,
       assignesId: assignesId == freezed
           ? _value.assignesId
           : assignesId // ignore: cast_nullable_to_non_nullable
@@ -130,6 +137,7 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       {String id,
       String taskName,
       String creatorId,
+      String? projectId,
       List<String> assignesId,
       TaskStatus status,
       String taskDetailsId,
@@ -155,6 +163,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object? id = freezed,
     Object? taskName = freezed,
     Object? creatorId = freezed,
+    Object? projectId = freezed,
     Object? assignesId = freezed,
     Object? status = freezed,
     Object? taskDetailsId = freezed,
@@ -175,6 +184,10 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
               as String,
+      projectId: projectId == freezed
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as String?,
       assignesId: assignesId == freezed
           ? _value._assignesId
           : assignesId // ignore: cast_nullable_to_non_nullable
@@ -210,6 +223,7 @@ class _$_Task extends _Task {
       {required this.id,
       required this.taskName,
       required this.creatorId,
+      this.projectId,
       final List<String> assignesId = const [],
       this.status = const TaskStatus.idea(),
       this.taskDetailsId = "",
@@ -229,6 +243,8 @@ class _$_Task extends _Task {
   final String taskName;
   @override
   final String creatorId;
+  @override
+  final String? projectId;
   final List<String> _assignesId;
   @override
   @JsonKey()
@@ -264,7 +280,7 @@ class _$_Task extends _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, taskName: $taskName, creatorId: $creatorId, assignesId: $assignesId, status: $status, taskDetailsId: $taskDetailsId, taskDetailsHash: $taskDetailsHash, subTasks: $subTasks, attributes: $attributes)';
+    return 'Task(id: $id, taskName: $taskName, creatorId: $creatorId, projectId: $projectId, assignesId: $assignesId, status: $status, taskDetailsId: $taskDetailsId, taskDetailsHash: $taskDetailsHash, subTasks: $subTasks, attributes: $attributes)';
   }
 
   @override
@@ -275,6 +291,7 @@ class _$_Task extends _Task {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.taskName, taskName) &&
             const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
+            const DeepCollectionEquality().equals(other.projectId, projectId) &&
             const DeepCollectionEquality()
                 .equals(other._assignesId, _assignesId) &&
             const DeepCollectionEquality().equals(other.status, status) &&
@@ -294,6 +311,7 @@ class _$_Task extends _Task {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(taskName),
       const DeepCollectionEquality().hash(creatorId),
+      const DeepCollectionEquality().hash(projectId),
       const DeepCollectionEquality().hash(_assignesId),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(taskDetailsId),
@@ -319,6 +337,7 @@ abstract class _Task extends Task {
       {required final String id,
       required final String taskName,
       required final String creatorId,
+      final String? projectId,
       final List<String> assignesId,
       final TaskStatus status,
       final String taskDetailsId,
@@ -335,6 +354,8 @@ abstract class _Task extends Task {
   String get taskName;
   @override
   String get creatorId;
+  @override
+  String? get projectId;
   @override
   List<String> get assignesId;
   @override
