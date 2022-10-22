@@ -9,9 +9,9 @@ import '../../widgets/buttons/space_menu_button.dart';
 import 'app_provider.dart';
 
 class HomeProvider extends ChangeNotifier {
-  HomeProvider(this._appProvider);
+  HomeProvider(this.appProvider);
 
-  final AppProvider _appProvider;
+  final AppProvider appProvider;
 
   final List<Space> spaces = [];
   Space? selectedSpace;
@@ -37,8 +37,9 @@ class HomeProvider extends ChangeNotifier {
 
   initSpaces() {
     if (spaces.isEmpty) {
-      spaces.addAll(_appProvider.selectedProject!.spaces);
+      spaces.addAll(appProvider.selectedProject!.spaces);
     }
+    selectedSpace ??= spaces[0];
   }
 
   toggleSwitch(bool value) {
@@ -70,20 +71,18 @@ class HomeProvider extends ChangeNotifier {
     initSpaces();
     Space space = spaces.singleWhere(
       (element) =>
-          element.map((value) => value.name,
-              box: (value) => value.name,
-              boxSettings: (v) => '',
-              view: (v) => '') ==
+          element.map(
+            (value) => value.name,
+            box: (value) => value.name,
+          ) ==
           spaceName,
     );
     Space newspace = space.map(
       (v) => v,
       box: (v) => v.copyWith(view: v.view.copyWith(onHovered: value)),
-      boxSettings: (v) => v,
-      view: (v) => v,
     );
-    spaces.remove(space);
-    spaces.add(newspace);
+    // spaces.remove(space);
+    // spaces.add(newspace);
     notifyListeners();
   }
 
@@ -103,20 +102,16 @@ class HomeProvider extends ChangeNotifier {
     initSpaces();
     Space space = spaces.singleWhere(
       (element) =>
-          element.map((value) => value.name,
-              box: (value) => value.name,
-              boxSettings: (v) => '',
-              view: (v) => '') ==
+          element.map(
+            (value) => value.name,
+            box: (value) => value.name,
+          ) ==
           spaceName,
     );
-    Space newspace = space.map(
-      (v) => v,
-      box: (v) => v.copyWith(view: v.view.copyWith(selected: !v.view.selected)),
-      boxSettings: (v) => v,
-      view: (v) => v,
-    );
-    spaces.remove(space);
-    spaces.add(newspace);
+    Space newspace = space.copyWith(
+        settings: space.settings.copyWith(selected: !space.settings.selected));
+    // spaces.remove(space);
+    // spaces.add(newspace);
     selectedSpace = newspace;
     notifyListeners();
   }

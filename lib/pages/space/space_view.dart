@@ -13,7 +13,7 @@ import '../../widgets/buttons/space_menu_button.dart';
 import '../../widgets/overlays/animated_dropdown_button.dart';
 import '../../widgets/overlays/menu_with_buttons.dart';
 
-class SpaceHeaderViews extends StatelessWidget {
+class SpaceHeaderViews extends HookConsumerWidget {
   final HomeProvider provider;
 
   const SpaceHeaderViews({
@@ -22,7 +22,7 @@ class SpaceHeaderViews extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     return Row(
       children: [
         SizedBox(width: 24),
@@ -228,8 +228,6 @@ class SpaceHeaderView extends HookConsumerWidget {
           e.map(
             (v) => v.name,
             box: (v) => v.name,
-            boxSettings: (v) => '',
-            view: (v) => '',
           ) ==
           name,
     );

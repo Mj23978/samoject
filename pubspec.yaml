@@ -62,6 +62,9 @@ dependencies:
   info_popup: ^1.2.0
   just_the_tooltip: ^0.0.12
   percent_indicator: ^4.2.2
+  avatars: ^2.0.2
+  uuid: ^3.0.6
+  random_avatar: ^0.0.7
 
 dev_dependencies:
   flutter_test:

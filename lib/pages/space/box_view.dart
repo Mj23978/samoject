@@ -1,52 +1,61 @@
+import 'package:avatars/avatars.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
-import 'package:samoject/widgets/charts/task_complete_circular_chart.dart';
+import 'package:random_avatar/random_avatar.dart';
 
+import '../../core/providers.dart';
+import '../../models/task/task.dart';
 import '../../models/task_status/task_status.dart';
 import '../../widgets/charts/multi_indicator_bar.dart';
+import '../../widgets/charts/task_complete_circular_chart.dart';
 import '../../widgets/overlays/menu_with_buttons.dart';
 
-class BoxView extends StatelessWidget {
+class BoxView extends HookConsumerWidget {
   const BoxView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final space = ref.watch(spaceProvider);
+    useMemoized(space.init, [space.tiles]);
+
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
       decoration: BoxDecoration(color: Color(0xffeeeeee)),
-      child: GridView(
+      child: GridView.builder(
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 250,
           mainAxisExtent: 290,
           crossAxisSpacing: 15,
           mainAxisSpacing: 15,
         ),
+        itemCount: space.tiles.length,
         padding: EdgeInsets.only(
           right: 40,
           top: 20,
           left: 15,
           bottom: 10,
         ),
-        children: const [
-          BoxViewCard(),
-          BoxViewCard(),
-          BoxViewCard(),
-          BoxViewCard(),
-        ],
+        itemBuilder: (context, index) {
+          return BoxViewCard(index);
+        },
       ),
     );
   }
 }
 
-class BoxViewCard extends StatelessWidget {
-  const BoxViewCard({Key? key}) : super(key: key);
+class BoxViewCard extends HookConsumerWidget {
+  final int index;
+
+  const BoxViewCard(this.index, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final space = ref.watch(spaceProvider);
+
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(4)),
@@ -57,7 +66,10 @@ class BoxViewCard extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            BoxViewCardHeader(),
+            BoxViewCardHeader(
+              username: space.tiles[index].username,
+              circleName: space.tiles[index].circleName,
+            ),
             SizedBox(
               height: 4,
             ),
@@ -74,9 +86,9 @@ class BoxViewCard extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 4),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
-                          "15",
+                          "${space.tiles[index].allTasks - space.tiles[index].doneTasks}",
                           style: TextStyle(fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
@@ -94,9 +106,9 @@ class BoxViewCard extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 4),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Text(
-                          "5",
+                          "${space.tiles[index].doneTasks}",
                           style: TextStyle(fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
@@ -110,50 +122,34 @@ class BoxViewCard extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  TaskCompleteCircularChart()
+                  TaskCompleteCircularChart(
+                    percent: space.tiles[index].doneTasks /
+                        space.tiles[index].allTasks,
+                  ),
                 ],
               ),
             ),
             SizedBox(
               height: 4,
             ),
-            createMultiIndicator([
-              IndicatorData(
-                0.2,
-                Colors.red,
-              ),
-              IndicatorData(
-                0.3,
-                Colors.blue,
-              ),
-            ]),
+            createMultiIndicator(
+              space.tiles[index].tasks
+                  .map((k, v) => MapEntry(
+                      k,
+                      IndicatorData(
+                          v.length / space.tiles[index].allTasks, k.color,
+                          sortIndex: space.sortStatus(k))))
+                  .values
+                  .toList(),
+            ),
             SizedBox(
               height: 12,
             ),
-            createExpandable(
-              title: "To Do",
-              color: Colors.cyan.shade200,
-            ),
-            createExpandable(
-              title: "IDEA",
-              color: Colors.cyan,
-            ),
-            createExpandable(
-              title: "UNDER REVIEW",
-              color: Colors.orange,
-            ),
-            createExpandable(
-              title: "PLANNED",
-              color: Colors.teal.shade200,
-            ),
-            createExpandable(
-              title: "IN PROGRESS",
-              color: Colors.blue,
-            ),
-            createExpandable(
-              title: "COMPLETE",
-              color: Colors.green,
-            ),
+            ...space.tiles[index].tasks
+                .map((k, v) =>
+                    MapEntry(k, createExpandable(status: k, tasks: v)))
+                .values
+                .toList(),
           ],
         ),
       ),
@@ -162,7 +158,14 @@ class BoxViewCard extends StatelessWidget {
 }
 
 class BoxViewCardHeader extends StatelessWidget {
-  const BoxViewCardHeader({Key? key}) : super(key: key);
+  final String circleName;
+  final String username;
+
+  const BoxViewCardHeader({
+    required this.circleName,
+    required this.username,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -171,23 +174,17 @@ class BoxViewCardHeader extends StatelessWidget {
         SizedBox(
           width: 4,
         ),
-        CircleAvatar(
-          maxRadius: 15,
-          minRadius: 10,
-          backgroundColor: Colors.teal,
-          child: Text(
-            "MH",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-            ),
-          ),
-        ),
+        // Avatar(
+        //   name: circleName,
+        //   useCache: true,
+        //   shape: AvatarShape.circle(15),
+        // ),
+        randomAvatar(circleName, height: 32, width: 32),
         SizedBox(
           width: 10,
         ),
         Text(
-          "You",
+          username,
           style: TextStyle(
             color: Colors.black,
             fontSize: 14,
@@ -237,10 +234,8 @@ class BoxViewCardHeader extends StatelessWidget {
   }
 }
 
-Widget createExpandable({
-  required String title,
-  required Color color,
-}) {
+Widget createExpandable(
+    {required List<Task> tasks, required TaskStatus status}) {
   return ExpandableNotifier(
     child: Column(
       children: [
@@ -256,11 +251,12 @@ Widget createExpandable({
                     width: 12,
                     height: 12,
                     decoration: BoxDecoration(
-                        color: color, borderRadius: BorderRadius.circular(2)),
+                        color: status.color,
+                        borderRadius: BorderRadius.circular(2)),
                   ),
                   SizedBox(width: 8),
                   Text(
-                    title,
+                    status.name,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -277,18 +273,21 @@ Widget createExpandable({
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 2),
                   child: Row(
                     children: [
-                      Icon(Icons.arrow_forward_ios_rounded, size: 12),
+                      RotatedBox(
+                        quarterTurns: 1,
+                        child: Icon(Icons.arrow_forward_ios_rounded, size: 12),
+                      ),
                       SizedBox(width: 6),
                       Container(
                         width: 12,
                         height: 12,
                         decoration: BoxDecoration(
-                            color: color,
+                            color: status.color,
                             borderRadius: BorderRadius.circular(2)),
                       ),
                       SizedBox(width: 8),
                       Text(
-                        title,
+                        status.name,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -298,48 +297,65 @@ Widget createExpandable({
                   ),
                 ),
               ),
-              TextButton(
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    EdgeInsets.symmetric(vertical: 8),
-                  ),
-                  // textStyle: MaterialStateProperty.resolveWith((states) {
-                  //   if (states.contains(MaterialState.hovered)) {
-                  //     return TextStyle(color: Colors.black);
-                  //   }
-                  //   return null;
-                  // })
-                ),
-                onPressed: () {},
-                onHover: (value) {},
-                child: Container(
-                  constraints: BoxConstraints(maxHeight: 30),
-                  child: Row(
-                    children: [
-                      TaskTile(
-                        onTap: () {},
-                        animationKey: Key("x side"),
-                        tooltipController: JustTheController(),
-                        content: Container(),
-                      ),
-                      Text(
-                        "Fix sidebar issue",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              for (var task in tasks) BoxTileTask(task: task, status: status),
             ],
           ),
         ),
       ],
     ),
   );
+}
+
+class BoxTileTask extends StatelessWidget {
+  final Task task;
+  final TaskStatus status;
+
+  const BoxTileTask({
+    required this.task,
+    required this.status,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(
+          EdgeInsets.symmetric(vertical: 8),
+        ),
+        // textStyle: MaterialStateProperty.resolveWith((states) {
+        //   if (states.contains(MaterialState.hovered)) {
+        //     return TextStyle(color: Colors.black);
+        //   }
+        //   return null;
+        // })
+      ),
+      onPressed: () {},
+      onHover: (value) {},
+      child: Container(
+        constraints: BoxConstraints(maxHeight: 30),
+        child: Row(
+          children: [
+            TaskTile(
+              onTap: () {},
+              animationKey: Key(task.id),
+              tooltipController: JustTheController(),
+              content: Container(),
+              color: status.color,
+            ),
+            Text(
+              task.taskName,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class BoxViewChangeStatusTooltipItem extends HookConsumerWidget {
@@ -402,12 +418,14 @@ class TaskTile extends HookConsumerWidget {
   final Key animationKey;
   final JustTheController tooltipController;
   final Widget content;
+  final Color color;
 
   const TaskTile({
     required this.onTap,
     required this.animationKey,
     required this.tooltipController,
     required this.content,
+    required this.color,
     this.duration = const Duration(milliseconds: 200),
     Key? key,
   }) : super(key: key);
@@ -481,14 +499,14 @@ class TaskTile extends HookConsumerWidget {
                         height: double.maxFinite,
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.7),
+                          color: color.withOpacity(0.6),
                         ),
                         child: Container(
                           height: 8,
                           width: 8,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(2),
-                            color: Colors.purple.withOpacity(0.5),
+                            color: color,
                           ),
                         ),
                         // duration: duration,

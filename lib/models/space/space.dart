@@ -14,28 +14,54 @@ class Space with _$Space {
     required String name,
     required SpaceView view,
     required SpaceType spaceType,
+    required SpaceSettings settings,
     List<Space>? subSpaces,
   }) = _Space;
 
   factory Space.box({
     required String id,
     required String name,
-    required SpaceBoxSettings settings,
-    required SpaceView view,
+    required SpaceSettings settings,
+    required SpaceViewBox view,
     @Default(SpaceType.box) SpaceType spaceType,
     String? parentId,
   }) = SpaceBox;
 
-  factory Space.boxSettings({
-    @Default(false) bool selected,
-  }) = SpaceBoxSettings;
-
-  factory Space.view({
-    @Default(false) bool selected,
-    @Default(false) bool onHovered,
-  }) = SpaceView;
-
   factory Space.fromJson(Map<String, dynamic> json) => _$SpaceFromJson(json);
+}
+
+
+@unfreezed
+class SpaceSettings with _$SpaceSettings {
+
+  const SpaceSettings._();
+
+  factory SpaceSettings({
+    @Default(false) bool selected,
+  }) = _SpaceSettings;
+
+  factory SpaceSettings.box({
+    @Default(false) bool selected,
+  }) = SpaceSettingsBox;
+
+  factory SpaceSettings.fromJson(Map<String, dynamic> json) => _$SpaceSettingsFromJson(json);
+}
+
+@unfreezed
+class SpaceView with _$SpaceView {
+
+  const SpaceView._();
+
+  factory SpaceView({
+    @Default(false) bool onHovered,
+  }) = _SpaceView;
+
+  factory SpaceView.box({
+    @Default(false) bool onHovered,
+
+  }) = SpaceViewBox;
+
+  factory SpaceView.fromJson(Map<String, dynamic> json) => _$SpaceViewFromJson(json);
 }
 
 extension SpaceExtensions on Space {
@@ -43,17 +69,13 @@ extension SpaceExtensions on Space {
     return map<bool>(
       (v) => v.view.onHovered,
       box: (v) => v.view.onHovered,
-      boxSettings: (v) => false,
-      view: (v) => false,
     );
   }
 
   bool isSelected() {
     return map<bool>(
-      (v) => v.view.selected,
-      box: (v) => v.view.selected,
-      boxSettings: (v) => false,
-      view: (v) => false,
+      (v) => v.settings.selected,
+      box: (v) => v.settings.selected,
     );
   }
 }

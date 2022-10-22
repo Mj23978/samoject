@@ -975,7 +975,7 @@ class _$TODO extends TODO {
   const _$TODO(
       {this.name = 'Todo',
       @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = Colors.yellow,
+          this.color = const Color.fromARGB(255, 252, 232, 54),
       final Map<String, dynamic> attributes = const {},
       final String? $type})
       : _attributes = attributes,

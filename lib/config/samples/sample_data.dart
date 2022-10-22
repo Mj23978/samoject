@@ -32,24 +32,24 @@ SpaceBox mjBoard = SpaceBox(
   id: Uuid().v4(),
   name: 'Board',
   parentId: _projId,
-  settings: SpaceBoxSettings(),
-  view: SpaceView(),
+  settings: SpaceSettingsBox(),
+  view: SpaceViewBox(),
 );
 
 SpaceBox mjList = SpaceBox(
   id: Uuid().v4(),
   name: 'List',
   parentId: _projId,
-  settings: SpaceBoxSettings(),
-  view: SpaceView(),
+  settings: SpaceSettingsBox(),
+  view: SpaceViewBox(),
 );
 
 SpaceBox mjBox = SpaceBox(
   id: Uuid().v4(),
   name: 'Box',
   parentId: _projId,
-  settings: SpaceBoxSettings(),
-  view: SpaceView(),
+  settings: SpaceSettingsBox(),
+  view: SpaceViewBox(),
 );
 
 User mj = User(
@@ -63,30 +63,40 @@ User mj = User(
 User hoji = User(
   id: Uuid().v4(),
   username: 'Hoji Joon',
+  firstName: "Hojjat",
+  lastName: 'Atai',
   roleName: "Developer",
   date: DateTime.now(),
 );
 User mobin = User(
   id: Uuid().v4(),
   username: 'Agha Zade',
+    firstName: "Mobin",
+  lastName: "Monavari",
   roleName: "Developer",
   date: DateTime.now(),
 );
 User shahraki = User(
   id: Uuid().v4(),
   username: 'Soton',
+    firstName: "Amirhossein",
+  lastName: 'Shahraki',
   roleName: "Developer",
   date: DateTime.now(),
 );
 User moslem = User(
   id: Uuid().v4(),
   username: 'Foundation',
+    firstName: 'Moslem',
+  lastName: 'Babae',
   roleName: "Project Owner",
   date: DateTime.now(),
 );
 User morteza = User(
   id: Uuid().v4(),
   username: 'Mori',
+    firstName: 'Morteza',
+  lastName: 'Atai',
   roleName: "Developer",
   date: DateTime.now(),
 );
@@ -185,9 +195,9 @@ Task task9 = Task(
   projectId: _projId,
   id: Uuid().v4(),
   taskName: "Having same family name",
-  status: TaskStatus.todo(),
+  status: TaskStatus.complete(),
   creatorId: hoji.id,
-  assignesId: [morteza.id],
+  assignesId: [morteza.id, hoji.id],
   taskDetailsId: taskDetails1.id,
   taskDetailsHash: taskDetails1.hash,
 );
@@ -449,7 +459,7 @@ Task task33 = Task(
   projectId: _projId,
   id: Uuid().v4(),
   taskName: "Ride to Drink Creamlin !!",
-  status: TaskStatus.planned(),
+  status: TaskStatus.complete(),
   creatorId: mobin.id,
   assignesId: [mj.id, shahraki.id],
   taskDetailsId: taskDetails1.id,
@@ -565,12 +575,14 @@ final List<Task> allTasks = [
 ];
 
 User setUserData(User user) {
+  final createdTasks = allTasks.where((element) {
+    return element.creatorId == user.id;
+  }).toList();
+  final assignedTasks =
+      allTasks.where((value) => value.assignesId.contains(user.id)).toList();
   return user.copyWith(
-    createdTasks:
-        allTasks.takeWhile((element) => element.creatorId == user.id).toList(),
-    assignedTasks: allTasks
-        .takeWhile((value) => value.assignesId.contains(user.id))
-        .toList(),
+    createdTasks: createdTasks,
+    assignedTasks: assignedTasks,
     // projects: [samojectProj],
   );
 }

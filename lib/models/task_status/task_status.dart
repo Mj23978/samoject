@@ -41,7 +41,7 @@ class TaskStatus with _$TaskStatus {
       toJson: color2String,
       fromJson: string2Color,
     )
-    @Default(Colors.yellow)
+    @Default(Color.fromARGB(255, 252, 232, 54))
         Color color,
     @Default({})
         Map<String, dynamic> attributes,
