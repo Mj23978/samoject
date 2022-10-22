@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:samoject/config/database/configs_store.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../utils/keys.dart';
-import '../../models/app_configs/app_configs.dart';
-import '../../models/workspace/workspace.dart';
 import '../../config/samples/sample_data.dart';
 import '../../models/project/project.dart';
 import '../../models/task/task.dart';
 import '../../models/user/user.dart';
+import '../../models/workspace/workspace.dart';
 
 class AppProvider extends ChangeNotifier {
-  
-  Box<AppConfigs> appBox = Hive.box<AppConfigs>(DBKeys.app_config);
-  AppConfigs? appConfigs;
-  User? me;
+  AppProvider(this.configsStore);
+
+  ConfigsStore configsStore;
   List<User> users = [];
 
   final List<Task> _allTasks = [
@@ -71,32 +68,25 @@ class AppProvider extends ChangeNotifier {
       settings: settings,
     );
     workspaces.add(Workspace(
-            id: Uuid().v4(),
+      id: Uuid().v4(),
       name: "Samoject Workspace",
     ));
-    if (appBox.get("configs") != null) {
-      appConfigs = AppConfigs(id: Uuid().v4());
-      appBox.put("configs", appConfigs!);
-    }
-    if (!appConfigs!.initialized) {
-      me ??= mj;
-      me = setUserData(me!);
-      users.addAll(
-          [morteza, moslem, hoji, shahraki, mobin].map(setUserData).toList());
-      appConfigs =
-          appConfigs!.copyWith(locale: Locale("en", "En"), initialized: true);
-      notifyListeners();
-    }
+    configsStore.initConfigs();
+    users.addAll(
+        [morteza, moslem, hoji, shahraki, mobin].map(setUserData).toList());
+    configsStore.addMe(setUserData(mj));
+    notifyListeners();
   }
 
   User setUserData(User user) {
     return user.copyWith(
-        createdTasks: _allTasks
-            .takeWhile((element) => element.creatorId == user.id)
-            .toList(),
-        assignedTasks: _allTasks
-            .takeWhile((value) => value.assignesId.contains(user.id))
-            .toList(),
-        workspaces: workspaces);
+      createdTasks: _allTasks
+          .takeWhile((element) => element.creatorId == user.id)
+          .toList(),
+      assignedTasks: _allTasks
+          .takeWhile((value) => value.assignesId.contains(user.id))
+          .toList(),
+      workspaces: workspaces,
+    );
   }
 }

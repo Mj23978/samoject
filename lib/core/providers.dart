@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:samoject/config/database/configs_store.dart';
 
 import 'logger.dart';
 import 'notifiers/app_provider.dart';
@@ -14,15 +15,22 @@ final ProviderFamily<Logger, String> loggerProvider =
   return getLogger(scope);
 });
 
+final configsProvider = Provider((ref) {
+  final conf = ConfigsStore();
+  conf.initConfigs();
+  return conf;
+});
+
 final appProvider = Provider(
-  (ref) => AppProvider(),
+  (ref) => AppProvider(ref.watch(configsProvider)),
 );
 
 final homeProvider = ChangeNotifierProvider((ref) {
   return HomeProvider(ref.watch(appProvider));
 });
 
-final splashProvider = StateNotifierProvider<SplashNotifier, SplashState>((ref) {
+final splashProvider =
+    StateNotifierProvider<SplashNotifier, SplashState>((ref) {
   return SplashNotifier();
 });
 

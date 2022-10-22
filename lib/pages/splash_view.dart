@@ -1,10 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
-import 'package:samoject/utils/keys.dart';
 
 import '../core/providers.dart';
 
@@ -24,8 +22,8 @@ class SplashView extends HookConsumerWidget {
       // backgroundColor: Color(0xFF1F0520),
       backgroundColor: Color(0xFF401734),
       onSuccess: (data) {
+        ref.read(appProvider).configsStore.showSplashed();
         //data is the optional data returned by until callback function
-        Hive.box(DBKeys.hive_config).put('showSplash', true);
         context.beamToNamed("/auth",
             replaceRouteInformation: true, stacked: false);
       },

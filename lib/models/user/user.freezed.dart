@@ -27,7 +27,7 @@ mixin _$User {
   String? get lastName => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  bool get activ => throw _privateConstructorUsedError;
+  bool get active => throw _privateConstructorUsedError;
   List<Task> get createdTasks => throw _privateConstructorUsedError;
   List<Task> get assignedTasks => throw _privateConstructorUsedError;
   List<Comment> get comments => throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $UserCopyWith<$Res> {
       String? lastName,
       String? password,
       String? email,
-      bool activ,
+      bool active,
       List<Task> createdTasks,
       List<Task> assignedTasks,
       List<Comment> comments,
@@ -76,7 +76,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? lastName = freezed,
     Object? password = freezed,
     Object? email = freezed,
-    Object? activ = freezed,
+    Object? active = freezed,
     Object? createdTasks = freezed,
     Object? assignedTasks = freezed,
     Object? comments = freezed,
@@ -112,9 +112,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      activ: activ == freezed
-          ? _value.activ
-          : activ // ignore: cast_nullable_to_non_nullable
+      active: active == freezed
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
               as bool,
       createdTasks: createdTasks == freezed
           ? _value.createdTasks
@@ -153,7 +153,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? lastName,
       String? password,
       String? email,
-      bool activ,
+      bool active,
       List<Task> createdTasks,
       List<Task> assignedTasks,
       List<Comment> comments,
@@ -179,7 +179,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? password = freezed,
     Object? email = freezed,
-    Object? activ = freezed,
+    Object? active = freezed,
     Object? createdTasks = freezed,
     Object? assignedTasks = freezed,
     Object? comments = freezed,
@@ -215,9 +215,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      activ: activ == freezed
-          ? _value.activ
-          : activ // ignore: cast_nullable_to_non_nullable
+      active: active == freezed
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
               as bool,
       createdTasks: createdTasks == freezed
           ? _value._createdTasks
@@ -254,7 +254,7 @@ class _$_User extends _User {
       this.lastName,
       this.password,
       this.email,
-      this.activ = true,
+      this.active = true,
       final List<Task> createdTasks = const [],
       final List<Task> assignedTasks = const [],
       final List<Comment> comments = const [],
@@ -284,7 +284,7 @@ class _$_User extends _User {
   final String? email;
   @override
   @JsonKey()
-  final bool activ;
+  final bool active;
   final List<Task> _createdTasks;
   @override
   @JsonKey()
@@ -322,7 +322,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, date: $date, firstName: $firstName, lastName: $lastName, password: $password, email: $email, activ: $activ, createdTasks: $createdTasks, assignedTasks: $assignedTasks, comments: $comments, workspaces: $workspaces, roleName: $roleName)';
+    return 'User(id: $id, username: $username, date: $date, firstName: $firstName, lastName: $lastName, password: $password, email: $email, active: $active, createdTasks: $createdTasks, assignedTasks: $assignedTasks, comments: $comments, workspaces: $workspaces, roleName: $roleName)';
   }
 
   @override
@@ -337,7 +337,7 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.activ, activ) &&
+            const DeepCollectionEquality().equals(other.active, active) &&
             const DeepCollectionEquality()
                 .equals(other._createdTasks, _createdTasks) &&
             const DeepCollectionEquality()
@@ -359,7 +359,7 @@ class _$_User extends _User {
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(activ),
+      const DeepCollectionEquality().hash(active),
       const DeepCollectionEquality().hash(_createdTasks),
       const DeepCollectionEquality().hash(_assignedTasks),
       const DeepCollectionEquality().hash(_comments),
@@ -388,7 +388,7 @@ abstract class _User extends User {
       final String? lastName,
       final String? password,
       final String? email,
-      final bool activ,
+      final bool active,
       final List<Task> createdTasks,
       final List<Task> assignedTasks,
       final List<Comment> comments,
@@ -413,7 +413,7 @@ abstract class _User extends User {
   @override
   String? get email;
   @override
-  bool get activ;
+  bool get active;
   @override
   List<Task> get createdTasks;
   @override

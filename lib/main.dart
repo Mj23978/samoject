@@ -10,7 +10,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'core/providers.dart';
-import 'models/app_configs/app_configs.dart';
 import 'pages/not_found/not_found_view.dart';
 import 'pages/routes.dart';
 import 'utils/helpers.dart';
@@ -27,7 +26,7 @@ void main() async {
   } else {
     Hive.initFlutter();
   }
-  await Hive.openBox<AppConfigs>(DBKeys.app_config);
+  await Hive.openBox(DBKeys.app_config);
   await Hive.openBox(DBKeys.hive_config);
   await Hive.openBox(DBKeys.users);
   initConfig();
@@ -49,12 +48,11 @@ class MyApp extends HookConsumerWidget {
     final app = ref.read(appProvider);
     useMemoized(() async {
       await app.initApp();
-      print(app.appConfigs);
     }, []);
     final parser = useMemoized(BeamerParser.new);
     final routerDelegate = useMemoized(() {
       return BeamerDelegate(
-        initialPath: (app.appConfigs?.splashShowed ?? false) ? '/home' : '/',
+        initialPath: (app.configsStore.showSplash ?? false) ? (app.configsStore.me != null) ? '/home' : '/auth' : '/',
         locationBuilder: BeamerLocationBuilder(beamLocations: [
           HomeLocation(),
         ]),

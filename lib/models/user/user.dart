@@ -11,6 +11,7 @@ part 'user.g.dart';
 class User with _$User {
 
   const User._();
+
   const factory User({
     required String id,
     required String username,
@@ -19,7 +20,7 @@ class User with _$User {
     String? lastName,
     String? password,
     String? email,
-    @Default(true) bool activ,
+    @Default(true) bool active,
     @Default([]) List<Task> createdTasks,
     @Default([]) List<Task> assignedTasks,
     @Default([]) List<Comment> comments,

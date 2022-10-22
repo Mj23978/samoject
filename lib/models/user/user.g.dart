@@ -14,7 +14,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       lastName: json['lastName'] as String?,
       password: json['password'] as String?,
       email: json['email'] as String?,
-      activ: json['activ'] as bool? ?? true,
+      active: json['active'] as bool? ?? true,
       createdTasks: (json['createdTasks'] as List<dynamic>?)
               ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -42,7 +42,7 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'lastName': instance.lastName,
       'password': instance.password,
       'email': instance.email,
-      'activ': instance.activ,
+      'active': instance.active,
       'createdTasks': instance.createdTasks,
       'assignedTasks': instance.assignedTasks,
       'comments': instance.comments,

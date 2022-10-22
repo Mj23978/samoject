@@ -27,10 +27,10 @@ class MockAuthFacade implements IAuthFacade {
         email: emailAddressString,
         password: passwordString,
         username: "${emailAddressString.split('@')[0]}}",
-        activ: true,
+        active: true,
         date: DateTime.now(),
       );
-      // await app.objectbox!.addUser(user);
+      await app.configsStore.addMe(user);
       return right(unit);
     } catch (e) {
       return left(const AuthFailures.serverError());
@@ -46,11 +46,11 @@ class MockAuthFacade implements IAuthFacade {
     final passwordString =
         password!.valueObject!.fold((l) => throw UnExpectedValueError(l), id);
     try {
-      if (app.me == null) {
+      if (app.configsStore.me == null) {
         return (left(AuthFailures.invalidEmailAndPasswordCombination()));
       }
-      if (app.me!.email == emailAddressString &&
-          (app.me!.password == null || app.me!.password == passwordString)) {
+      if (app.configsStore.me!.email == emailAddressString &&
+          (app.configsStore.me!.password == null || app.configsStore.me!.password == passwordString)) {
         return right(unit);
       }
       throw Error();
@@ -61,7 +61,7 @@ class MockAuthFacade implements IAuthFacade {
 
   @override
   Future<User?> getSignedInUser() async {
-    return app.me;
+    return app.configsStore.me;
   }
 
   @override
