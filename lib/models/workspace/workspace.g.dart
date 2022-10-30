@@ -14,6 +14,10 @@ _$_Workspace _$$_WorkspaceFromJson(Map<String, dynamic> json) => _$_Workspace(
               ?.map((e) => Project.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      projectIds: (json['projectIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_WorkspaceToJson(_$_Workspace instance) =>
@@ -22,4 +26,5 @@ Map<String, dynamic> _$$_WorkspaceToJson(_$_Workspace instance) =>
       'name': instance.name,
       'belongsTo': instance.belongsTo,
       'projects': instance.projects,
+      'projectIds': instance.projectIds,
     };

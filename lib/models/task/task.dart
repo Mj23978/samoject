@@ -13,7 +13,7 @@ class Task with _$Task {
     required String id,
     required String taskName,
     required String creatorId,
-    String? projectId,
+    required String projectId,
     @Default([]) List<String> assignesId,
     @Default(TaskStatus.idea()) TaskStatus status,
     @Default("") String taskDetailsId,

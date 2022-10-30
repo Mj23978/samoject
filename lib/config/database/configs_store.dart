@@ -8,15 +8,16 @@ import '../../utils/keys.dart';
 
 class ConfigsStore {
   Box appBox = Hive.box(DBKeys.app_config);
-  bool? initialized;
-  bool? _showSplash;
+  bool _initialized = false;
+  bool _showSplash = false;
   Locale? locale;
   User? _me;
 
   Future<bool> initConfigs() async {
     if (appBox.get('initialized', defaultValue: false)) {
       locale = Locale('en', 'EN');
-      appBox.put('initialzed', true);
+      _initialized = true;
+      appBox.put('initialized', _initialized);
       appBox.put('local', Locale('en', 'EN'));
     }
     return true;
@@ -31,7 +32,11 @@ class ConfigsStore {
   }
 
   bool getSplash() {
-    return appBox.get('showSplash', defaultValue: (_showSplash ?? false));
+    return appBox.get('showSplash', defaultValue: _showSplash);
+  }
+
+  bool getInitialized() {
+    return appBox.get('initialized', defaultValue: _initialized);
   }
 
   User? getMe() {

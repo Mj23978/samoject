@@ -16,9 +16,12 @@ class Project with _$Project {
     required String name,
     required ProjectSettings settings,
     @Default([]) List<Space> spaces,
+    @Default([]) List<String> spaceIds,
     @Default([]) List<Task> tasks,
+    @Default([]) List<String> taskIds,
     @Default([]) List<User> users,
-    String? localId,
+    @Default([]) List<String> userIds,
+    required String workspaceId,
   }) = _Project;
 
   factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);

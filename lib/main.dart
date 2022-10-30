@@ -12,7 +12,6 @@ import 'package:url_strategy/url_strategy.dart';
 import 'core/providers.dart';
 import 'pages/not_found/not_found_view.dart';
 import 'pages/routes.dart';
-import 'utils/helpers.dart';
 import 'utils/keys.dart';
 
 void main() async {

@@ -24,6 +24,7 @@ mixin _$Workspace {
   String get name => throw _privateConstructorUsedError;
   User get belongsTo => throw _privateConstructorUsedError;
   List<Project> get projects => throw _privateConstructorUsedError;
+  List<String> get projectIds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,12 @@ mixin _$Workspace {
 abstract class $WorkspaceCopyWith<$Res> {
   factory $WorkspaceCopyWith(Workspace value, $Res Function(Workspace) then) =
       _$WorkspaceCopyWithImpl<$Res>;
-  $Res call({String id, String name, User belongsTo, List<Project> projects});
+  $Res call(
+      {String id,
+      String name,
+      User belongsTo,
+      List<Project> projects,
+      List<String> projectIds});
 
   $UserCopyWith<$Res> get belongsTo;
 }
@@ -54,6 +60,7 @@ class _$WorkspaceCopyWithImpl<$Res> implements $WorkspaceCopyWith<$Res> {
     Object? name = freezed,
     Object? belongsTo = freezed,
     Object? projects = freezed,
+    Object? projectIds = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -72,6 +79,10 @@ class _$WorkspaceCopyWithImpl<$Res> implements $WorkspaceCopyWith<$Res> {
           ? _value.projects
           : projects // ignore: cast_nullable_to_non_nullable
               as List<Project>,
+      projectIds: projectIds == freezed
+          ? _value.projectIds
+          : projectIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 
@@ -89,7 +100,12 @@ abstract class _$$_WorkspaceCopyWith<$Res> implements $WorkspaceCopyWith<$Res> {
           _$_Workspace value, $Res Function(_$_Workspace) then) =
       __$$_WorkspaceCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, User belongsTo, List<Project> projects});
+  $Res call(
+      {String id,
+      String name,
+      User belongsTo,
+      List<Project> projects,
+      List<String> projectIds});
 
   @override
   $UserCopyWith<$Res> get belongsTo;
@@ -111,6 +127,7 @@ class __$$_WorkspaceCopyWithImpl<$Res> extends _$WorkspaceCopyWithImpl<$Res>
     Object? name = freezed,
     Object? belongsTo = freezed,
     Object? projects = freezed,
+    Object? projectIds = freezed,
   }) {
     return _then(_$_Workspace(
       id: id == freezed
@@ -129,6 +146,10 @@ class __$$_WorkspaceCopyWithImpl<$Res> extends _$WorkspaceCopyWithImpl<$Res>
           ? _value._projects
           : projects // ignore: cast_nullable_to_non_nullable
               as List<Project>,
+      projectIds: projectIds == freezed
+          ? _value._projectIds
+          : projectIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -140,8 +161,10 @@ class _$_Workspace extends _Workspace {
       {required this.id,
       required this.name,
       required this.belongsTo,
-      final List<Project> projects = const []})
+      final List<Project> projects = const [],
+      final List<String> projectIds = const []})
       : _projects = projects,
+        _projectIds = projectIds,
         super._();
 
   factory _$_Workspace.fromJson(Map<String, dynamic> json) =>
@@ -161,9 +184,17 @@ class _$_Workspace extends _Workspace {
     return EqualUnmodifiableListView(_projects);
   }
 
+  final List<String> _projectIds;
+  @override
+  @JsonKey()
+  List<String> get projectIds {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_projectIds);
+  }
+
   @override
   String toString() {
-    return 'Workspace(id: $id, name: $name, belongsTo: $belongsTo, projects: $projects)';
+    return 'Workspace(id: $id, name: $name, belongsTo: $belongsTo, projects: $projects, projectIds: $projectIds)';
   }
 
   @override
@@ -174,7 +205,9 @@ class _$_Workspace extends _Workspace {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.belongsTo, belongsTo) &&
-            const DeepCollectionEquality().equals(other._projects, _projects));
+            const DeepCollectionEquality().equals(other._projects, _projects) &&
+            const DeepCollectionEquality()
+                .equals(other._projectIds, _projectIds));
   }
 
   @JsonKey(ignore: true)
@@ -184,7 +217,8 @@ class _$_Workspace extends _Workspace {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(belongsTo),
-      const DeepCollectionEquality().hash(_projects));
+      const DeepCollectionEquality().hash(_projects),
+      const DeepCollectionEquality().hash(_projectIds));
 
   @JsonKey(ignore: true)
   @override
@@ -204,7 +238,8 @@ abstract class _Workspace extends Workspace {
       {required final String id,
       required final String name,
       required final User belongsTo,
-      final List<Project> projects}) = _$_Workspace;
+      final List<Project> projects,
+      final List<String> projectIds}) = _$_Workspace;
   const _Workspace._() : super._();
 
   factory _Workspace.fromJson(Map<String, dynamic> json) =
@@ -218,6 +253,8 @@ abstract class _Workspace extends Workspace {
   User get belongsTo;
   @override
   List<Project> get projects;
+  @override
+  List<String> get projectIds;
   @override
   @JsonKey(ignore: true)
   _$$_WorkspaceCopyWith<_$_Workspace> get copyWith =>

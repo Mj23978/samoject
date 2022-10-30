@@ -15,6 +15,7 @@ class Workspace with _$Workspace {
     required String name,
     required User belongsTo,
     @Default([]) List<Project> projects,
+    @Default([]) List<String> projectIds,
   }) = _Workspace;
 
   factory Workspace.fromJson(Map<String, dynamic> json) => _$WorkspaceFromJson(json);

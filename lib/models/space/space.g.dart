@@ -10,6 +10,7 @@ _$_Space _$$_SpaceFromJson(Map<String, dynamic> json) => _$_Space(
       id: json['id'] as String,
       name: json['name'] as String,
       view: SpaceView.fromJson(json['view'] as Map<String, dynamic>),
+      projectId: json['projectId'] as String,
       spaceType: $enumDecode(_$SpaceTypeEnumMap, json['spaceType']),
       settings:
           SpaceSettings.fromJson(json['settings'] as Map<String, dynamic>),
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$_SpaceToJson(_$_Space instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'view': instance.view,
+      'projectId': instance.projectId,
       'spaceType': _$SpaceTypeEnumMap[instance.spaceType]!,
       'settings': instance.settings,
       'subSpaces': instance.subSpaces,
@@ -39,6 +41,7 @@ const _$SpaceTypeEnumMap = {
 _$SpaceBox _$$SpaceBoxFromJson(Map<String, dynamic> json) => _$SpaceBox(
       id: json['id'] as String,
       name: json['name'] as String,
+      projectId: json['projectId'] as String,
       settings:
           SpaceSettings.fromJson(json['settings'] as Map<String, dynamic>),
       view: SpaceViewBox.fromJson(json['view'] as Map<String, dynamic>),
@@ -52,6 +55,7 @@ Map<String, dynamic> _$$SpaceBoxToJson(_$SpaceBox instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'projectId': instance.projectId,
       'settings': instance.settings,
       'view': instance.view,
       'spaceType': _$SpaceTypeEnumMap[instance.spaceType]!,

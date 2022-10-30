@@ -13,6 +13,7 @@ class Space with _$Space {
     required String id,
     required String name,
     required SpaceView view,
+    required String projectId,
     required SpaceType spaceType,
     required SpaceSettings settings,
     List<Space>? subSpaces,
@@ -21,6 +22,7 @@ class Space with _$Space {
   factory Space.box({
     required String id,
     required String name,
+    required String projectId,
     required SpaceSettings settings,
     required SpaceViewBox view,
     @Default(SpaceType.box) SpaceType spaceType,

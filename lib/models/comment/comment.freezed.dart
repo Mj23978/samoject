@@ -21,6 +21,7 @@ Comment _$CommentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Comment {
   String get id => throw _privateConstructorUsedError;
+  String get chatId => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get roomId => throw _privateConstructorUsedError;
 
@@ -33,7 +34,7 @@ mixin _$Comment {
 abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res>;
-  $Res call({String id, String content, String roomId});
+  $Res call({String id, String chatId, String content, String roomId});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? chatId = freezed,
     Object? content = freezed,
     Object? roomId = freezed,
   }) {
@@ -54,6 +56,10 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      chatId: chatId == freezed
+          ? _value.chatId
+          : chatId // ignore: cast_nullable_to_non_nullable
               as String,
       content: content == freezed
           ? _value.content
@@ -73,7 +79,7 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
           _$_Comment value, $Res Function(_$_Comment) then) =
       __$$_CommentCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String content, String roomId});
+  $Res call({String id, String chatId, String content, String roomId});
 }
 
 /// @nodoc
@@ -88,6 +94,7 @@ class __$$_CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? chatId = freezed,
     Object? content = freezed,
     Object? roomId = freezed,
   }) {
@@ -95,6 +102,10 @@ class __$$_CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      chatId: chatId == freezed
+          ? _value.chatId
+          : chatId // ignore: cast_nullable_to_non_nullable
               as String,
       content: content == freezed
           ? _value.content
@@ -112,7 +123,10 @@ class __$$_CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Comment extends _Comment {
   const _$_Comment(
-      {required this.id, required this.content, required this.roomId})
+      {required this.id,
+      required this.chatId,
+      required this.content,
+      required this.roomId})
       : super._();
 
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
@@ -121,13 +135,15 @@ class _$_Comment extends _Comment {
   @override
   final String id;
   @override
+  final String chatId;
+  @override
   final String content;
   @override
   final String roomId;
 
   @override
   String toString() {
-    return 'Comment(id: $id, content: $content, roomId: $roomId)';
+    return 'Comment(id: $id, chatId: $chatId, content: $content, roomId: $roomId)';
   }
 
   @override
@@ -136,6 +152,7 @@ class _$_Comment extends _Comment {
         (other.runtimeType == runtimeType &&
             other is _$_Comment &&
             const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.chatId, chatId) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.roomId, roomId));
   }
@@ -145,6 +162,7 @@ class _$_Comment extends _Comment {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(chatId),
       const DeepCollectionEquality().hash(content),
       const DeepCollectionEquality().hash(roomId));
 
@@ -164,6 +182,7 @@ class _$_Comment extends _Comment {
 abstract class _Comment extends Comment {
   const factory _Comment(
       {required final String id,
+      required final String chatId,
       required final String content,
       required final String roomId}) = _$_Comment;
   const _Comment._() : super._();
@@ -172,6 +191,8 @@ abstract class _Comment extends Comment {
 
   @override
   String get id;
+  @override
+  String get chatId;
   @override
   String get content;
   @override

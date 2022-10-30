@@ -23,7 +23,7 @@ mixin _$Task {
   String get id => throw _privateConstructorUsedError;
   String get taskName => throw _privateConstructorUsedError;
   String get creatorId => throw _privateConstructorUsedError;
-  String? get projectId => throw _privateConstructorUsedError;
+  String get projectId => throw _privateConstructorUsedError;
   List<String> get assignesId => throw _privateConstructorUsedError;
   TaskStatus get status => throw _privateConstructorUsedError;
   String get taskDetailsId => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $TaskCopyWith<$Res> {
       {String id,
       String taskName,
       String creatorId,
-      String? projectId,
+      String projectId,
       List<String> assignesId,
       TaskStatus status,
       String taskDetailsId,
@@ -92,7 +92,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
       projectId: projectId == freezed
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       assignesId: assignesId == freezed
           ? _value.assignesId
           : assignesId // ignore: cast_nullable_to_non_nullable
@@ -137,7 +137,7 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       {String id,
       String taskName,
       String creatorId,
-      String? projectId,
+      String projectId,
       List<String> assignesId,
       TaskStatus status,
       String taskDetailsId,
@@ -187,7 +187,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
       projectId: projectId == freezed
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       assignesId: assignesId == freezed
           ? _value._assignesId
           : assignesId // ignore: cast_nullable_to_non_nullable
@@ -223,7 +223,7 @@ class _$_Task extends _Task {
       {required this.id,
       required this.taskName,
       required this.creatorId,
-      this.projectId,
+      required this.projectId,
       final List<String> assignesId = const [],
       this.status = const TaskStatus.idea(),
       this.taskDetailsId = "",
@@ -244,7 +244,7 @@ class _$_Task extends _Task {
   @override
   final String creatorId;
   @override
-  final String? projectId;
+  final String projectId;
   final List<String> _assignesId;
   @override
   @JsonKey()
@@ -337,7 +337,7 @@ abstract class _Task extends Task {
       {required final String id,
       required final String taskName,
       required final String creatorId,
-      final String? projectId,
+      required final String projectId,
       final List<String> assignesId,
       final TaskStatus status,
       final String taskDetailsId,
@@ -355,7 +355,7 @@ abstract class _Task extends Task {
   @override
   String get creatorId;
   @override
-  String? get projectId;
+  String get projectId;
   @override
   List<String> get assignesId;
   @override

@@ -33,17 +33,25 @@ mixin _$Space {
   set id(String value) => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
+  String get projectId => throw _privateConstructorUsedError;
+  set projectId(String value) => throw _privateConstructorUsedError;
   SpaceType get spaceType => throw _privateConstructorUsedError;
   set spaceType(SpaceType value) => throw _privateConstructorUsedError;
   SpaceSettings get settings => throw _privateConstructorUsedError;
   set settings(SpaceSettings value) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String name, SpaceView view,
+    TResult Function(String id, String name, SpaceView view, String projectId,
             SpaceType spaceType, SpaceSettings settings, List<Space>? subSpaces)
         $default, {
-    required TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)
+    required TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)
         box,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,12 +61,19 @@ mixin _$Space {
             String id,
             String name,
             SpaceView view,
+            String projectId,
             SpaceType spaceType,
             SpaceSettings settings,
             List<Space>? subSpaces)?
         $default, {
-    TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)?
+    TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)?
         box,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,12 +83,19 @@ mixin _$Space {
             String id,
             String name,
             SpaceView view,
+            String projectId,
             SpaceType spaceType,
             SpaceSettings settings,
             List<Space>? subSpaces)?
         $default, {
-    TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)?
+    TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)?
         box,
     required TResult orElse(),
   }) =>
@@ -107,7 +129,11 @@ abstract class $SpaceCopyWith<$Res> {
   factory $SpaceCopyWith(Space value, $Res Function(Space) then) =
       _$SpaceCopyWithImpl<$Res>;
   $Res call(
-      {String id, String name, SpaceType spaceType, SpaceSettings settings});
+      {String id,
+      String name,
+      String projectId,
+      SpaceType spaceType,
+      SpaceSettings settings});
 
   $SpaceSettingsCopyWith<$Res> get settings;
 }
@@ -124,6 +150,7 @@ class _$SpaceCopyWithImpl<$Res> implements $SpaceCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? projectId = freezed,
     Object? spaceType = freezed,
     Object? settings = freezed,
   }) {
@@ -135,6 +162,10 @@ class _$SpaceCopyWithImpl<$Res> implements $SpaceCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      projectId: projectId == freezed
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
               as String,
       spaceType: spaceType == freezed
           ? _value.spaceType
@@ -164,6 +195,7 @@ abstract class _$$_SpaceCopyWith<$Res> implements $SpaceCopyWith<$Res> {
       {String id,
       String name,
       SpaceView view,
+      String projectId,
       SpaceType spaceType,
       SpaceSettings settings,
       List<Space>? subSpaces});
@@ -187,6 +219,7 @@ class __$$_SpaceCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? view = freezed,
+    Object? projectId = freezed,
     Object? spaceType = freezed,
     Object? settings = freezed,
     Object? subSpaces = freezed,
@@ -204,6 +237,10 @@ class __$$_SpaceCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
           ? _value.view
           : view // ignore: cast_nullable_to_non_nullable
               as SpaceView,
+      projectId: projectId == freezed
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as String,
       spaceType: spaceType == freezed
           ? _value.spaceType
           : spaceType // ignore: cast_nullable_to_non_nullable
@@ -234,6 +271,7 @@ class _$_Space extends _Space {
       {required this.id,
       required this.name,
       required this.view,
+      required this.projectId,
       required this.spaceType,
       required this.settings,
       this.subSpaces,
@@ -251,6 +289,8 @@ class _$_Space extends _Space {
   @override
   SpaceView view;
   @override
+  String projectId;
+  @override
   SpaceType spaceType;
   @override
   SpaceSettings settings;
@@ -262,7 +302,7 @@ class _$_Space extends _Space {
 
   @override
   String toString() {
-    return 'Space(id: $id, name: $name, view: $view, spaceType: $spaceType, settings: $settings, subSpaces: $subSpaces)';
+    return 'Space(id: $id, name: $name, view: $view, projectId: $projectId, spaceType: $spaceType, settings: $settings, subSpaces: $subSpaces)';
   }
 
   @JsonKey(ignore: true)
@@ -273,14 +313,20 @@ class _$_Space extends _Space {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String name, SpaceView view,
+    TResult Function(String id, String name, SpaceView view, String projectId,
             SpaceType spaceType, SpaceSettings settings, List<Space>? subSpaces)
         $default, {
-    required TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)
+    required TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)
         box,
   }) {
-    return $default(id, name, view, spaceType, settings, subSpaces);
+    return $default(id, name, view, projectId, spaceType, settings, subSpaces);
   }
 
   @override
@@ -290,15 +336,23 @@ class _$_Space extends _Space {
             String id,
             String name,
             SpaceView view,
+            String projectId,
             SpaceType spaceType,
             SpaceSettings settings,
             List<Space>? subSpaces)?
         $default, {
-    TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)?
+    TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)?
         box,
   }) {
-    return $default?.call(id, name, view, spaceType, settings, subSpaces);
+    return $default?.call(
+        id, name, view, projectId, spaceType, settings, subSpaces);
   }
 
   @override
@@ -308,17 +362,25 @@ class _$_Space extends _Space {
             String id,
             String name,
             SpaceView view,
+            String projectId,
             SpaceType spaceType,
             SpaceSettings settings,
             List<Space>? subSpaces)?
         $default, {
-    TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)?
+    TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)?
         box,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(id, name, view, spaceType, settings, subSpaces);
+      return $default(
+          id, name, view, projectId, spaceType, settings, subSpaces);
     }
     return orElse();
   }
@@ -367,6 +429,7 @@ abstract class _Space extends Space {
       {required String id,
       required String name,
       required SpaceView view,
+      required String projectId,
       required SpaceType spaceType,
       required SpaceSettings settings,
       List<Space>? subSpaces}) = _$_Space;
@@ -382,6 +445,9 @@ abstract class _Space extends Space {
   set name(String value);
   SpaceView get view;
   set view(SpaceView value);
+  @override
+  String get projectId;
+  set projectId(String value);
   @override
   SpaceType get spaceType;
   set spaceType(SpaceType value);
@@ -405,6 +471,7 @@ abstract class _$$SpaceBoxCopyWith<$Res> implements $SpaceCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      String projectId,
       SpaceSettings settings,
       SpaceViewBox view,
       SpaceType spaceType,
@@ -427,6 +494,7 @@ class __$$SpaceBoxCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? projectId = freezed,
     Object? settings = freezed,
     Object? view = freezed,
     Object? spaceType = freezed,
@@ -440,6 +508,10 @@ class __$$SpaceBoxCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      projectId: projectId == freezed
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
               as String,
       settings: settings == freezed
           ? _value.settings
@@ -467,6 +539,7 @@ class _$SpaceBox extends SpaceBox {
   _$SpaceBox(
       {required this.id,
       required this.name,
+      required this.projectId,
       required this.settings,
       required this.view,
       this.spaceType = SpaceType.box,
@@ -483,6 +556,8 @@ class _$SpaceBox extends SpaceBox {
   @override
   String name;
   @override
+  String projectId;
+  @override
   SpaceSettings settings;
   @override
   SpaceViewBox view;
@@ -497,7 +572,7 @@ class _$SpaceBox extends SpaceBox {
 
   @override
   String toString() {
-    return 'Space.box(id: $id, name: $name, settings: $settings, view: $view, spaceType: $spaceType, parentId: $parentId)';
+    return 'Space.box(id: $id, name: $name, projectId: $projectId, settings: $settings, view: $view, spaceType: $spaceType, parentId: $parentId)';
   }
 
   @JsonKey(ignore: true)
@@ -508,14 +583,20 @@ class _$SpaceBox extends SpaceBox {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String name, SpaceView view,
+    TResult Function(String id, String name, SpaceView view, String projectId,
             SpaceType spaceType, SpaceSettings settings, List<Space>? subSpaces)
         $default, {
-    required TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)
+    required TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)
         box,
   }) {
-    return box(id, name, settings, view, spaceType, parentId);
+    return box(id, name, projectId, settings, view, spaceType, parentId);
   }
 
   @override
@@ -525,15 +606,22 @@ class _$SpaceBox extends SpaceBox {
             String id,
             String name,
             SpaceView view,
+            String projectId,
             SpaceType spaceType,
             SpaceSettings settings,
             List<Space>? subSpaces)?
         $default, {
-    TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)?
+    TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)?
         box,
   }) {
-    return box?.call(id, name, settings, view, spaceType, parentId);
+    return box?.call(id, name, projectId, settings, view, spaceType, parentId);
   }
 
   @override
@@ -543,17 +631,24 @@ class _$SpaceBox extends SpaceBox {
             String id,
             String name,
             SpaceView view,
+            String projectId,
             SpaceType spaceType,
             SpaceSettings settings,
             List<Space>? subSpaces)?
         $default, {
-    TResult Function(String id, String name, SpaceSettings settings,
-            SpaceViewBox view, SpaceType spaceType, String? parentId)?
+    TResult Function(
+            String id,
+            String name,
+            String projectId,
+            SpaceSettings settings,
+            SpaceViewBox view,
+            SpaceType spaceType,
+            String? parentId)?
         box,
     required TResult orElse(),
   }) {
     if (box != null) {
-      return box(id, name, settings, view, spaceType, parentId);
+      return box(id, name, projectId, settings, view, spaceType, parentId);
     }
     return orElse();
   }
@@ -601,6 +696,7 @@ abstract class SpaceBox extends Space {
   factory SpaceBox(
       {required String id,
       required String name,
+      required String projectId,
       required SpaceSettings settings,
       required SpaceViewBox view,
       SpaceType spaceType,
@@ -615,6 +711,9 @@ abstract class SpaceBox extends Space {
   @override
   String get name;
   set name(String value);
+  @override
+  String get projectId;
+  set projectId(String value);
   @override
   SpaceSettings get settings;
   set settings(SpaceSettings value);

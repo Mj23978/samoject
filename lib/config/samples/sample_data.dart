@@ -19,6 +19,7 @@ ProjectSettings samojectSettings = ProjectSettings(id: Uuid().v4());
 String _projId = Uuid().v4();
 Project samojectProj = Project(
   id: _projId,
+  workspaceId: myWorkspace.id,
   name: "Samoject Project",
   settings: samojectSettings,
   spaces: [mjBox, mjBoard, mjList],
@@ -31,7 +32,7 @@ Project samojectProj = Project(
 SpaceBox mjBoard = SpaceBox(
   id: Uuid().v4(),
   name: 'Board',
-  parentId: _projId,
+  projectId: _projId,
   settings: SpaceSettingsBox(),
   view: SpaceViewBox(),
 );
@@ -39,7 +40,7 @@ SpaceBox mjBoard = SpaceBox(
 SpaceBox mjList = SpaceBox(
   id: Uuid().v4(),
   name: 'List',
-  parentId: _projId,
+  projectId: _projId,
   settings: SpaceSettingsBox(),
   view: SpaceViewBox(),
 );
@@ -47,7 +48,7 @@ SpaceBox mjList = SpaceBox(
 SpaceBox mjBox = SpaceBox(
   id: Uuid().v4(),
   name: 'Box',
-  parentId: _projId,
+  projectId: _projId,
   settings: SpaceSettingsBox(),
   view: SpaceViewBox(),
 );
