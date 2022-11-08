@@ -23,7 +23,7 @@ class TaskDetailssStore {
 
   Future<bool> addTaskDetails(TaskDetails taskDetails) async {
     if (box.get(taskDetails.id) == null) {
-      box.put(taskDetails.id, jsonEncode(taskDetails.toJson()));
+      // box.put(taskDetails.id, jsonEncode(taskDetails.toJson()));
     }
     return true;
   }

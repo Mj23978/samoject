@@ -23,7 +23,7 @@ class SpacesStore {
 
   Future<bool> addSpace(Space space) async {
     if (box.get("${space.projectId}.${space.id}") == null) {
-      box.put("${space.projectId}.${space.id}", jsonEncode(space.toJson()));
+      // box.put("${space.projectId}.${space.id}", jsonEncode(space.toJson()));
     }
     return true;
   }

@@ -1,26 +1,32 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:objectbox/objectbox.dart';
+import 'package:samoject/models/task_details/task_details.dart';
 
+import '../project/project.dart';
 import '../task_status/task_status.dart';
+import '../user/user.dart';
 
 part 'task.freezed.dart';
-part 'task.g.dart';
+// part 'task.g.dart';
 
-@freezed
+@unfreezed
 class Task with _$Task {
   const Task._();
   
-  const factory Task({
+  @Entity(realClass: Task)
+  factory Task({
+    @Id() @Default(0) int oid,
     required String id,
     required String taskName,
-    required String creatorId,
-    required String projectId,
-    @Default([]) List<String> assignesId,
-    @Default(TaskStatus.idea()) TaskStatus status,
-    @Default("") String taskDetailsId,
+    required ToOne<User> creatorId,
+    required ToOne<Project> projectId,
+    required ToOne<TaskDetails> taskDetailsId,
+    required ToMany<User> assignesId,
+    required ToMany<Task> subTasks,
+    required ToOne<TaskStatus> status,
     @Default("") String taskDetailsHash,
-    @Default([]) List<Task> subTasks,
-    @Default({}) Map<String, dynamic> attributes,
+    // @Default({}) Map<String, dynamic> attributes,
   }) = _Task;
 
-  factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+  // factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 }

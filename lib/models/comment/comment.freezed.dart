@@ -14,18 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Comment _$CommentFromJson(Map<String, dynamic> json) {
-  return _Comment.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Comment {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   String get chatId => throw _privateConstructorUsedError;
+  set chatId(String value) => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String get roomId => throw _privateConstructorUsedError;
+  set content(String value) => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CommentCopyWith<Comment> get copyWith => throw _privateConstructorUsedError;
 }
@@ -34,7 +35,7 @@ mixin _$Comment {
 abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res>;
-  $Res call({String id, String chatId, String content, String roomId});
+  $Res call({@Id() int oid, String id, String chatId, String content});
 }
 
 /// @nodoc
@@ -47,12 +48,16 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? chatId = freezed,
     Object? content = freezed,
-    Object? roomId = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -65,10 +70,6 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      roomId: roomId == freezed
-          ? _value.roomId
-          : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -79,7 +80,7 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
           _$_Comment value, $Res Function(_$_Comment) then) =
       __$$_CommentCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String chatId, String content, String roomId});
+  $Res call({@Id() int oid, String id, String chatId, String content});
 }
 
 /// @nodoc
@@ -93,12 +94,16 @@ class __$$_CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? chatId = freezed,
     Object? content = freezed,
-    Object? roomId = freezed,
   }) {
     return _then(_$_Comment(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -111,92 +116,65 @@ class __$$_CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      roomId: roomId == freezed
-          ? _value.roomId
-          : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: Comment)
 class _$_Comment extends _Comment {
-  const _$_Comment(
-      {required this.id,
+  _$_Comment(
+      {@Id() this.oid = 0,
+      required this.id,
       required this.chatId,
-      required this.content,
-      required this.roomId})
+      required this.content})
       : super._();
 
-  factory _$_Comment.fromJson(Map<String, dynamic> json) =>
-      _$$_CommentFromJson(json);
-
   @override
-  final String id;
+  @JsonKey()
+  @Id()
+  int oid;
   @override
-  final String chatId;
+  String id;
   @override
-  final String content;
+  String chatId;
   @override
-  final String roomId;
+  String content;
 
   @override
   String toString() {
-    return 'Comment(id: $id, chatId: $chatId, content: $content, roomId: $roomId)';
+    return 'Comment(oid: $oid, id: $id, chatId: $chatId, content: $content)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Comment &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.chatId, chatId) &&
-            const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.roomId, roomId));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(chatId),
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(roomId));
 
   @JsonKey(ignore: true)
   @override
   _$$_CommentCopyWith<_$_Comment> get copyWith =>
       __$$_CommentCopyWithImpl<_$_Comment>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_CommentToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Comment extends Comment {
-  const factory _Comment(
-      {required final String id,
-      required final String chatId,
-      required final String content,
-      required final String roomId}) = _$_Comment;
-  const _Comment._() : super._();
+  factory _Comment(
+      {@Id() int oid,
+      required String id,
+      required String chatId,
+      required String content}) = _$_Comment;
+  _Comment._() : super._();
 
-  factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
+  set id(String value);
   @override
   String get chatId;
+  set chatId(String value);
   @override
   String get content;
-  @override
-  String get roomId;
+  set content(String value);
   @override
   @JsonKey(ignore: true)
   _$$_CommentCopyWith<_$_Comment> get copyWith =>

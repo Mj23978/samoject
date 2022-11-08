@@ -21,7 +21,7 @@ class UsersStore {
   Future<bool> addMe(User user) async {
     if (box.get('user:me') == null) {
       _me ??= user;
-      box.put('user:me', jsonEncode(_me!.toJson()));
+      // box.put('user:me', jsonEncode(_me!.toJson()));
     }
     return true;
   }
@@ -35,7 +35,7 @@ class UsersStore {
     if (m == null) {
       return null;
     }
-    return User.fromJson(jsonDecode(m));
+    // return User.fromJson(jsonDecode(m));
   }
 
   Future<bool> showSplashed() async {

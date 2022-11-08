@@ -16,11 +16,7 @@ final ProviderFamily<Logger, String> loggerProvider =
   return getLogger(scope);
 });
 
-final configsProvider = Provider((ref) {
-  final conf = ConfigsStore();
-  conf.initConfigs();
-  return conf;
-});
+late final Provider<ConfigsStore> configsProvider;
 
 final appProvider = Provider(
   (ref) => AppProvider(ref.watch(configsProvider)),

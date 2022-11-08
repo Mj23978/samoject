@@ -14,88 +14,96 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Space _$SpaceFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'default':
-      return _Space.fromJson(json);
-    case 'box':
-      return SpaceBox.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'Space',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$Space {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   set id(String value) => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
-  String get projectId => throw _privateConstructorUsedError;
-  set projectId(String value) => throw _privateConstructorUsedError;
-  SpaceType get spaceType => throw _privateConstructorUsedError;
-  set spaceType(SpaceType value) => throw _privateConstructorUsedError;
-  SpaceSettings get settings => throw _privateConstructorUsedError;
-  set settings(SpaceSettings value) => throw _privateConstructorUsedError;
+  ToOne<SpaceView> get view => throw _privateConstructorUsedError;
+  set view(ToOne<SpaceView> value) => throw _privateConstructorUsedError;
+  ToOne<Project> get projectId => throw _privateConstructorUsedError;
+  set projectId(ToOne<Project> value) => throw _privateConstructorUsedError;
+  String get spaceType => throw _privateConstructorUsedError;
+  set spaceType(String value) => throw _privateConstructorUsedError;
+  ToOne<SpaceSettings> get settings => throw _privateConstructorUsedError;
+  set settings(ToOne<SpaceSettings> value) =>
+      throw _privateConstructorUsedError;
+  ToMany<Space> get subSpaces => throw _privateConstructorUsedError;
+  set subSpaces(ToMany<Space> value) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String name, SpaceView view, String projectId,
-            SpaceType spaceType, SpaceSettings settings, List<Space>? subSpaces)
-        $default, {
-    required TResult Function(
+    TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)
+        $default, {
+    required TResult Function(
+            @Id() int oid,
+            String id,
+            String name,
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)
         box,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            SpaceView view,
-            String projectId,
-            SpaceType spaceType,
-            SpaceSettings settings,
-            List<Space>? subSpaces)?
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)?
         $default, {
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)?
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)?
         box,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            SpaceView view,
-            String projectId,
-            SpaceType spaceType,
-            SpaceSettings settings,
-            List<Space>? subSpaces)?
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)?
         $default, {
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)?
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)?
         box,
     required TResult orElse(),
   }) =>
@@ -119,7 +127,7 @@ mixin _$Space {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $SpaceCopyWith<Space> get copyWith => throw _privateConstructorUsedError;
 }
@@ -129,13 +137,14 @@ abstract class $SpaceCopyWith<$Res> {
   factory $SpaceCopyWith(Space value, $Res Function(Space) then) =
       _$SpaceCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String name,
-      String projectId,
-      SpaceType spaceType,
-      SpaceSettings settings});
-
-  $SpaceSettingsCopyWith<$Res> get settings;
+      ToOne<SpaceView> view,
+      ToOne<Project> projectId,
+      String spaceType,
+      ToOne<SpaceSettings> settings,
+      ToMany<Space> subSpaces});
 }
 
 /// @nodoc
@@ -148,13 +157,20 @@ class _$SpaceCopyWithImpl<$Res> implements $SpaceCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? name = freezed,
+    Object? view = freezed,
     Object? projectId = freezed,
     Object? spaceType = freezed,
     Object? settings = freezed,
+    Object? subSpaces = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -163,26 +179,27 @@ class _$SpaceCopyWithImpl<$Res> implements $SpaceCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      view: view == freezed
+          ? _value.view
+          : view // ignore: cast_nullable_to_non_nullable
+              as ToOne<SpaceView>,
       projectId: projectId == freezed
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<Project>,
       spaceType: spaceType == freezed
           ? _value.spaceType
           : spaceType // ignore: cast_nullable_to_non_nullable
-              as SpaceType,
+              as String,
       settings: settings == freezed
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as SpaceSettings,
+              as ToOne<SpaceSettings>,
+      subSpaces: subSpaces == freezed
+          ? _value.subSpaces
+          : subSpaces // ignore: cast_nullable_to_non_nullable
+              as ToMany<Space>,
     ));
-  }
-
-  @override
-  $SpaceSettingsCopyWith<$Res> get settings {
-    return $SpaceSettingsCopyWith<$Res>(_value.settings, (value) {
-      return _then(_value.copyWith(settings: value));
-    });
   }
 }
 
@@ -192,17 +209,14 @@ abstract class _$$_SpaceCopyWith<$Res> implements $SpaceCopyWith<$Res> {
       __$$_SpaceCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String name,
-      SpaceView view,
-      String projectId,
-      SpaceType spaceType,
-      SpaceSettings settings,
-      List<Space>? subSpaces});
-
-  $SpaceViewCopyWith<$Res> get view;
-  @override
-  $SpaceSettingsCopyWith<$Res> get settings;
+      ToOne<SpaceView> view,
+      ToOne<Project> projectId,
+      String spaceType,
+      ToOne<SpaceSettings> settings,
+      ToMany<Space> subSpaces});
 }
 
 /// @nodoc
@@ -216,6 +230,7 @@ class __$$_SpaceCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? view = freezed,
@@ -225,6 +240,10 @@ class __$$_SpaceCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
     Object? subSpaces = freezed,
   }) {
     return _then(_$_Space(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -236,73 +255,64 @@ class __$$_SpaceCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
       view: view == freezed
           ? _value.view
           : view // ignore: cast_nullable_to_non_nullable
-              as SpaceView,
+              as ToOne<SpaceView>,
       projectId: projectId == freezed
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<Project>,
       spaceType: spaceType == freezed
           ? _value.spaceType
           : spaceType // ignore: cast_nullable_to_non_nullable
-              as SpaceType,
+              as String,
       settings: settings == freezed
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as SpaceSettings,
+              as ToOne<SpaceSettings>,
       subSpaces: subSpaces == freezed
           ? _value.subSpaces
           : subSpaces // ignore: cast_nullable_to_non_nullable
-              as List<Space>?,
+              as ToMany<Space>,
     ));
-  }
-
-  @override
-  $SpaceViewCopyWith<$Res> get view {
-    return $SpaceViewCopyWith<$Res>(_value.view, (value) {
-      return _then(_value.copyWith(view: value));
-    });
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: Space)
 class _$_Space extends _Space {
   _$_Space(
-      {required this.id,
+      {@Id() this.oid = 0,
+      required this.id,
       required this.name,
       required this.view,
       required this.projectId,
       required this.spaceType,
       required this.settings,
-      this.subSpaces,
-      final String? $type})
-      : $type = $type ?? 'default',
-        super._();
+      required this.subSpaces})
+      : super._();
 
-  factory _$_Space.fromJson(Map<String, dynamic> json) =>
-      _$$_SpaceFromJson(json);
-
+  @override
+  @JsonKey()
+  @Id()
+  int oid;
   @override
   String id;
   @override
   String name;
   @override
-  SpaceView view;
+  ToOne<SpaceView> view;
   @override
-  String projectId;
+  ToOne<Project> projectId;
   @override
-  SpaceType spaceType;
+  String spaceType;
   @override
-  SpaceSettings settings;
+  ToOne<SpaceSettings> settings;
   @override
-  List<Space>? subSpaces;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  ToMany<Space> subSpaces;
 
   @override
   String toString() {
-    return 'Space(id: $id, name: $name, view: $view, projectId: $projectId, spaceType: $spaceType, settings: $settings, subSpaces: $subSpaces)';
+    return 'Space(oid: $oid, id: $id, name: $name, view: $view, projectId: $projectId, spaceType: $spaceType, settings: $settings, subSpaces: $subSpaces)';
   }
 
   @JsonKey(ignore: true)
@@ -313,74 +323,87 @@ class _$_Space extends _Space {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String name, SpaceView view, String projectId,
-            SpaceType spaceType, SpaceSettings settings, List<Space>? subSpaces)
-        $default, {
-    required TResult Function(
+    TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)
+        $default, {
+    required TResult Function(
+            @Id() int oid,
+            String id,
+            String name,
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)
         box,
   }) {
-    return $default(id, name, view, projectId, spaceType, settings, subSpaces);
+    return $default(
+        oid, id, name, view, projectId, spaceType, settings, subSpaces);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            SpaceView view,
-            String projectId,
-            SpaceType spaceType,
-            SpaceSettings settings,
-            List<Space>? subSpaces)?
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)?
         $default, {
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)?
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)?
         box,
   }) {
     return $default?.call(
-        id, name, view, projectId, spaceType, settings, subSpaces);
+        oid, id, name, view, projectId, spaceType, settings, subSpaces);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            SpaceView view,
-            String projectId,
-            SpaceType spaceType,
-            SpaceSettings settings,
-            List<Space>? subSpaces)?
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)?
         $default, {
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)?
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)?
         box,
     required TResult orElse(),
   }) {
     if ($default != null) {
       return $default(
-          id, name, view, projectId, spaceType, settings, subSpaces);
+          oid, id, name, view, projectId, spaceType, settings, subSpaces);
     }
     return orElse();
   }
@@ -415,47 +438,46 @@ class _$_Space extends _Space {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SpaceToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Space extends Space {
   factory _Space(
-      {required String id,
+      {@Id() int oid,
+      required String id,
       required String name,
-      required SpaceView view,
-      required String projectId,
-      required SpaceType spaceType,
-      required SpaceSettings settings,
-      List<Space>? subSpaces}) = _$_Space;
+      required ToOne<SpaceView> view,
+      required ToOne<Project> projectId,
+      required String spaceType,
+      required ToOne<SpaceSettings> settings,
+      required ToMany<Space> subSpaces}) = _$_Space;
   _Space._() : super._();
 
-  factory _Space.fromJson(Map<String, dynamic> json) = _$_Space.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
   set id(String value);
   @override
   String get name;
   set name(String value);
-  SpaceView get view;
-  set view(SpaceView value);
   @override
-  String get projectId;
-  set projectId(String value);
+  ToOne<SpaceView> get view;
+  set view(ToOne<SpaceView> value);
   @override
-  SpaceType get spaceType;
-  set spaceType(SpaceType value);
+  ToOne<Project> get projectId;
+  set projectId(ToOne<Project> value);
   @override
-  SpaceSettings get settings;
-  set settings(SpaceSettings value);
-  List<Space>? get subSpaces;
-  set subSpaces(List<Space>? value);
+  String get spaceType;
+  set spaceType(String value);
+  @override
+  ToOne<SpaceSettings> get settings;
+  set settings(ToOne<SpaceSettings> value);
+  @override
+  ToMany<Space> get subSpaces;
+  set subSpaces(ToMany<Space> value);
   @override
   @JsonKey(ignore: true)
   _$$_SpaceCopyWith<_$_Space> get copyWith =>
@@ -469,16 +491,14 @@ abstract class _$$SpaceBoxCopyWith<$Res> implements $SpaceCopyWith<$Res> {
       __$$SpaceBoxCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String name,
-      String projectId,
-      SpaceSettings settings,
-      SpaceViewBox view,
-      SpaceType spaceType,
-      String? parentId});
-
-  @override
-  $SpaceSettingsCopyWith<$Res> get settings;
+      ToOne<Project> projectId,
+      ToOne<SpaceSettings> settings,
+      ToOne<SpaceView> view,
+      String spaceType,
+      ToMany<Space> subSpaces});
 }
 
 /// @nodoc
@@ -492,15 +512,20 @@ class __$$SpaceBoxCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? projectId = freezed,
     Object? settings = freezed,
     Object? view = freezed,
     Object? spaceType = freezed,
-    Object? parentId = freezed,
+    Object? subSpaces = freezed,
   }) {
     return _then(_$SpaceBox(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -512,67 +537,65 @@ class __$$SpaceBoxCopyWithImpl<$Res> extends _$SpaceCopyWithImpl<$Res>
       projectId: projectId == freezed
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<Project>,
       settings: settings == freezed
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as SpaceSettings,
+              as ToOne<SpaceSettings>,
       view: view == freezed
           ? _value.view
           : view // ignore: cast_nullable_to_non_nullable
-              as SpaceViewBox,
+              as ToOne<SpaceView>,
       spaceType: spaceType == freezed
           ? _value.spaceType
           : spaceType // ignore: cast_nullable_to_non_nullable
-              as SpaceType,
-      parentId: parentId == freezed
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      subSpaces: subSpaces == freezed
+          ? _value.subSpaces
+          : subSpaces // ignore: cast_nullable_to_non_nullable
+              as ToMany<Space>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: SpaceBox)
 class _$SpaceBox extends SpaceBox {
   _$SpaceBox(
-      {required this.id,
+      {@Id() this.oid = 0,
+      required this.id,
       required this.name,
       required this.projectId,
       required this.settings,
       required this.view,
-      this.spaceType = SpaceType.box,
-      this.parentId,
-      final String? $type})
-      : $type = $type ?? 'box',
-        super._();
+      this.spaceType = 'box',
+      required this.subSpaces})
+      : super._();
 
-  factory _$SpaceBox.fromJson(Map<String, dynamic> json) =>
-      _$$SpaceBoxFromJson(json);
-
+  @override
+  @JsonKey()
+  @Id()
+  int oid;
   @override
   String id;
   @override
   String name;
   @override
-  String projectId;
+  ToOne<Project> projectId;
   @override
-  SpaceSettings settings;
+  ToOne<SpaceSettings> settings;
   @override
-  SpaceViewBox view;
+  ToOne<SpaceView> view;
   @override
   @JsonKey()
-  SpaceType spaceType;
+  String spaceType;
   @override
-  String? parentId;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  ToMany<Space> subSpaces;
 
   @override
   String toString() {
-    return 'Space.box(id: $id, name: $name, projectId: $projectId, settings: $settings, view: $view, spaceType: $spaceType, parentId: $parentId)';
+    return 'Space.box(oid: $oid, id: $id, name: $name, projectId: $projectId, settings: $settings, view: $view, spaceType: $spaceType, subSpaces: $subSpaces)';
   }
 
   @JsonKey(ignore: true)
@@ -583,72 +606,86 @@ class _$SpaceBox extends SpaceBox {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String name, SpaceView view, String projectId,
-            SpaceType spaceType, SpaceSettings settings, List<Space>? subSpaces)
-        $default, {
-    required TResult Function(
+    TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)
+        $default, {
+    required TResult Function(
+            @Id() int oid,
+            String id,
+            String name,
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)
         box,
   }) {
-    return box(id, name, projectId, settings, view, spaceType, parentId);
+    return box(oid, id, name, projectId, settings, view, spaceType, subSpaces);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            SpaceView view,
-            String projectId,
-            SpaceType spaceType,
-            SpaceSettings settings,
-            List<Space>? subSpaces)?
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)?
         $default, {
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)?
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)?
         box,
   }) {
-    return box?.call(id, name, projectId, settings, view, spaceType, parentId);
+    return box?.call(
+        oid, id, name, projectId, settings, view, spaceType, subSpaces);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            SpaceView view,
-            String projectId,
-            SpaceType spaceType,
-            SpaceSettings settings,
-            List<Space>? subSpaces)?
+            ToOne<SpaceView> view,
+            ToOne<Project> projectId,
+            String spaceType,
+            ToOne<SpaceSettings> settings,
+            ToMany<Space> subSpaces)?
         $default, {
     TResult Function(
+            @Id() int oid,
             String id,
             String name,
-            String projectId,
-            SpaceSettings settings,
-            SpaceViewBox view,
-            SpaceType spaceType,
-            String? parentId)?
+            ToOne<Project> projectId,
+            ToOne<SpaceSettings> settings,
+            ToOne<SpaceView> view,
+            String spaceType,
+            ToMany<Space> subSpaces)?
         box,
     required TResult orElse(),
   }) {
     if (box != null) {
-      return box(id, name, projectId, settings, view, spaceType, parentId);
+      return box(
+          oid, id, name, projectId, settings, view, spaceType, subSpaces);
     }
     return orElse();
   }
@@ -683,28 +720,25 @@ class _$SpaceBox extends SpaceBox {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SpaceBoxToJson(
-      this,
-    );
-  }
 }
 
 abstract class SpaceBox extends Space {
   factory SpaceBox(
-      {required String id,
+      {@Id() int oid,
+      required String id,
       required String name,
-      required String projectId,
-      required SpaceSettings settings,
-      required SpaceViewBox view,
-      SpaceType spaceType,
-      String? parentId}) = _$SpaceBox;
+      required ToOne<Project> projectId,
+      required ToOne<SpaceSettings> settings,
+      required ToOne<SpaceView> view,
+      String spaceType,
+      required ToMany<Space> subSpaces}) = _$SpaceBox;
   SpaceBox._() : super._();
 
-  factory SpaceBox.fromJson(Map<String, dynamic> json) = _$SpaceBox.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
   set id(String value);
@@ -712,57 +746,50 @@ abstract class SpaceBox extends Space {
   String get name;
   set name(String value);
   @override
-  String get projectId;
-  set projectId(String value);
+  ToOne<Project> get projectId;
+  set projectId(ToOne<Project> value);
   @override
-  SpaceSettings get settings;
-  set settings(SpaceSettings value);
-  SpaceViewBox get view;
-  set view(SpaceViewBox value);
+  ToOne<SpaceSettings> get settings;
+  set settings(ToOne<SpaceSettings> value);
   @override
-  SpaceType get spaceType;
-  set spaceType(SpaceType value);
-  String? get parentId;
-  set parentId(String? value);
+  ToOne<SpaceView> get view;
+  set view(ToOne<SpaceView> value);
+  @override
+  String get spaceType;
+  set spaceType(String value);
+  @override
+  ToMany<Space> get subSpaces;
+  set subSpaces(ToMany<Space> value);
   @override
   @JsonKey(ignore: true)
   _$$SpaceBoxCopyWith<_$SpaceBox> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-SpaceSettings _$SpaceSettingsFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'default':
-      return _SpaceSettings.fromJson(json);
-    case 'box':
-      return SpaceSettingsBox.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'SpaceSettings',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$SpaceSettings {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   bool get selected => throw _privateConstructorUsedError;
   set selected(bool value) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(bool selected) $default, {
-    required TResult Function(bool selected) box,
+    TResult Function(@Id() int oid, bool selected) $default, {
+    required TResult Function(@Id() int oid, bool selected) box,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(bool selected)? $default, {
-    TResult Function(bool selected)? box,
+    TResult Function(@Id() int oid, bool selected)? $default, {
+    TResult Function(@Id() int oid, bool selected)? box,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool selected)? $default, {
-    TResult Function(bool selected)? box,
+    TResult Function(@Id() int oid, bool selected)? $default, {
+    TResult Function(@Id() int oid, bool selected)? box,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -785,7 +812,7 @@ mixin _$SpaceSettings {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $SpaceSettingsCopyWith<SpaceSettings> get copyWith =>
       throw _privateConstructorUsedError;
@@ -796,7 +823,7 @@ abstract class $SpaceSettingsCopyWith<$Res> {
   factory $SpaceSettingsCopyWith(
           SpaceSettings value, $Res Function(SpaceSettings) then) =
       _$SpaceSettingsCopyWithImpl<$Res>;
-  $Res call({bool selected});
+  $Res call({@Id() int oid, bool selected});
 }
 
 /// @nodoc
@@ -810,9 +837,14 @@ class _$SpaceSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? selected = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       selected: selected == freezed
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
@@ -828,7 +860,7 @@ abstract class _$$_SpaceSettingsCopyWith<$Res>
           _$_SpaceSettings value, $Res Function(_$_SpaceSettings) then) =
       __$$_SpaceSettingsCopyWithImpl<$Res>;
   @override
-  $Res call({bool selected});
+  $Res call({@Id() int oid, bool selected});
 }
 
 /// @nodoc
@@ -844,9 +876,14 @@ class __$$_SpaceSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? selected = freezed,
   }) {
     return _then(_$_SpaceSettings(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       selected: selected == freezed
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
@@ -856,25 +893,22 @@ class __$$_SpaceSettingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: SpaceSettings)
 class _$_SpaceSettings extends _SpaceSettings {
-  _$_SpaceSettings({this.selected = false, final String? $type})
-      : $type = $type ?? 'default',
-        super._();
+  _$_SpaceSettings({@Id() this.oid = 0, this.selected = false}) : super._();
 
-  factory _$_SpaceSettings.fromJson(Map<String, dynamic> json) =>
-      _$$_SpaceSettingsFromJson(json);
-
+  @override
+  @JsonKey()
+  @Id()
+  int oid;
   @override
   @JsonKey()
   bool selected;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
   @override
   String toString() {
-    return 'SpaceSettings(selected: $selected)';
+    return 'SpaceSettings(oid: $oid, selected: $selected)';
   }
 
   @JsonKey(ignore: true)
@@ -885,30 +919,30 @@ class _$_SpaceSettings extends _SpaceSettings {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(bool selected) $default, {
-    required TResult Function(bool selected) box,
+    TResult Function(@Id() int oid, bool selected) $default, {
+    required TResult Function(@Id() int oid, bool selected) box,
   }) {
-    return $default(selected);
+    return $default(oid, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(bool selected)? $default, {
-    TResult Function(bool selected)? box,
+    TResult Function(@Id() int oid, bool selected)? $default, {
+    TResult Function(@Id() int oid, bool selected)? box,
   }) {
-    return $default?.call(selected);
+    return $default?.call(oid, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool selected)? $default, {
-    TResult Function(bool selected)? box,
+    TResult Function(@Id() int oid, bool selected)? $default, {
+    TResult Function(@Id() int oid, bool selected)? box,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(selected);
+      return $default(oid, selected);
     }
     return orElse();
   }
@@ -943,22 +977,17 @@ class _$_SpaceSettings extends _SpaceSettings {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SpaceSettingsToJson(
-      this,
-    );
-  }
 }
 
 abstract class _SpaceSettings extends SpaceSettings {
-  factory _SpaceSettings({bool selected}) = _$_SpaceSettings;
+  factory _SpaceSettings({@Id() int oid, bool selected}) = _$_SpaceSettings;
   _SpaceSettings._() : super._();
 
-  factory _SpaceSettings.fromJson(Map<String, dynamic> json) =
-      _$_SpaceSettings.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   bool get selected;
   set selected(bool value);
@@ -975,7 +1004,7 @@ abstract class _$$SpaceSettingsBoxCopyWith<$Res>
           _$SpaceSettingsBox value, $Res Function(_$SpaceSettingsBox) then) =
       __$$SpaceSettingsBoxCopyWithImpl<$Res>;
   @override
-  $Res call({bool selected});
+  $Res call({@Id() int oid, bool selected});
 }
 
 /// @nodoc
@@ -991,9 +1020,14 @@ class __$$SpaceSettingsBoxCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? selected = freezed,
   }) {
     return _then(_$SpaceSettingsBox(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       selected: selected == freezed
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
@@ -1003,25 +1037,22 @@ class __$$SpaceSettingsBoxCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: SpaceSettingsBox)
 class _$SpaceSettingsBox extends SpaceSettingsBox {
-  _$SpaceSettingsBox({this.selected = false, final String? $type})
-      : $type = $type ?? 'box',
-        super._();
+  _$SpaceSettingsBox({@Id() this.oid = 0, this.selected = false}) : super._();
 
-  factory _$SpaceSettingsBox.fromJson(Map<String, dynamic> json) =>
-      _$$SpaceSettingsBoxFromJson(json);
-
+  @override
+  @JsonKey()
+  @Id()
+  int oid;
   @override
   @JsonKey()
   bool selected;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
   @override
   String toString() {
-    return 'SpaceSettings.box(selected: $selected)';
+    return 'SpaceSettings.box(oid: $oid, selected: $selected)';
   }
 
   @JsonKey(ignore: true)
@@ -1032,30 +1063,30 @@ class _$SpaceSettingsBox extends SpaceSettingsBox {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(bool selected) $default, {
-    required TResult Function(bool selected) box,
+    TResult Function(@Id() int oid, bool selected) $default, {
+    required TResult Function(@Id() int oid, bool selected) box,
   }) {
-    return box(selected);
+    return box(oid, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(bool selected)? $default, {
-    TResult Function(bool selected)? box,
+    TResult Function(@Id() int oid, bool selected)? $default, {
+    TResult Function(@Id() int oid, bool selected)? box,
   }) {
-    return box?.call(selected);
+    return box?.call(oid, selected);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool selected)? $default, {
-    TResult Function(bool selected)? box,
+    TResult Function(@Id() int oid, bool selected)? $default, {
+    TResult Function(@Id() int oid, bool selected)? box,
     required TResult orElse(),
   }) {
     if (box != null) {
-      return box(selected);
+      return box(oid, selected);
     }
     return orElse();
   }
@@ -1090,22 +1121,17 @@ class _$SpaceSettingsBox extends SpaceSettingsBox {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SpaceSettingsBoxToJson(
-      this,
-    );
-  }
 }
 
 abstract class SpaceSettingsBox extends SpaceSettings {
-  factory SpaceSettingsBox({bool selected}) = _$SpaceSettingsBox;
+  factory SpaceSettingsBox({@Id() int oid, bool selected}) = _$SpaceSettingsBox;
   SpaceSettingsBox._() : super._();
 
-  factory SpaceSettingsBox.fromJson(Map<String, dynamic> json) =
-      _$SpaceSettingsBox.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   bool get selected;
   set selected(bool value);
@@ -1115,39 +1141,30 @@ abstract class SpaceSettingsBox extends SpaceSettings {
       throw _privateConstructorUsedError;
 }
 
-SpaceView _$SpaceViewFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'default':
-      return _SpaceView.fromJson(json);
-    case 'box':
-      return SpaceViewBox.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'SpaceView',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$SpaceView {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   bool get onHovered => throw _privateConstructorUsedError;
   set onHovered(bool value) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(bool onHovered) $default, {
-    required TResult Function(bool onHovered) box,
+    TResult Function(@Id() int oid, bool onHovered) $default, {
+    required TResult Function(@Id() int oid, bool onHovered) box,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(bool onHovered)? $default, {
-    TResult Function(bool onHovered)? box,
+    TResult Function(@Id() int oid, bool onHovered)? $default, {
+    TResult Function(@Id() int oid, bool onHovered)? box,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool onHovered)? $default, {
-    TResult Function(bool onHovered)? box,
+    TResult Function(@Id() int oid, bool onHovered)? $default, {
+    TResult Function(@Id() int oid, bool onHovered)? box,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1170,7 +1187,7 @@ mixin _$SpaceView {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $SpaceViewCopyWith<SpaceView> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1180,7 +1197,7 @@ mixin _$SpaceView {
 abstract class $SpaceViewCopyWith<$Res> {
   factory $SpaceViewCopyWith(SpaceView value, $Res Function(SpaceView) then) =
       _$SpaceViewCopyWithImpl<$Res>;
-  $Res call({bool onHovered});
+  $Res call({@Id() int oid, bool onHovered});
 }
 
 /// @nodoc
@@ -1193,9 +1210,14 @@ class _$SpaceViewCopyWithImpl<$Res> implements $SpaceViewCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? onHovered = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       onHovered: onHovered == freezed
           ? _value.onHovered
           : onHovered // ignore: cast_nullable_to_non_nullable
@@ -1210,7 +1232,7 @@ abstract class _$$_SpaceViewCopyWith<$Res> implements $SpaceViewCopyWith<$Res> {
           _$_SpaceView value, $Res Function(_$_SpaceView) then) =
       __$$_SpaceViewCopyWithImpl<$Res>;
   @override
-  $Res call({bool onHovered});
+  $Res call({@Id() int oid, bool onHovered});
 }
 
 /// @nodoc
@@ -1225,9 +1247,14 @@ class __$$_SpaceViewCopyWithImpl<$Res> extends _$SpaceViewCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? onHovered = freezed,
   }) {
     return _then(_$_SpaceView(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       onHovered: onHovered == freezed
           ? _value.onHovered
           : onHovered // ignore: cast_nullable_to_non_nullable
@@ -1237,25 +1264,22 @@ class __$$_SpaceViewCopyWithImpl<$Res> extends _$SpaceViewCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: SpaceView)
 class _$_SpaceView extends _SpaceView {
-  _$_SpaceView({this.onHovered = false, final String? $type})
-      : $type = $type ?? 'default',
-        super._();
+  _$_SpaceView({@Id() this.oid = 0, this.onHovered = false}) : super._();
 
-  factory _$_SpaceView.fromJson(Map<String, dynamic> json) =>
-      _$$_SpaceViewFromJson(json);
-
+  @override
+  @JsonKey()
+  @Id()
+  int oid;
   @override
   @JsonKey()
   bool onHovered;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
   @override
   String toString() {
-    return 'SpaceView(onHovered: $onHovered)';
+    return 'SpaceView(oid: $oid, onHovered: $onHovered)';
   }
 
   @JsonKey(ignore: true)
@@ -1266,30 +1290,30 @@ class _$_SpaceView extends _SpaceView {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(bool onHovered) $default, {
-    required TResult Function(bool onHovered) box,
+    TResult Function(@Id() int oid, bool onHovered) $default, {
+    required TResult Function(@Id() int oid, bool onHovered) box,
   }) {
-    return $default(onHovered);
+    return $default(oid, onHovered);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(bool onHovered)? $default, {
-    TResult Function(bool onHovered)? box,
+    TResult Function(@Id() int oid, bool onHovered)? $default, {
+    TResult Function(@Id() int oid, bool onHovered)? box,
   }) {
-    return $default?.call(onHovered);
+    return $default?.call(oid, onHovered);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool onHovered)? $default, {
-    TResult Function(bool onHovered)? box,
+    TResult Function(@Id() int oid, bool onHovered)? $default, {
+    TResult Function(@Id() int oid, bool onHovered)? box,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(onHovered);
+      return $default(oid, onHovered);
     }
     return orElse();
   }
@@ -1324,22 +1348,17 @@ class _$_SpaceView extends _SpaceView {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SpaceViewToJson(
-      this,
-    );
-  }
 }
 
 abstract class _SpaceView extends SpaceView {
-  factory _SpaceView({bool onHovered}) = _$_SpaceView;
+  factory _SpaceView({@Id() int oid, bool onHovered}) = _$_SpaceView;
   _SpaceView._() : super._();
 
-  factory _SpaceView.fromJson(Map<String, dynamic> json) =
-      _$_SpaceView.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   bool get onHovered;
   set onHovered(bool value);
@@ -1356,7 +1375,7 @@ abstract class _$$SpaceViewBoxCopyWith<$Res>
           _$SpaceViewBox value, $Res Function(_$SpaceViewBox) then) =
       __$$SpaceViewBoxCopyWithImpl<$Res>;
   @override
-  $Res call({bool onHovered});
+  $Res call({@Id() int oid, bool onHovered});
 }
 
 /// @nodoc
@@ -1371,9 +1390,14 @@ class __$$SpaceViewBoxCopyWithImpl<$Res> extends _$SpaceViewCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? onHovered = freezed,
   }) {
     return _then(_$SpaceViewBox(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       onHovered: onHovered == freezed
           ? _value.onHovered
           : onHovered // ignore: cast_nullable_to_non_nullable
@@ -1383,25 +1407,22 @@ class __$$SpaceViewBoxCopyWithImpl<$Res> extends _$SpaceViewCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: SpaceViewBox)
 class _$SpaceViewBox extends SpaceViewBox {
-  _$SpaceViewBox({this.onHovered = false, final String? $type})
-      : $type = $type ?? 'box',
-        super._();
+  _$SpaceViewBox({@Id() this.oid = 0, this.onHovered = false}) : super._();
 
-  factory _$SpaceViewBox.fromJson(Map<String, dynamic> json) =>
-      _$$SpaceViewBoxFromJson(json);
-
+  @override
+  @JsonKey()
+  @Id()
+  int oid;
   @override
   @JsonKey()
   bool onHovered;
 
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
   @override
   String toString() {
-    return 'SpaceView.box(onHovered: $onHovered)';
+    return 'SpaceView.box(oid: $oid, onHovered: $onHovered)';
   }
 
   @JsonKey(ignore: true)
@@ -1412,30 +1433,30 @@ class _$SpaceViewBox extends SpaceViewBox {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(bool onHovered) $default, {
-    required TResult Function(bool onHovered) box,
+    TResult Function(@Id() int oid, bool onHovered) $default, {
+    required TResult Function(@Id() int oid, bool onHovered) box,
   }) {
-    return box(onHovered);
+    return box(oid, onHovered);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(bool onHovered)? $default, {
-    TResult Function(bool onHovered)? box,
+    TResult Function(@Id() int oid, bool onHovered)? $default, {
+    TResult Function(@Id() int oid, bool onHovered)? box,
   }) {
-    return box?.call(onHovered);
+    return box?.call(oid, onHovered);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(bool onHovered)? $default, {
-    TResult Function(bool onHovered)? box,
+    TResult Function(@Id() int oid, bool onHovered)? $default, {
+    TResult Function(@Id() int oid, bool onHovered)? box,
     required TResult orElse(),
   }) {
     if (box != null) {
-      return box(onHovered);
+      return box(oid, onHovered);
     }
     return orElse();
   }
@@ -1470,22 +1491,17 @@ class _$SpaceViewBox extends SpaceViewBox {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SpaceViewBoxToJson(
-      this,
-    );
-  }
 }
 
 abstract class SpaceViewBox extends SpaceView {
-  factory SpaceViewBox({bool onHovered}) = _$SpaceViewBox;
+  factory SpaceViewBox({@Id() int oid, bool onHovered}) = _$SpaceViewBox;
   SpaceViewBox._() : super._();
 
-  factory SpaceViewBox.fromJson(Map<String, dynamic> json) =
-      _$SpaceViewBox.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   bool get onHovered;
   set onHovered(bool value);

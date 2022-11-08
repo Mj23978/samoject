@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:samoject/objectbox.g.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/auth/auth_value_objects.dart';
@@ -29,8 +30,12 @@ class MockAuthFacade implements IAuthFacade {
         username: "${emailAddressString.split('@')[0]}}",
         active: true,
         date: DateTime.now(),
+        assignedTasks: ToMany(),
+        comments: ToMany(),
+        createdTasks: ToMany(),
+        projects: ToMany(),
       );
-      await app.configsStore.addMe(user);
+      app.configsStore.addMe(user);
       return right(unit);
     } catch (e) {
       return left(const AuthFailures.serverError());
@@ -46,11 +51,12 @@ class MockAuthFacade implements IAuthFacade {
     final passwordString =
         password!.valueObject!.fold((l) => throw UnExpectedValueError(l), id);
     try {
-      if (app.configsStore.getMe() == null) {
+      final me = app.configsStore.getMe();
+      if (me == null) {
         return (left(AuthFailures.invalidEmailAndPasswordCombination()));
       }
-      if (app.configsStore.getMe()!.email == emailAddressString &&
-          (app.configsStore.getMe()!.password == null || app.configsStore.getMe()!.password == passwordString)) {
+      if (me.email == emailAddressString &&
+          (me.password == null || me.password == passwordString)) {
         return right(unit);
       }
       throw Error();

@@ -14,18 +14,19 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TaskDetails _$TaskDetailsFromJson(Map<String, dynamic> json) {
-  return _TaskDetails.fromJson(json);
-}
-
 /// @nodoc
 mixin _$TaskDetails {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   String get hash => throw _privateConstructorUsedError;
+  set hash(String value) => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  Map<String, dynamic> get attributes => throw _privateConstructorUsedError;
+  set content(String value) => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TaskDetailsCopyWith<TaskDetails> get copyWith =>
       throw _privateConstructorUsedError;
@@ -36,11 +37,7 @@ abstract class $TaskDetailsCopyWith<$Res> {
   factory $TaskDetailsCopyWith(
           TaskDetails value, $Res Function(TaskDetails) then) =
       _$TaskDetailsCopyWithImpl<$Res>;
-  $Res call(
-      {String id,
-      String hash,
-      String content,
-      Map<String, dynamic> attributes});
+  $Res call({@Id() int oid, String id, String hash, String content});
 }
 
 /// @nodoc
@@ -53,12 +50,16 @@ class _$TaskDetailsCopyWithImpl<$Res> implements $TaskDetailsCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? hash = freezed,
     Object? content = freezed,
-    Object? attributes = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -71,10 +72,6 @@ class _$TaskDetailsCopyWithImpl<$Res> implements $TaskDetailsCopyWith<$Res> {
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      attributes: attributes == freezed
-          ? _value.attributes
-          : attributes // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
     ));
   }
 }
@@ -86,11 +83,7 @@ abstract class _$$_TaskDetailsCopyWith<$Res>
           _$_TaskDetails value, $Res Function(_$_TaskDetails) then) =
       __$$_TaskDetailsCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String id,
-      String hash,
-      String content,
-      Map<String, dynamic> attributes});
+  $Res call({@Id() int oid, String id, String hash, String content});
 }
 
 /// @nodoc
@@ -105,12 +98,16 @@ class __$$_TaskDetailsCopyWithImpl<$Res> extends _$TaskDetailsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? hash = freezed,
     Object? content = freezed,
-    Object? attributes = freezed,
   }) {
     return _then(_$_TaskDetails(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -123,101 +120,66 @@ class __$$_TaskDetailsCopyWithImpl<$Res> extends _$TaskDetailsCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      attributes: attributes == freezed
-          ? _value._attributes
-          : attributes // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: TaskDetails)
 class _$_TaskDetails extends _TaskDetails {
-  const _$_TaskDetails(
-      {required this.id,
+  _$_TaskDetails(
+      {@Id() this.oid = 0,
+      required this.id,
       required this.hash,
-      this.content = "",
-      final Map<String, dynamic> attributes = const {}})
-      : _attributes = attributes,
-        super._();
-
-  factory _$_TaskDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_TaskDetailsFromJson(json);
+      this.content = ""})
+      : super._();
 
   @override
-  final String id;
+  @JsonKey()
+  @Id()
+  int oid;
   @override
-  final String hash;
+  String id;
+  @override
+  String hash;
   @override
   @JsonKey()
-  final String content;
-  final Map<String, dynamic> _attributes;
-  @override
-  @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
+  String content;
 
   @override
   String toString() {
-    return 'TaskDetails(id: $id, hash: $hash, content: $content, attributes: $attributes)';
+    return 'TaskDetails(oid: $oid, id: $id, hash: $hash, content: $content)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_TaskDetails &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.hash, hash) &&
-            const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(hash),
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
   _$$_TaskDetailsCopyWith<_$_TaskDetails> get copyWith =>
       __$$_TaskDetailsCopyWithImpl<_$_TaskDetails>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_TaskDetailsToJson(
-      this,
-    );
-  }
 }
 
 abstract class _TaskDetails extends TaskDetails {
-  const factory _TaskDetails(
-      {required final String id,
-      required final String hash,
-      final String content,
-      final Map<String, dynamic> attributes}) = _$_TaskDetails;
-  const _TaskDetails._() : super._();
+  factory _TaskDetails(
+      {@Id() int oid,
+      required String id,
+      required String hash,
+      String content}) = _$_TaskDetails;
+  _TaskDetails._() : super._();
 
-  factory _TaskDetails.fromJson(Map<String, dynamic> json) =
-      _$_TaskDetails.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
+  set id(String value);
   @override
   String get hash;
+  set hash(String value);
   @override
   String get content;
-  @override
-  Map<String, dynamic> get attributes;
+  set content(String value);
   @override
   @JsonKey(ignore: true)
   _$$_TaskDetailsCopyWith<_$_TaskDetails> get copyWith =>

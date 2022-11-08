@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
+import 'package:samoject/objectbox.g.dart';
 // import 'package:samoject_table/samoject_table.dart';
 import 'package:uuid/uuid.dart';
 
@@ -79,7 +80,7 @@ class HomeProvider extends ChangeNotifier {
     );
     Space newspace = space.map(
       (v) => v,
-      box: (v) => v.copyWith(view: v.view.copyWith(onHovered: value)),
+      box: (v) => v.copyWith(view: ToOne(target: v.view.target!.copyWith(onHovered: value))),
     );
     // spaces.remove(space);
     // spaces.add(newspace);
@@ -109,7 +110,8 @@ class HomeProvider extends ChangeNotifier {
           spaceName,
     );
     Space newspace = space.copyWith(
-        settings: space.settings.copyWith(selected: !space.settings.selected));
+      settings: ToOne(target: space.settings.target!.copyWith(selected: !space.settings.target!.selected)),
+    );
     // spaces.remove(space);
     // spaces.add(newspace);
     selectedSpace = newspace;

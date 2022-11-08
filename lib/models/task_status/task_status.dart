@@ -1,117 +1,98 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../utils/helpers.dart';
+import 'package:objectbox/objectbox.dart';
 
 part 'task_status.freezed.dart';
-part 'task_status.g.dart';
+// part 'task_status.g.dart';
 
-@freezed
+@unfreezed
 class TaskStatus with _$TaskStatus {
   const TaskStatus._();
 
-  const factory TaskStatus({
+  @Entity(realClass: TaskStatus)
+  factory TaskStatus({
+    @Id() @Default(0) int oid,
     required String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-        required Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+    @Property() required int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = _TaskStatus;
 
-  const factory TaskStatus.complete({
-    @Default('Complete')
-        String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-    @Default(Colors.lightGreen)
-        Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+  factory TaskStatus.complete({
+    @Id() @Default(0) int oid,
+    @Default('Complete') String name,
+    @Default(0xff8bc34a) int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = Complete;
 
-  const factory TaskStatus.todo({
-    @Default('Todo')
-        String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-    @Default(Color.fromARGB(255, 252, 232, 54))
-        Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+  factory TaskStatus.todo({
+    @Id() @Default(0) int oid,
+    @Default('Todo') String name,
+    @Default(0xffffca28) int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = TODO;
 
-  const factory TaskStatus.idea({
-    @Default('Idea')
-        String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-    @Default(Colors.grey)
-        Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+  factory TaskStatus.idea({
+    @Id() @Default(0) int oid,
+    @Default('Idea') String name,
+    @Default(0xff9e9e9e) int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = IDEA;
 
-  const factory TaskStatus.underReview({
-    @Default('Under Review')
-        String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-    @Default(Color(0xffffb74d))
-        Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+  factory TaskStatus.underReview({
+    @Id() @Default(0) int oid,
+    @Default('Under Review') String name,
+    @Default(0xffffb74d) int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = UnderReview;
 
-  const factory TaskStatus.starting({
-    @Default('Starting')
-        String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-    @Default(Colors.indigoAccent)
-        Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+  factory TaskStatus.starting({
+    @Id() @Default(0) int oid,
+    @Default('Starting') String name,
+    @Default(0xff536dfe) int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = Starting;
 
-  const factory TaskStatus.planned({
-    @Default('Planned')
-        String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-    @Default(Colors.green)
-        Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+  factory TaskStatus.planned({
+    @Id() @Default(0) int oid,
+    @Default('Planned') String name,
+    @Default(0xff4caf50) int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = Planned;
 
-  const factory TaskStatus.inProgress({
-    @Default('Planned')
-        String name,
-    @JsonKey(
-      toJson: color2String,
-      fromJson: string2Color,
-    )
-    @Default(Colors.blue)
-        Color color,
-    @Default({})
-        Map<String, dynamic> attributes,
+  factory TaskStatus.inProgress({
+    @Id() @Default(0) int oid,
+    @Default('In Progress') String name,
+    @Default(0xff2196f3) int color,
+    @Default({}) Map<String, dynamic> attributes,
   }) = InProgress;
 
-  factory TaskStatus.fromJson(Map<String, dynamic> json) =>
-      _$TaskStatusFromJson(json);
+  // factory TaskStatus.fromJson(Map<String, dynamic> json) =>
+  //     _$TaskStatusFromJson(json);
+}
+
+extension TaskStatusExtension on TaskStatus {
+  Color getColor() {
+    return Color(color);
+  }
+}
+
+extension TaskStatusStrExtension on String {
+  Color toTaskStatusColor() {
+    if (this == "Planned") {
+      return Color(0xff4caf50);
+    } else if (this == "In Progress") {
+      return Color(0xff2196f3);
+    } else if (this == "Starting") {
+      return Color(0xff536dfe);
+    } else if (this == "Under Review") {
+      return Color(0xffffb74d);
+    } else if (this == "Idea") {
+      return Color(0xff9e9e9e);
+    } else if (this == "Todo") {
+      return Color(0xffffca28);
+    } else if (this == "Complete") {
+      return Color(0xff8bc34a);
+    } 
+    return Colors.white;
+  }
 }
