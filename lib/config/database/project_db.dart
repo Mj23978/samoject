@@ -23,7 +23,7 @@ class ProjectsStore {
 
   Future<bool> addProject(Project project) async {
     if (box.get("${project.workspaceId}.${project.id}") == null) {
-      box.put("${project.workspaceId}.${project.id}", jsonEncode(project.toJson()));
+      // box.put("${project.workspaceId}.${project.id}", jsonEncode(project.toJson()));
     }
     return true;
   }

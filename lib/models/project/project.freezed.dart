@@ -14,24 +14,28 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Project _$ProjectFromJson(Map<String, dynamic> json) {
-  return _Project.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Project {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  ProjectSettings get settings => throw _privateConstructorUsedError;
-  List<Space> get spaces => throw _privateConstructorUsedError;
-  List<String> get spaceIds => throw _privateConstructorUsedError;
-  List<Task> get tasks => throw _privateConstructorUsedError;
-  List<String> get taskIds => throw _privateConstructorUsedError;
-  List<User> get users => throw _privateConstructorUsedError;
-  List<String> get userIds => throw _privateConstructorUsedError;
-  String get workspaceId => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
+  ToOne<ProjectSettings> get settings => throw _privateConstructorUsedError;
+  set settings(ToOne<ProjectSettings> value) =>
+      throw _privateConstructorUsedError;
+  ToOne<Workspace> get workspaceId => throw _privateConstructorUsedError;
+  set workspaceId(ToOne<Workspace> value) => throw _privateConstructorUsedError;
+  ToMany<Space> get spaces => throw _privateConstructorUsedError;
+  set spaces(ToMany<Space> value) => throw _privateConstructorUsedError;
+  ToMany<Task> get tasks => throw _privateConstructorUsedError;
+  set tasks(ToMany<Task> value) => throw _privateConstructorUsedError;
+  ToMany<User> get users => throw _privateConstructorUsedError;
+  set users(ToMany<User> value) => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ProjectCopyWith<Project> get copyWith => throw _privateConstructorUsedError;
 }
@@ -41,18 +45,14 @@ abstract class $ProjectCopyWith<$Res> {
   factory $ProjectCopyWith(Project value, $Res Function(Project) then) =
       _$ProjectCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String name,
-      ProjectSettings settings,
-      List<Space> spaces,
-      List<String> spaceIds,
-      List<Task> tasks,
-      List<String> taskIds,
-      List<User> users,
-      List<String> userIds,
-      String workspaceId});
-
-  $ProjectSettingsCopyWith<$Res> get settings;
+      ToOne<ProjectSettings> settings,
+      ToOne<Workspace> workspaceId,
+      ToMany<Space> spaces,
+      ToMany<Task> tasks,
+      ToMany<User> users});
 }
 
 /// @nodoc
@@ -65,18 +65,20 @@ class _$ProjectCopyWithImpl<$Res> implements $ProjectCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? settings = freezed,
-    Object? spaces = freezed,
-    Object? spaceIds = freezed,
-    Object? tasks = freezed,
-    Object? taskIds = freezed,
-    Object? users = freezed,
-    Object? userIds = freezed,
     Object? workspaceId = freezed,
+    Object? spaces = freezed,
+    Object? tasks = freezed,
+    Object? users = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -88,43 +90,24 @@ class _$ProjectCopyWithImpl<$Res> implements $ProjectCopyWith<$Res> {
       settings: settings == freezed
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as ProjectSettings,
-      spaces: spaces == freezed
-          ? _value.spaces
-          : spaces // ignore: cast_nullable_to_non_nullable
-              as List<Space>,
-      spaceIds: spaceIds == freezed
-          ? _value.spaceIds
-          : spaceIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      tasks: tasks == freezed
-          ? _value.tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
-      taskIds: taskIds == freezed
-          ? _value.taskIds
-          : taskIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      users: users == freezed
-          ? _value.users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<User>,
-      userIds: userIds == freezed
-          ? _value.userIds
-          : userIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as ToOne<ProjectSettings>,
       workspaceId: workspaceId == freezed
           ? _value.workspaceId
           : workspaceId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<Workspace>,
+      spaces: spaces == freezed
+          ? _value.spaces
+          : spaces // ignore: cast_nullable_to_non_nullable
+              as ToMany<Space>,
+      tasks: tasks == freezed
+          ? _value.tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as ToMany<Task>,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as ToMany<User>,
     ));
-  }
-
-  @override
-  $ProjectSettingsCopyWith<$Res> get settings {
-    return $ProjectSettingsCopyWith<$Res>(_value.settings, (value) {
-      return _then(_value.copyWith(settings: value));
-    });
   }
 }
 
@@ -135,19 +118,14 @@ abstract class _$$_ProjectCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       __$$_ProjectCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String name,
-      ProjectSettings settings,
-      List<Space> spaces,
-      List<String> spaceIds,
-      List<Task> tasks,
-      List<String> taskIds,
-      List<User> users,
-      List<String> userIds,
-      String workspaceId});
-
-  @override
-  $ProjectSettingsCopyWith<$Res> get settings;
+      ToOne<ProjectSettings> settings,
+      ToOne<Workspace> workspaceId,
+      ToMany<Space> spaces,
+      ToMany<Task> tasks,
+      ToMany<User> users});
 }
 
 /// @nodoc
@@ -161,18 +139,20 @@ class __$$_ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? settings = freezed,
-    Object? spaces = freezed,
-    Object? spaceIds = freezed,
-    Object? tasks = freezed,
-    Object? taskIds = freezed,
-    Object? users = freezed,
-    Object? userIds = freezed,
     Object? workspaceId = freezed,
+    Object? spaces = freezed,
+    Object? tasks = freezed,
+    Object? users = freezed,
   }) {
     return _then(_$_Project(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -184,224 +164,127 @@ class __$$_ProjectCopyWithImpl<$Res> extends _$ProjectCopyWithImpl<$Res>
       settings: settings == freezed
           ? _value.settings
           : settings // ignore: cast_nullable_to_non_nullable
-              as ProjectSettings,
-      spaces: spaces == freezed
-          ? _value._spaces
-          : spaces // ignore: cast_nullable_to_non_nullable
-              as List<Space>,
-      spaceIds: spaceIds == freezed
-          ? _value._spaceIds
-          : spaceIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      tasks: tasks == freezed
-          ? _value._tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
-      taskIds: taskIds == freezed
-          ? _value._taskIds
-          : taskIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      users: users == freezed
-          ? _value._users
-          : users // ignore: cast_nullable_to_non_nullable
-              as List<User>,
-      userIds: userIds == freezed
-          ? _value._userIds
-          : userIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as ToOne<ProjectSettings>,
       workspaceId: workspaceId == freezed
           ? _value.workspaceId
           : workspaceId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<Workspace>,
+      spaces: spaces == freezed
+          ? _value.spaces
+          : spaces // ignore: cast_nullable_to_non_nullable
+              as ToMany<Space>,
+      tasks: tasks == freezed
+          ? _value.tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as ToMany<Task>,
+      users: users == freezed
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as ToMany<User>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: Project)
 class _$_Project extends _Project {
-  const _$_Project(
-      {required this.id,
+  _$_Project(
+      {@Id() this.oid = 0,
+      required this.id,
       required this.name,
       required this.settings,
-      final List<Space> spaces = const [],
-      final List<String> spaceIds = const [],
-      final List<Task> tasks = const [],
-      final List<String> taskIds = const [],
-      final List<User> users = const [],
-      final List<String> userIds = const [],
-      required this.workspaceId})
-      : _spaces = spaces,
-        _spaceIds = spaceIds,
-        _tasks = tasks,
-        _taskIds = taskIds,
-        _users = users,
-        _userIds = userIds,
-        super._();
+      required this.workspaceId,
+      required this.spaces,
+      required this.tasks,
+      required this.users})
+      : super._();
 
-  factory _$_Project.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final ProjectSettings settings;
-  final List<Space> _spaces;
   @override
   @JsonKey()
-  List<Space> get spaces {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_spaces);
-  }
-
-  final List<String> _spaceIds;
+  @Id()
+  int oid;
   @override
-  @JsonKey()
-  List<String> get spaceIds {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_spaceIds);
-  }
-
-  final List<Task> _tasks;
+  String id;
   @override
-  @JsonKey()
-  List<Task> get tasks {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tasks);
-  }
-
-  final List<String> _taskIds;
+  String name;
   @override
-  @JsonKey()
-  List<String> get taskIds {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_taskIds);
-  }
-
-  final List<User> _users;
+  ToOne<ProjectSettings> settings;
   @override
-  @JsonKey()
-  List<User> get users {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_users);
-  }
-
-  final List<String> _userIds;
+  ToOne<Workspace> workspaceId;
   @override
-  @JsonKey()
-  List<String> get userIds {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_userIds);
-  }
-
+  ToMany<Space> spaces;
   @override
-  final String workspaceId;
+  ToMany<Task> tasks;
+  @override
+  ToMany<User> users;
 
   @override
   String toString() {
-    return 'Project(id: $id, name: $name, settings: $settings, spaces: $spaces, spaceIds: $spaceIds, tasks: $tasks, taskIds: $taskIds, users: $users, userIds: $userIds, workspaceId: $workspaceId)';
+    return 'Project(oid: $oid, id: $id, name: $name, settings: $settings, workspaceId: $workspaceId, spaces: $spaces, tasks: $tasks, users: $users)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Project &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.settings, settings) &&
-            const DeepCollectionEquality().equals(other._spaces, _spaces) &&
-            const DeepCollectionEquality().equals(other._spaceIds, _spaceIds) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            const DeepCollectionEquality().equals(other._taskIds, _taskIds) &&
-            const DeepCollectionEquality().equals(other._users, _users) &&
-            const DeepCollectionEquality().equals(other._userIds, _userIds) &&
-            const DeepCollectionEquality()
-                .equals(other.workspaceId, workspaceId));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(settings),
-      const DeepCollectionEquality().hash(_spaces),
-      const DeepCollectionEquality().hash(_spaceIds),
-      const DeepCollectionEquality().hash(_tasks),
-      const DeepCollectionEquality().hash(_taskIds),
-      const DeepCollectionEquality().hash(_users),
-      const DeepCollectionEquality().hash(_userIds),
-      const DeepCollectionEquality().hash(workspaceId));
 
   @JsonKey(ignore: true)
   @override
   _$$_ProjectCopyWith<_$_Project> get copyWith =>
       __$$_ProjectCopyWithImpl<_$_Project>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ProjectToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Project extends Project {
-  const factory _Project(
-      {required final String id,
-      required final String name,
-      required final ProjectSettings settings,
-      final List<Space> spaces,
-      final List<String> spaceIds,
-      final List<Task> tasks,
-      final List<String> taskIds,
-      final List<User> users,
-      final List<String> userIds,
-      required final String workspaceId}) = _$_Project;
-  const _Project._() : super._();
+  factory _Project(
+      {@Id() int oid,
+      required String id,
+      required String name,
+      required ToOne<ProjectSettings> settings,
+      required ToOne<Workspace> workspaceId,
+      required ToMany<Space> spaces,
+      required ToMany<Task> tasks,
+      required ToMany<User> users}) = _$_Project;
+  _Project._() : super._();
 
-  factory _Project.fromJson(Map<String, dynamic> json) = _$_Project.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
+  set id(String value);
   @override
   String get name;
+  set name(String value);
   @override
-  ProjectSettings get settings;
+  ToOne<ProjectSettings> get settings;
+  set settings(ToOne<ProjectSettings> value);
   @override
-  List<Space> get spaces;
+  ToOne<Workspace> get workspaceId;
+  set workspaceId(ToOne<Workspace> value);
   @override
-  List<String> get spaceIds;
+  ToMany<Space> get spaces;
+  set spaces(ToMany<Space> value);
   @override
-  List<Task> get tasks;
+  ToMany<Task> get tasks;
+  set tasks(ToMany<Task> value);
   @override
-  List<String> get taskIds;
-  @override
-  List<User> get users;
-  @override
-  List<String> get userIds;
-  @override
-  String get workspaceId;
+  ToMany<User> get users;
+  set users(ToMany<User> value);
   @override
   @JsonKey(ignore: true)
   _$$_ProjectCopyWith<_$_Project> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-ProjectSettings _$ProjectSettingsFromJson(Map<String, dynamic> json) {
-  return _ProjectSettings.fromJson(json);
-}
-
 /// @nodoc
 mixin _$ProjectSettings {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   String? get localId => throw _privateConstructorUsedError;
+  set localId(String? value) => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ProjectSettingsCopyWith<ProjectSettings> get copyWith =>
       throw _privateConstructorUsedError;
@@ -412,7 +295,7 @@ abstract class $ProjectSettingsCopyWith<$Res> {
   factory $ProjectSettingsCopyWith(
           ProjectSettings value, $Res Function(ProjectSettings) then) =
       _$ProjectSettingsCopyWithImpl<$Res>;
-  $Res call({String id, String? localId});
+  $Res call({@Id() int oid, String id, String? localId});
 }
 
 /// @nodoc
@@ -426,10 +309,15 @@ class _$ProjectSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? localId = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -449,7 +337,7 @@ abstract class _$$_ProjectSettingsCopyWith<$Res>
           _$_ProjectSettings value, $Res Function(_$_ProjectSettings) then) =
       __$$_ProjectSettingsCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String? localId});
+  $Res call({@Id() int oid, String id, String? localId});
 }
 
 /// @nodoc
@@ -465,10 +353,15 @@ class __$$_ProjectSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? localId = freezed,
   }) {
     return _then(_$_ProjectSettings(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -482,64 +375,50 @@ class __$$_ProjectSettingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: ProjectSettings)
 class _$_ProjectSettings extends _ProjectSettings {
-  const _$_ProjectSettings({required this.id, this.localId}) : super._();
-
-  factory _$_ProjectSettings.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectSettingsFromJson(json);
+  _$_ProjectSettings({@Id() this.oid = 0, required this.id, this.localId})
+      : super._();
 
   @override
-  final String id;
+  @JsonKey()
+  @Id()
+  int oid;
   @override
-  final String? localId;
+  String id;
+  @override
+  String? localId;
 
   @override
   String toString() {
-    return 'ProjectSettings(id: $id, localId: $localId)';
+    return 'ProjectSettings(oid: $oid, id: $id, localId: $localId)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ProjectSettings &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.localId, localId));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(localId));
 
   @JsonKey(ignore: true)
   @override
   _$$_ProjectSettingsCopyWith<_$_ProjectSettings> get copyWith =>
       __$$_ProjectSettingsCopyWithImpl<_$_ProjectSettings>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ProjectSettingsToJson(
-      this,
-    );
-  }
 }
 
 abstract class _ProjectSettings extends ProjectSettings {
-  const factory _ProjectSettings(
-      {required final String id, final String? localId}) = _$_ProjectSettings;
-  const _ProjectSettings._() : super._();
+  factory _ProjectSettings(
+      {@Id() int oid,
+      required String id,
+      String? localId}) = _$_ProjectSettings;
+  _ProjectSettings._() : super._();
 
-  factory _ProjectSettings.fromJson(Map<String, dynamic> json) =
-      _$_ProjectSettings.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
+  set id(String value);
   @override
   String? get localId;
+  set localId(String? value);
   @override
   @JsonKey(ignore: true)
   _$$_ProjectSettingsCopyWith<_$_ProjectSettings> get copyWith =>

@@ -14,24 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Task _$TaskFromJson(Map<String, dynamic> json) {
-  return _Task.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Task {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   String get taskName => throw _privateConstructorUsedError;
-  String get creatorId => throw _privateConstructorUsedError;
-  String get projectId => throw _privateConstructorUsedError;
-  List<String> get assignesId => throw _privateConstructorUsedError;
-  TaskStatus get status => throw _privateConstructorUsedError;
-  String get taskDetailsId => throw _privateConstructorUsedError;
+  set taskName(String value) => throw _privateConstructorUsedError;
+  ToOne<User> get creatorId => throw _privateConstructorUsedError;
+  set creatorId(ToOne<User> value) => throw _privateConstructorUsedError;
+  ToOne<Project> get projectId => throw _privateConstructorUsedError;
+  set projectId(ToOne<Project> value) => throw _privateConstructorUsedError;
+  ToOne<TaskDetails> get taskDetailsId => throw _privateConstructorUsedError;
+  set taskDetailsId(ToOne<TaskDetails> value) =>
+      throw _privateConstructorUsedError;
+  ToMany<User> get assignesId => throw _privateConstructorUsedError;
+  set assignesId(ToMany<User> value) => throw _privateConstructorUsedError;
+  ToMany<Task> get subTasks => throw _privateConstructorUsedError;
+  set subTasks(ToMany<Task> value) => throw _privateConstructorUsedError;
+  ToOne<TaskStatus> get status => throw _privateConstructorUsedError;
+  set status(ToOne<TaskStatus> value) => throw _privateConstructorUsedError;
   String get taskDetailsHash => throw _privateConstructorUsedError;
-  List<Task> get subTasks => throw _privateConstructorUsedError;
-  Map<String, dynamic> get attributes => throw _privateConstructorUsedError;
+  set taskDetailsHash(String value) => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
 }
@@ -41,18 +49,16 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String taskName,
-      String creatorId,
-      String projectId,
-      List<String> assignesId,
-      TaskStatus status,
-      String taskDetailsId,
-      String taskDetailsHash,
-      List<Task> subTasks,
-      Map<String, dynamic> attributes});
-
-  $TaskStatusCopyWith<$Res> get status;
+      ToOne<User> creatorId,
+      ToOne<Project> projectId,
+      ToOne<TaskDetails> taskDetailsId,
+      ToMany<User> assignesId,
+      ToMany<Task> subTasks,
+      ToOne<TaskStatus> status,
+      String taskDetailsHash});
 }
 
 /// @nodoc
@@ -65,18 +71,22 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? taskName = freezed,
     Object? creatorId = freezed,
     Object? projectId = freezed,
-    Object? assignesId = freezed,
-    Object? status = freezed,
     Object? taskDetailsId = freezed,
-    Object? taskDetailsHash = freezed,
+    Object? assignesId = freezed,
     Object? subTasks = freezed,
-    Object? attributes = freezed,
+    Object? status = freezed,
+    Object? taskDetailsHash = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -88,43 +98,32 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
       creatorId: creatorId == freezed
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<User>,
       projectId: projectId == freezed
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
-              as String,
-      assignesId: assignesId == freezed
-          ? _value.assignesId
-          : assignesId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as TaskStatus,
+              as ToOne<Project>,
       taskDetailsId: taskDetailsId == freezed
           ? _value.taskDetailsId
           : taskDetailsId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<TaskDetails>,
+      assignesId: assignesId == freezed
+          ? _value.assignesId
+          : assignesId // ignore: cast_nullable_to_non_nullable
+              as ToMany<User>,
+      subTasks: subTasks == freezed
+          ? _value.subTasks
+          : subTasks // ignore: cast_nullable_to_non_nullable
+              as ToMany<Task>,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ToOne<TaskStatus>,
       taskDetailsHash: taskDetailsHash == freezed
           ? _value.taskDetailsHash
           : taskDetailsHash // ignore: cast_nullable_to_non_nullable
               as String,
-      subTasks: subTasks == freezed
-          ? _value.subTasks
-          : subTasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
-      attributes: attributes == freezed
-          ? _value.attributes
-          : attributes // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
     ));
-  }
-
-  @override
-  $TaskStatusCopyWith<$Res> get status {
-    return $TaskStatusCopyWith<$Res>(_value.status, (value) {
-      return _then(_value.copyWith(status: value));
-    });
   }
 }
 
@@ -134,19 +133,16 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$_TaskCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String taskName,
-      String creatorId,
-      String projectId,
-      List<String> assignesId,
-      TaskStatus status,
-      String taskDetailsId,
-      String taskDetailsHash,
-      List<Task> subTasks,
-      Map<String, dynamic> attributes});
-
-  @override
-  $TaskStatusCopyWith<$Res> get status;
+      ToOne<User> creatorId,
+      ToOne<Project> projectId,
+      ToOne<TaskDetails> taskDetailsId,
+      ToMany<User> assignesId,
+      ToMany<Task> subTasks,
+      ToOne<TaskStatus> status,
+      String taskDetailsHash});
 }
 
 /// @nodoc
@@ -160,18 +156,22 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? taskName = freezed,
     Object? creatorId = freezed,
     Object? projectId = freezed,
-    Object? assignesId = freezed,
-    Object? status = freezed,
     Object? taskDetailsId = freezed,
-    Object? taskDetailsHash = freezed,
+    Object? assignesId = freezed,
     Object? subTasks = freezed,
-    Object? attributes = freezed,
+    Object? status = freezed,
+    Object? taskDetailsHash = freezed,
   }) {
     return _then(_$_Task(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -183,191 +183,133 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
       creatorId: creatorId == freezed
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<User>,
       projectId: projectId == freezed
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
-              as String,
-      assignesId: assignesId == freezed
-          ? _value._assignesId
-          : assignesId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as TaskStatus,
+              as ToOne<Project>,
       taskDetailsId: taskDetailsId == freezed
           ? _value.taskDetailsId
           : taskDetailsId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ToOne<TaskDetails>,
+      assignesId: assignesId == freezed
+          ? _value.assignesId
+          : assignesId // ignore: cast_nullable_to_non_nullable
+              as ToMany<User>,
+      subTasks: subTasks == freezed
+          ? _value.subTasks
+          : subTasks // ignore: cast_nullable_to_non_nullable
+              as ToMany<Task>,
+      status: status == freezed
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as ToOne<TaskStatus>,
       taskDetailsHash: taskDetailsHash == freezed
           ? _value.taskDetailsHash
           : taskDetailsHash // ignore: cast_nullable_to_non_nullable
               as String,
-      subTasks: subTasks == freezed
-          ? _value._subTasks
-          : subTasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
-      attributes: attributes == freezed
-          ? _value._attributes
-          : attributes // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: Task)
 class _$_Task extends _Task {
-  const _$_Task(
-      {required this.id,
+  _$_Task(
+      {@Id() this.oid = 0,
+      required this.id,
       required this.taskName,
       required this.creatorId,
       required this.projectId,
-      final List<String> assignesId = const [],
-      this.status = const TaskStatus.idea(),
-      this.taskDetailsId = "",
-      this.taskDetailsHash = "",
-      final List<Task> subTasks = const [],
-      final Map<String, dynamic> attributes = const {}})
-      : _assignesId = assignesId,
-        _subTasks = subTasks,
-        _attributes = attributes,
-        super._();
-
-  factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String taskName;
-  @override
-  final String creatorId;
-  @override
-  final String projectId;
-  final List<String> _assignesId;
-  @override
-  @JsonKey()
-  List<String> get assignesId {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_assignesId);
-  }
+      required this.taskDetailsId,
+      required this.assignesId,
+      required this.subTasks,
+      required this.status,
+      this.taskDetailsHash = ""})
+      : super._();
 
   @override
   @JsonKey()
-  final TaskStatus status;
+  @Id()
+  int oid;
+  @override
+  String id;
+  @override
+  String taskName;
+  @override
+  ToOne<User> creatorId;
+  @override
+  ToOne<Project> projectId;
+  @override
+  ToOne<TaskDetails> taskDetailsId;
+  @override
+  ToMany<User> assignesId;
+  @override
+  ToMany<Task> subTasks;
+  @override
+  ToOne<TaskStatus> status;
   @override
   @JsonKey()
-  final String taskDetailsId;
-  @override
-  @JsonKey()
-  final String taskDetailsHash;
-  final List<Task> _subTasks;
-  @override
-  @JsonKey()
-  List<Task> get subTasks {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subTasks);
-  }
-
-  final Map<String, dynamic> _attributes;
-  @override
-  @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
+  String taskDetailsHash;
 
   @override
   String toString() {
-    return 'Task(id: $id, taskName: $taskName, creatorId: $creatorId, projectId: $projectId, assignesId: $assignesId, status: $status, taskDetailsId: $taskDetailsId, taskDetailsHash: $taskDetailsHash, subTasks: $subTasks, attributes: $attributes)';
+    return 'Task(oid: $oid, id: $id, taskName: $taskName, creatorId: $creatorId, projectId: $projectId, taskDetailsId: $taskDetailsId, assignesId: $assignesId, subTasks: $subTasks, status: $status, taskDetailsHash: $taskDetailsHash)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Task &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.taskName, taskName) &&
-            const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
-            const DeepCollectionEquality().equals(other.projectId, projectId) &&
-            const DeepCollectionEquality()
-                .equals(other._assignesId, _assignesId) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.taskDetailsId, taskDetailsId) &&
-            const DeepCollectionEquality()
-                .equals(other.taskDetailsHash, taskDetailsHash) &&
-            const DeepCollectionEquality().equals(other._subTasks, _subTasks) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(taskName),
-      const DeepCollectionEquality().hash(creatorId),
-      const DeepCollectionEquality().hash(projectId),
-      const DeepCollectionEquality().hash(_assignesId),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(taskDetailsId),
-      const DeepCollectionEquality().hash(taskDetailsHash),
-      const DeepCollectionEquality().hash(_subTasks),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
   _$$_TaskCopyWith<_$_Task> get copyWith =>
       __$$_TaskCopyWithImpl<_$_Task>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_TaskToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Task extends Task {
-  const factory _Task(
-      {required final String id,
-      required final String taskName,
-      required final String creatorId,
-      required final String projectId,
-      final List<String> assignesId,
-      final TaskStatus status,
-      final String taskDetailsId,
-      final String taskDetailsHash,
-      final List<Task> subTasks,
-      final Map<String, dynamic> attributes}) = _$_Task;
-  const _Task._() : super._();
+  factory _Task(
+      {@Id() int oid,
+      required String id,
+      required String taskName,
+      required ToOne<User> creatorId,
+      required ToOne<Project> projectId,
+      required ToOne<TaskDetails> taskDetailsId,
+      required ToMany<User> assignesId,
+      required ToMany<Task> subTasks,
+      required ToOne<TaskStatus> status,
+      String taskDetailsHash}) = _$_Task;
+  _Task._() : super._();
 
-  factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
+  set id(String value);
   @override
   String get taskName;
+  set taskName(String value);
   @override
-  String get creatorId;
+  ToOne<User> get creatorId;
+  set creatorId(ToOne<User> value);
   @override
-  String get projectId;
+  ToOne<Project> get projectId;
+  set projectId(ToOne<Project> value);
   @override
-  List<String> get assignesId;
+  ToOne<TaskDetails> get taskDetailsId;
+  set taskDetailsId(ToOne<TaskDetails> value);
   @override
-  TaskStatus get status;
+  ToMany<User> get assignesId;
+  set assignesId(ToMany<User> value);
   @override
-  String get taskDetailsId;
+  ToMany<Task> get subTasks;
+  set subTasks(ToMany<Task> value);
+  @override
+  ToOne<TaskStatus> get status;
+  set status(ToOne<TaskStatus> value);
   @override
   String get taskDetailsHash;
-  @override
-  List<Task> get subTasks;
-  @override
-  Map<String, dynamic> get attributes;
+  set taskDetailsHash(String value);
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;

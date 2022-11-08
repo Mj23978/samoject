@@ -1,3 +1,4 @@
+import 'package:samoject/objectbox.g.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../models/project/project.dart';
@@ -11,46 +12,49 @@ import '../../models/workspace/workspace.dart';
 Workspace myWorkspace = Workspace(
   id: Uuid().v4(),
   name: "Samoject Workspace",
-  projects: [samojectProj],
-  belongsTo: mj,
+  projects: ToMany(items: [samojectProj]),
+  belongsTo: ToOne(target:  mj),
 );
 
 ProjectSettings samojectSettings = ProjectSettings(id: Uuid().v4());
 String _projId = Uuid().v4();
 Project samojectProj = Project(
   id: _projId,
-  workspaceId: myWorkspace.id,
+  workspaceId: ToOne(target: myWorkspace),
   name: "Samoject Project",
-  settings: samojectSettings,
-  spaces: [mjBox, mjBoard, mjList],
-  tasks: allTasks.where((element) => element.projectId == _projId).toList(),
-  users: [mj, hoji, mobin, shahraki, moslem, morteza]
+  settings: ToOne(target: samojectSettings),
+  spaces: ToMany(items: [mjBox, mjBoard, mjList]),
+  tasks: ToMany(items: allTasks.where((element) => element.projectId == _projId).toList()),
+  users: ToMany(items:  [mj, hoji, mobin, shahraki, moslem, morteza]
       .map<User>(setUserData)
-      .toList(),
+      .toList()),
 );
 
 SpaceBox mjBoard = SpaceBox(
   id: Uuid().v4(),
   name: 'Board',
-  projectId: _projId,
-  settings: SpaceSettingsBox(),
-  view: SpaceViewBox(),
+  projectId: ToOne(target: samojectProj),
+  settings: ToOne(target: SpaceSettingsBox()),
+  view: ToOne(target: SpaceViewBox()),
+  subSpaces: ToMany(),
 );
 
 SpaceBox mjList = SpaceBox(
   id: Uuid().v4(),
   name: 'List',
-  projectId: _projId,
-  settings: SpaceSettingsBox(),
-  view: SpaceViewBox(),
+  projectId: ToOne(target: samojectProj),
+  settings: ToOne(target: SpaceSettingsBox()),
+  view: ToOne(target: SpaceViewBox()),
+  subSpaces: ToMany(),
 );
 
 SpaceBox mjBox = SpaceBox(
   id: Uuid().v4(),
   name: 'Box',
-  projectId: _projId,
-  settings: SpaceSettingsBox(),
-  view: SpaceViewBox(),
+  projectId: ToOne(target: samojectProj),
+  settings: ToOne(target: SpaceSettingsBox()),
+  view: ToOne(target: SpaceViewBox()),
+  subSpaces: ToMany(),
 );
 
 User mj = User(
@@ -60,6 +64,10 @@ User mj = User(
   lastName: 'Hosseini',
   roleName: "Developer",
   date: DateTime.now(),
+  assignedTasks: ToMany(),
+  comments: ToMany(),
+  createdTasks: ToMany(),
+  projects: ToMany(),  
 );
 User hoji = User(
   id: Uuid().v4(),
@@ -68,6 +76,10 @@ User hoji = User(
   lastName: 'Atai',
   roleName: "Developer",
   date: DateTime.now(),
+  assignedTasks: ToMany(),
+  comments: ToMany(),
+  createdTasks: ToMany(),
+  projects: ToMany(),  
 );
 User mobin = User(
   id: Uuid().v4(),
@@ -76,6 +88,10 @@ User mobin = User(
   lastName: "Monavari",
   roleName: "Developer",
   date: DateTime.now(),
+  assignedTasks: ToMany(),
+  comments: ToMany(),
+  createdTasks: ToMany(),
+  projects: ToMany(),  
 );
 User shahraki = User(
   id: Uuid().v4(),
@@ -84,6 +100,10 @@ User shahraki = User(
   lastName: 'Shahraki',
   roleName: "Developer",
   date: DateTime.now(),
+  assignedTasks: ToMany(),
+  comments: ToMany(),
+  createdTasks: ToMany(),
+  projects: ToMany(),  
 );
 User moslem = User(
   id: Uuid().v4(),
@@ -92,6 +112,10 @@ User moslem = User(
   lastName: 'Babae',
   roleName: "Project Owner",
   date: DateTime.now(),
+  assignedTasks: ToMany(),
+  comments: ToMany(),
+  createdTasks: ToMany(),
+  projects: ToMany(),  
 );
 User morteza = User(
   id: Uuid().v4(),
@@ -100,437 +124,480 @@ User morteza = User(
   lastName: 'Atai',
   roleName: "Developer",
   date: DateTime.now(),
+  assignedTasks: ToMany(),
+  comments: ToMany(),
+  createdTasks: ToMany(),
+  projects: ToMany(),  
 );
 
 TaskDetails taskDetails1 = TaskDetails(id: Uuid().v4(), hash: 'hash');
 
 Task task1 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Recurring task: this task will restart when closed",
-  status: TaskStatus.todo(),
-  taskDetailsId: taskDetails1.id,
-  assignesId: [mj.id],
-  creatorId: moslem.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  taskDetailsId: ToOne(target: taskDetails1),
+  assignesId: ToMany(items: [mj]),
+  creatorId: ToOne(target: moslem),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task2 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Hello, assigned comments",
-  status: TaskStatus.todo(),
-  assignesId: [moslem.id, hoji.id],
-  creatorId: mj.id,
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  assignesId: ToMany(items: [moslem, hoji]),
+  creatorId: ToOne(target: mj),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task3 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "This task is Complete",
-  status: TaskStatus.complete(),
-  assignesId: [hoji.id, mj.id],
-  creatorId: shahraki.id,
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  assignesId: ToMany(items: [hoji, mj]),
+  creatorId: ToOne(target: shahraki),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task4 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Linking tasks with other tasks",
-  status: TaskStatus.inProgress(),
-  creatorId: mobin.id,
-  assignesId: [morteza.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.inProgress()),
+  creatorId: ToOne(target: mobin),
+  assignesId: ToMany(items: [morteza]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task5 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Smokes Ciggs",
-  status: TaskStatus.inProgress(),
-  creatorId: moslem.id,
-  assignesId: [],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.inProgress()),
+  creatorId: ToOne(target: moslem),
+  assignesId: ToMany(items: []),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task6 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Bieng Old Friends",
-  status: TaskStatus.complete(),
-  creatorId: shahraki.id,
-  assignesId: [mobin.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: shahraki),
+  assignesId: ToMany(items: [mobin]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task7 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Named Soton Gang",
-  status: TaskStatus.complete(),
-  creatorId: mj.id,
-  assignesId: [shahraki.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: mj),
+  assignesId: ToMany(items: [shahraki]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task8 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Multitask Toolbar: Magicly Manage Task",
-  status: TaskStatus.todo(),
-  creatorId: mj.id,
-  assignesId: [morteza.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: mj),
+  assignesId: ToMany(items: [morteza]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task9 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Having same family name",
-  status: TaskStatus.complete(),
-  creatorId: hoji.id,
-  assignesId: [morteza.id, hoji.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [morteza, hoji]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task10 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "View All tasks in one view",
-  status: TaskStatus.todo(),
-  creatorId: hoji.id,
-  assignesId: [morteza.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [morteza]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task11 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Check out these checklists!",
-  status: TaskStatus.planned(),
-  creatorId: mobin.id,
-  assignesId: [mj.id, moslem.id, hoji.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.planned()),
+  creatorId: ToOne(target: mobin),
+  assignesId: ToMany(items: [mj, moslem, hoji]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task12 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Sort and Filter your tasks",
-  status: TaskStatus.starting(),
-  creatorId: moslem.id,
-  assignesId: [mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.starting()),
+  creatorId: ToOne(target: moslem),
+  assignesId: ToMany(items: [mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task13 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Add awesome integrations in samoject",
-  status: TaskStatus.todo(),
-  creatorId: shahraki.id,
-  assignesId: [mobin.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: shahraki),
+  assignesId: ToMany(items: [mobin]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task14 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Look at bottom of your screen! This task is in your Task Tray",
-  status: TaskStatus.todo(),
-  creatorId: hoji.id,
-  assignesId: [mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task15 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Mobile Time Tracking",
-  status: TaskStatus.planned(),
-  creatorId: morteza.id,
-  assignesId: [moslem.id, mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.planned()),
+  creatorId: ToOne(target: morteza),
+  assignesId: ToMany(items: [moslem, mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task16 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Mind Maps",
-  status: TaskStatus.planned(),
-  creatorId: morteza.id,
-  assignesId: [morteza.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.planned()),
+  creatorId: ToOne(target: morteza),
+  assignesId: ToMany(items: [morteza]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task17 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Modal issue",
-  status: TaskStatus.inProgress(),
-  creatorId: hoji.id,
-  assignesId: [hoji.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.inProgress()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [hoji]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task18 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Discord Integration",
-  status: TaskStatus.todo(),
-  creatorId: mj.id,
-  assignesId: [morteza.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: mj),
+  assignesId: ToMany(items: [morteza]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task19 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Improve Search",
-  status: TaskStatus.underReview(),
-  creatorId: mobin.id,
-  assignesId: [mobin.id, shahraki.id, mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.underReview()),
+  creatorId: ToOne(target: mobin),
+  assignesId: ToMany(items: [mobin, shahraki, mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task20 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Fix Sidebar issue",
-  status: TaskStatus.inProgress(),
-  creatorId: mj.id,
-  assignesId: [mobin.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.inProgress()),
+  creatorId: ToOne(target: mj),
+  assignesId: ToMany(items: [mobin]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task21 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Add Resource Management",
-  status: TaskStatus.inProgress(),
-  creatorId: morteza.id,
-  assignesId: [hoji.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.inProgress()),
+  creatorId: ToOne(target: morteza),
+  assignesId: ToMany(items: [hoji]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task22 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Create Docs and Dashboards Sections",
-  status: TaskStatus.todo(),
-  creatorId: mobin.id,
-  assignesId: [hoji.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: mobin),
+  assignesId: ToMany(items: [hoji]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task23 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Add Chat Capablities",
-  status: TaskStatus.idea(),
-  creatorId: hoji.id,
-  assignesId: [shahraki.id, mobin.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.idea()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [shahraki, mobin]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task24 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Overhauled API",
-  status: TaskStatus.starting(),
-  creatorId: mj.id,
-  assignesId: [shahraki.id, moslem.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.starting()),
+  creatorId: ToOne(target: mj),
+  assignesId: ToMany(items: [shahraki, moslem]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task25 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Translations and Localizations",
-  status: TaskStatus.complete(),
-  creatorId: shahraki.id,
-  assignesId: [mobin.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: shahraki),
+  assignesId: ToMany(items: [mobin]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task26 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Make responsive Views for all platforms",
-  status: TaskStatus.complete(),
-  creatorId: moslem.id,
-  assignesId: [mobin.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: moslem),
+  assignesId: ToMany(items: [mobin]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task27 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Firefox Integration Extension",
-  status: TaskStatus.todo(),
-  creatorId: hoji.id,
-  assignesId: [shahraki.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [shahraki]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task28 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Templates Marketplace",
-  status: TaskStatus.idea(),
-  creatorId: morteza.id,
-  assignesId: [shahraki.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.idea()),
+  creatorId: ToOne(target: morteza),
+  assignesId: ToMany(items: [shahraki]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task29 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Mobile Inbox",
-  status: TaskStatus.planned(),
-  creatorId: moslem.id,
-  assignesId: [mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.planned()),
+  creatorId: ToOne(target: moslem),
+  assignesId: ToMany(items: [mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task30 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "App Marketplace",
-  status: TaskStatus.idea(),
-  creatorId: hoji.id,
-  assignesId: [moslem.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.idea()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [moslem]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task31 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Automation",
-  status: TaskStatus.starting(),
-  creatorId: mj.id,
-  assignesId: [mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.starting()),
+  creatorId: ToOne(target: mj),
+  assignesId: ToMany(items: [mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task32 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Github & Gitlab Integration",
-  status: TaskStatus.todo(),
-  creatorId: mobin.id,
-  assignesId: [morteza.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: mobin),
+  assignesId: ToMany(items: [morteza]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task33 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Ride to Drink Creamlin !!",
-  status: TaskStatus.complete(),
-  creatorId: mobin.id,
-  assignesId: [mj.id, shahraki.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: mobin),
+  assignesId: ToMany(items: [mj, shahraki]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task34 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Put Kazemi in his own Gooni :)",
-  status: TaskStatus.todo(),
-  creatorId: moslem.id,
-  assignesId: [mj.id, shahraki.id, hoji.id, mobin.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.todo()),
+  creatorId: ToOne(target: moslem),
+  assignesId: ToMany(items: [mj, shahraki, hoji, mobin]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task35 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Design Profiling",
-  status: TaskStatus.planned(),
-  creatorId: mj.id,
-  assignesId: [hoji.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.planned()),
+  creatorId: ToOne(target: mj),
+  assignesId: ToMany(items: [hoji]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task36 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "ML Tools",
-  status: TaskStatus.idea(),
-  creatorId: hoji.id,
-  assignesId: [mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.idea()),
+  creatorId: ToOne(target: hoji),
+  assignesId: ToMany(items: [mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task37 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Create Box View",
-  status: TaskStatus.complete(),
-  creatorId: moslem.id,
-  assignesId: [mj.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: moslem),
+  assignesId: ToMany(items: [mj]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task38 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Add Charts to Box View",
-  status: TaskStatus.complete(),
-  creatorId: mobin.id,
-  assignesId: [shahraki.id, morteza.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: mobin),
+  assignesId: ToMany(items: [shahraki, morteza]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 Task task39 = Task(
-  projectId: _projId,
+  projectId: ToOne(target: samojectProj),
   id: Uuid().v4(),
   taskName: "Create Sample Data",
-  status: TaskStatus.complete(),
-  creatorId: morteza.id,
-  assignesId: [moslem.id],
-  taskDetailsId: taskDetails1.id,
+  status: ToOne(target:  TaskStatus.complete()),
+  creatorId: ToOne(target: morteza),
+  assignesId: ToMany(items: [moslem]),
+  taskDetailsId: ToOne(target: taskDetails1),
   taskDetailsHash: taskDetails1.hash,
+  subTasks: ToMany(),
 );
 
 final List<Task> allTasks = [
@@ -577,13 +644,13 @@ final List<Task> allTasks = [
 
 User setUserData(User user) {
   final createdTasks = allTasks.where((element) {
-    return element.creatorId == user.id;
+    return element.creatorId.targetId == user.oid;
   }).toList();
   final assignedTasks =
-      allTasks.where((value) => value.assignesId.contains(user.id)).toList();
-  return user.copyWith(
-    createdTasks: createdTasks,
-    assignedTasks: assignedTasks,
-    // projects: [samojectProj],
-  );
+      allTasks.where((value) => value.assignesId.any((us) => user.oid == us.oid)).toList();
+  user.createdTasks.addAll(createdTasks);
+  user.createdTasks.applyToDb();
+  user.assignedTasks.addAll(assignedTasks);
+  user.assignedTasks.applyToDb();
+  return user;
 }

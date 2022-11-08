@@ -1,4 +1,3 @@
-import 'package:avatars/avatars.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -55,7 +54,12 @@ class BoxViewCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final space = ref.watch(spaceProvider);
-
+    final taskSections = space.tiles[index].tasks
+                .map((k, v) =>
+                    MapEntry(k, TaskSection(status: k, tasks: v, statusColor: k.toTaskStatusColor())))
+                .values
+                .toList();
+    taskSections.sort(((a, b) => space.sortStatus(a.status).compareTo(space.sortStatus(b.status))));
     return Container(
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(4)),
@@ -137,7 +141,7 @@ class BoxViewCard extends HookConsumerWidget {
                   .map((k, v) => MapEntry(
                       k,
                       IndicatorData(
-                          v.length / space.tiles[index].allTasks, k.color,
+                          v.length / space.tiles[index].allTasks, k.toTaskStatusColor(),
                           sortIndex: space.sortStatus(k))))
                   .values
                   .toList(),
@@ -145,11 +149,7 @@ class BoxViewCard extends HookConsumerWidget {
             SizedBox(
               height: 12,
             ),
-            ...space.tiles[index].tasks
-                .map((k, v) =>
-                    MapEntry(k, createExpandable(status: k, tasks: v)))
-                .values
-                .toList(),
+            ...taskSections,
           ],
         ),
       ),
@@ -234,9 +234,17 @@ class BoxViewCardHeader extends StatelessWidget {
   }
 }
 
-Widget createExpandable(
-    {required List<Task> tasks, required TaskStatus status}) {
-  return ExpandableNotifier(
+class TaskSection extends StatelessWidget {
+
+  final String status;
+final  List<Task> tasks;
+final Color statusColor;
+  const TaskSection({required this.tasks, required this.status, required this.statusColor,Key? key,}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return 
+ExpandableNotifier(
     child: Column(
       children: [
         Expandable(
@@ -251,12 +259,12 @@ Widget createExpandable(
                     width: 12,
                     height: 12,
                     decoration: BoxDecoration(
-                        color: status.color,
+                        color: statusColor,
                         borderRadius: BorderRadius.circular(2)),
                   ),
                   SizedBox(width: 8),
                   Text(
-                    status.name,
+                    status,
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -282,12 +290,12 @@ Widget createExpandable(
                         width: 12,
                         height: 12,
                         decoration: BoxDecoration(
-                            color: status.color,
+                            color: statusColor,
                             borderRadius: BorderRadius.circular(2)),
                       ),
                       SizedBox(width: 8),
                       Text(
-                        status.name,
+                        status,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
@@ -297,22 +305,23 @@ Widget createExpandable(
                   ),
                 ),
               ),
-              for (var task in tasks) BoxTileTask(task: task, status: status),
+              for (var task in tasks) BoxTileTask(task: task, statusColor: statusColor),
             ],
           ),
         ),
       ],
     ),
   );
-}
+}}
+
 
 class BoxTileTask extends StatelessWidget {
   final Task task;
-  final TaskStatus status;
+  final Color statusColor;
 
   const BoxTileTask({
     required this.task,
-    required this.status,
+    required this.statusColor,
     Key? key,
   }) : super(key: key);
 
@@ -341,7 +350,7 @@ class BoxTileTask extends StatelessWidget {
               animationKey: Key(task.id),
               tooltipController: JustTheController(),
               content: Container(),
-              color: status.color,
+              color: statusColor,
             ),
             Text(
               task.taskName,
@@ -476,7 +485,7 @@ class TaskTile extends HookConsumerWidget {
                         TaskStatus.complete(),
                       ].map<Widget>((e) {
                         return BoxViewChangeStatusTooltipItem(
-                          color: e.color,
+                          color: Color(e.color),
                           name: e.name,
                         );
                       }).toList(),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../models/comment/comment.dart';
@@ -23,7 +21,7 @@ class CommentsStore {
 
   Future<bool> addComment(Comment comment) async {
     if (box.get("${comment.chatId}.${comment.id}") == null) {
-      box.put("${comment.chatId}.${comment.id}", jsonEncode(comment.toJson()));
+      // box.put("${comment.chatId}.${comment.id}", jsonEncode(comment.toJson()));
     }
     return true;
   }

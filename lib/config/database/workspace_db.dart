@@ -46,15 +46,15 @@ class WorkspacesStore {
 
   Future<bool> _add(String id, Workspace workspace) async {
     for (var proj in workspace.projects) {
-      if (workspace.projectIds.contains(proj.id)) {
+      // if (workspace.projectIds.contains(proj.id)) {
+      //   _projectsStore.addProject(proj);
+      // } else {
         _projectsStore.addProject(proj);
-      } else {
-        _projectsStore.addProject(proj);
-        workspace.projectIds.add(proj.id);
-      }
+        // workspace.projectIds.add(proj.id);
+      // }
     }
     workspace.projects.clear();
-    box.put(id, jsonEncode(workspace.toJson()));
+    // box.put(id, jsonEncode(workspace.toJson()));
     return true;
   }
 
@@ -63,14 +63,14 @@ class WorkspacesStore {
     if (res == null) {
       return null;
     }
-    final workspace = Workspace.fromJson(jsonDecode(res));
-    for (var pId in workspace.projectIds) {
-      final project = await _projectsStore.getProject("${workspace.id}.$pId");
-      if (project != null) {
-        workspace.projects.add(project);
-      }
-    }
-    return workspace;
+    // final workspace = Workspace.fromJson(jsonDecode(res));
+    // for (var pId in workspace.projectIds) {
+    //   final project = await _projectsStore.getProject("${workspace.id}.$pId");
+    //   if (project != null) {
+    //     workspace.projects.add(project);
+    //   }
+    // }
+    // return workspace;
   }
 
   Future<Workspace?> getMainWorkspace() async {

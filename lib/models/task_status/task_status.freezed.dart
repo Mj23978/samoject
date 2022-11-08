@@ -14,165 +14,101 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TaskStatus _$TaskStatusFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'default':
-      return _TaskStatus.fromJson(json);
-    case 'complete':
-      return Complete.fromJson(json);
-    case 'todo':
-      return TODO.fromJson(json);
-    case 'idea':
-      return IDEA.fromJson(json);
-    case 'underReview':
-      return UnderReview.fromJson(json);
-    case 'starting':
-      return Starting.fromJson(json);
-    case 'planned':
-      return Planned.fromJson(json);
-    case 'inProgress':
-      return InProgress.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'TaskStatus',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$TaskStatus {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
+  @Property()
+  int get color => throw _privateConstructorUsedError;
+  @Property()
+  set color(int value) => throw _privateConstructorUsedError;
   Map<String, dynamic> get attributes => throw _privateConstructorUsedError;
+  set attributes(Map<String, dynamic> value) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
@@ -215,7 +151,7 @@ mixin _$TaskStatus {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $TaskStatusCopyWith<TaskStatus> get copyWith =>
       throw _privateConstructorUsedError;
@@ -227,8 +163,9 @@ abstract class $TaskStatusCopyWith<$Res> {
           TaskStatus value, $Res Function(TaskStatus) then) =
       _$TaskStatusCopyWithImpl<$Res>;
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+      {@Id() int oid,
+      String name,
+      @Property() int color,
       Map<String, dynamic> attributes});
 }
 
@@ -242,11 +179,16 @@ class _$TaskStatusCopyWithImpl<$Res> implements $TaskStatusCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -254,7 +196,7 @@ class _$TaskStatusCopyWithImpl<$Res> implements $TaskStatusCopyWith<$Res> {
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
@@ -271,8 +213,9 @@ abstract class _$$_TaskStatusCopyWith<$Res>
       __$$_TaskStatusCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+      {@Id() int oid,
+      String name,
+      @Property() int color,
       Map<String, dynamic> attributes});
 }
 
@@ -288,11 +231,16 @@ class __$$_TaskStatusCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$_TaskStatus(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -300,9 +248,9 @@ class __$$_TaskStatusCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -310,60 +258,33 @@ class __$$_TaskStatusCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: TaskStatus)
 class _$_TaskStatus extends _TaskStatus {
-  const _$_TaskStatus(
-      {required this.name,
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          required this.color,
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'default',
-        super._();
+  _$_TaskStatus(
+      {@Id() this.oid = 0,
+      required this.name,
+      @Property() required this.color,
+      this.attributes = const {}})
+      : super._();
 
-  factory _$_TaskStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_TaskStatusFromJson(json);
-
-  @override
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  @Id()
+  int oid;
+  @override
+  String name;
+  @override
+  @Property()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_TaskStatus &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -373,144 +294,96 @@ class _$_TaskStatus extends _TaskStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return $default(name, color, attributes);
+    return $default(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return $default?.call(name, color, attributes);
+    return $default?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(name, color, attributes);
+      return $default(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -563,33 +436,32 @@ class _$_TaskStatus extends _TaskStatus {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_TaskStatusToJson(
-      this,
-    );
-  }
 }
 
 abstract class _TaskStatus extends TaskStatus {
-  const factory _TaskStatus(
-      {required final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          required final Color color,
-      final Map<String, dynamic> attributes}) = _$_TaskStatus;
-  const _TaskStatus._() : super._();
+  factory _TaskStatus(
+      {@Id() int oid,
+      required String name,
+      @Property() required int color,
+      Map<String, dynamic> attributes}) = _$_TaskStatus;
+  _TaskStatus._() : super._();
 
-  factory _TaskStatus.fromJson(Map<String, dynamic> json) =
-      _$_TaskStatus.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  @Property()
+  int get color;
+  @Property()
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$_TaskStatusCopyWith<_$_TaskStatus> get copyWith =>
@@ -603,9 +475,7 @@ abstract class _$$CompleteCopyWith<$Res> implements $TaskStatusCopyWith<$Res> {
       __$$CompleteCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
-      Map<String, dynamic> attributes});
+      {@Id() int oid, String name, int color, Map<String, dynamic> attributes});
 }
 
 /// @nodoc
@@ -619,11 +489,16 @@ class __$$CompleteCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$Complete(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -631,9 +506,9 @@ class __$$CompleteCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -641,61 +516,33 @@ class __$$CompleteCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$Complete extends Complete {
-  const _$Complete(
-      {this.name = 'Complete',
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = Colors.lightGreen,
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'complete',
-        super._();
-
-  factory _$Complete.fromJson(Map<String, dynamic> json) =>
-      _$$CompleteFromJson(json);
+  _$Complete(
+      {@Id() this.oid = 0,
+      this.name = 'Complete',
+      this.color = 0xff8bc34a,
+      this.attributes = const {}})
+      : super._();
 
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
+  @Id()
+  int oid;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  String name;
+  @override
+  @JsonKey()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus.complete(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus.complete(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Complete &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -705,144 +552,96 @@ class _$Complete extends Complete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return complete(name, color, attributes);
+    return complete(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return complete?.call(name, color, attributes);
+    return complete?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if (complete != null) {
-      return complete(name, color, attributes);
+      return complete(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -895,31 +694,30 @@ class _$Complete extends Complete {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CompleteToJson(
-      this,
-    );
-  }
 }
 
 abstract class Complete extends TaskStatus {
-  const factory Complete(
-      {final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) final Color color,
-      final Map<String, dynamic> attributes}) = _$Complete;
-  const Complete._() : super._();
+  factory Complete(
+      {@Id() int oid,
+      String name,
+      int color,
+      Map<String, dynamic> attributes}) = _$Complete;
+  Complete._() : super._();
 
-  factory Complete.fromJson(Map<String, dynamic> json) = _$Complete.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  int get color;
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$CompleteCopyWith<_$Complete> get copyWith =>
@@ -932,9 +730,7 @@ abstract class _$$TODOCopyWith<$Res> implements $TaskStatusCopyWith<$Res> {
       __$$TODOCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
-      Map<String, dynamic> attributes});
+      {@Id() int oid, String name, int color, Map<String, dynamic> attributes});
 }
 
 /// @nodoc
@@ -948,11 +744,16 @@ class __$$TODOCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$TODO(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -960,9 +761,9 @@ class __$$TODOCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -970,60 +771,33 @@ class __$$TODOCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$TODO extends TODO {
-  const _$TODO(
-      {this.name = 'Todo',
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = const Color.fromARGB(255, 252, 232, 54),
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'todo',
-        super._();
-
-  factory _$TODO.fromJson(Map<String, dynamic> json) => _$$TODOFromJson(json);
+  _$TODO(
+      {@Id() this.oid = 0,
+      this.name = 'Todo',
+      this.color = 0xffffca28,
+      this.attributes = const {}})
+      : super._();
 
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
+  @Id()
+  int oid;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  String name;
+  @override
+  @JsonKey()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus.todo(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus.todo(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TODO &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -1033,144 +807,96 @@ class _$TODO extends TODO {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return todo(name, color, attributes);
+    return todo(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return todo?.call(name, color, attributes);
+    return todo?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if (todo != null) {
-      return todo(name, color, attributes);
+      return todo(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -1223,31 +949,30 @@ class _$TODO extends TODO {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TODOToJson(
-      this,
-    );
-  }
 }
 
 abstract class TODO extends TaskStatus {
-  const factory TODO(
-      {final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) final Color color,
-      final Map<String, dynamic> attributes}) = _$TODO;
-  const TODO._() : super._();
+  factory TODO(
+      {@Id() int oid,
+      String name,
+      int color,
+      Map<String, dynamic> attributes}) = _$TODO;
+  TODO._() : super._();
 
-  factory TODO.fromJson(Map<String, dynamic> json) = _$TODO.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  int get color;
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$TODOCopyWith<_$TODO> get copyWith => throw _privateConstructorUsedError;
@@ -1259,9 +984,7 @@ abstract class _$$IDEACopyWith<$Res> implements $TaskStatusCopyWith<$Res> {
       __$$IDEACopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
-      Map<String, dynamic> attributes});
+      {@Id() int oid, String name, int color, Map<String, dynamic> attributes});
 }
 
 /// @nodoc
@@ -1275,11 +998,16 @@ class __$$IDEACopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$IDEA(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1287,9 +1015,9 @@ class __$$IDEACopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -1297,60 +1025,33 @@ class __$$IDEACopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$IDEA extends IDEA {
-  const _$IDEA(
-      {this.name = 'Idea',
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = Colors.grey,
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'idea',
-        super._();
-
-  factory _$IDEA.fromJson(Map<String, dynamic> json) => _$$IDEAFromJson(json);
+  _$IDEA(
+      {@Id() this.oid = 0,
+      this.name = 'Idea',
+      this.color = 0xff9e9e9e,
+      this.attributes = const {}})
+      : super._();
 
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
+  @Id()
+  int oid;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  String name;
+  @override
+  @JsonKey()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus.idea(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus.idea(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$IDEA &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -1360,144 +1061,96 @@ class _$IDEA extends IDEA {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return idea(name, color, attributes);
+    return idea(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return idea?.call(name, color, attributes);
+    return idea?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if (idea != null) {
-      return idea(name, color, attributes);
+      return idea(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -1550,31 +1203,30 @@ class _$IDEA extends IDEA {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$IDEAToJson(
-      this,
-    );
-  }
 }
 
 abstract class IDEA extends TaskStatus {
-  const factory IDEA(
-      {final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) final Color color,
-      final Map<String, dynamic> attributes}) = _$IDEA;
-  const IDEA._() : super._();
+  factory IDEA(
+      {@Id() int oid,
+      String name,
+      int color,
+      Map<String, dynamic> attributes}) = _$IDEA;
+  IDEA._() : super._();
 
-  factory IDEA.fromJson(Map<String, dynamic> json) = _$IDEA.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  int get color;
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$IDEACopyWith<_$IDEA> get copyWith => throw _privateConstructorUsedError;
@@ -1588,9 +1240,7 @@ abstract class _$$UnderReviewCopyWith<$Res>
       __$$UnderReviewCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
-      Map<String, dynamic> attributes});
+      {@Id() int oid, String name, int color, Map<String, dynamic> attributes});
 }
 
 /// @nodoc
@@ -1605,11 +1255,16 @@ class __$$UnderReviewCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$UnderReview(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1617,9 +1272,9 @@ class __$$UnderReviewCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -1627,61 +1282,33 @@ class __$$UnderReviewCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$UnderReview extends UnderReview {
-  const _$UnderReview(
-      {this.name = 'Under Review',
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = const Color(0xffffb74d),
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'underReview',
-        super._();
-
-  factory _$UnderReview.fromJson(Map<String, dynamic> json) =>
-      _$$UnderReviewFromJson(json);
+  _$UnderReview(
+      {@Id() this.oid = 0,
+      this.name = 'Under Review',
+      this.color = 0xffffb74d,
+      this.attributes = const {}})
+      : super._();
 
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
+  @Id()
+  int oid;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  String name;
+  @override
+  @JsonKey()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus.underReview(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus.underReview(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UnderReview &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -1691,144 +1318,96 @@ class _$UnderReview extends UnderReview {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return underReview(name, color, attributes);
+    return underReview(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return underReview?.call(name, color, attributes);
+    return underReview?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if (underReview != null) {
-      return underReview(name, color, attributes);
+      return underReview(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -1881,32 +1460,30 @@ class _$UnderReview extends UnderReview {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UnderReviewToJson(
-      this,
-    );
-  }
 }
 
 abstract class UnderReview extends TaskStatus {
-  const factory UnderReview(
-      {final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) final Color color,
-      final Map<String, dynamic> attributes}) = _$UnderReview;
-  const UnderReview._() : super._();
+  factory UnderReview(
+      {@Id() int oid,
+      String name,
+      int color,
+      Map<String, dynamic> attributes}) = _$UnderReview;
+  UnderReview._() : super._();
 
-  factory UnderReview.fromJson(Map<String, dynamic> json) =
-      _$UnderReview.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  int get color;
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$UnderReviewCopyWith<_$UnderReview> get copyWith =>
@@ -1920,9 +1497,7 @@ abstract class _$$StartingCopyWith<$Res> implements $TaskStatusCopyWith<$Res> {
       __$$StartingCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
-      Map<String, dynamic> attributes});
+      {@Id() int oid, String name, int color, Map<String, dynamic> attributes});
 }
 
 /// @nodoc
@@ -1936,11 +1511,16 @@ class __$$StartingCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$Starting(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1948,9 +1528,9 @@ class __$$StartingCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -1958,61 +1538,33 @@ class __$$StartingCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$Starting extends Starting {
-  const _$Starting(
-      {this.name = 'Starting',
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = Colors.indigoAccent,
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'starting',
-        super._();
-
-  factory _$Starting.fromJson(Map<String, dynamic> json) =>
-      _$$StartingFromJson(json);
+  _$Starting(
+      {@Id() this.oid = 0,
+      this.name = 'Starting',
+      this.color = 0xff536dfe,
+      this.attributes = const {}})
+      : super._();
 
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
+  @Id()
+  int oid;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  String name;
+  @override
+  @JsonKey()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus.starting(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus.starting(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Starting &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -2022,144 +1574,96 @@ class _$Starting extends Starting {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return starting(name, color, attributes);
+    return starting(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return starting?.call(name, color, attributes);
+    return starting?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if (starting != null) {
-      return starting(name, color, attributes);
+      return starting(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -2212,31 +1716,30 @@ class _$Starting extends Starting {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$StartingToJson(
-      this,
-    );
-  }
 }
 
 abstract class Starting extends TaskStatus {
-  const factory Starting(
-      {final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) final Color color,
-      final Map<String, dynamic> attributes}) = _$Starting;
-  const Starting._() : super._();
+  factory Starting(
+      {@Id() int oid,
+      String name,
+      int color,
+      Map<String, dynamic> attributes}) = _$Starting;
+  Starting._() : super._();
 
-  factory Starting.fromJson(Map<String, dynamic> json) = _$Starting.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  int get color;
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$StartingCopyWith<_$Starting> get copyWith =>
@@ -2249,9 +1752,7 @@ abstract class _$$PlannedCopyWith<$Res> implements $TaskStatusCopyWith<$Res> {
       __$$PlannedCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
-      Map<String, dynamic> attributes});
+      {@Id() int oid, String name, int color, Map<String, dynamic> attributes});
 }
 
 /// @nodoc
@@ -2265,11 +1766,16 @@ class __$$PlannedCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$Planned(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -2277,9 +1783,9 @@ class __$$PlannedCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -2287,61 +1793,33 @@ class __$$PlannedCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$Planned extends Planned {
-  const _$Planned(
-      {this.name = 'Planned',
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = Colors.green,
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'planned',
-        super._();
-
-  factory _$Planned.fromJson(Map<String, dynamic> json) =>
-      _$$PlannedFromJson(json);
+  _$Planned(
+      {@Id() this.oid = 0,
+      this.name = 'Planned',
+      this.color = 0xff4caf50,
+      this.attributes = const {}})
+      : super._();
 
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
+  @Id()
+  int oid;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  String name;
+  @override
+  @JsonKey()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus.planned(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus.planned(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Planned &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -2351,144 +1829,96 @@ class _$Planned extends Planned {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return planned(name, color, attributes);
+    return planned(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return planned?.call(name, color, attributes);
+    return planned?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if (planned != null) {
-      return planned(name, color, attributes);
+      return planned(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -2541,31 +1971,30 @@ class _$Planned extends Planned {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PlannedToJson(
-      this,
-    );
-  }
 }
 
 abstract class Planned extends TaskStatus {
-  const factory Planned(
-      {final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) final Color color,
-      final Map<String, dynamic> attributes}) = _$Planned;
-  const Planned._() : super._();
+  factory Planned(
+      {@Id() int oid,
+      String name,
+      int color,
+      Map<String, dynamic> attributes}) = _$Planned;
+  Planned._() : super._();
 
-  factory Planned.fromJson(Map<String, dynamic> json) = _$Planned.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  int get color;
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$PlannedCopyWith<_$Planned> get copyWith =>
@@ -2580,9 +2009,7 @@ abstract class _$$InProgressCopyWith<$Res>
       __$$InProgressCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
-      Map<String, dynamic> attributes});
+      {@Id() int oid, String name, int color, Map<String, dynamic> attributes});
 }
 
 /// @nodoc
@@ -2597,11 +2024,16 @@ class __$$InProgressCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? name = freezed,
     Object? color = freezed,
     Object? attributes = freezed,
   }) {
     return _then(_$InProgress(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -2609,9 +2041,9 @@ class __$$InProgressCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as Color,
+              as int,
       attributes: attributes == freezed
-          ? _value._attributes
+          ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
@@ -2619,61 +2051,33 @@ class __$$InProgressCopyWithImpl<$Res> extends _$TaskStatusCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$InProgress extends InProgress {
-  const _$InProgress(
-      {this.name = 'Planned',
-      @JsonKey(toJson: color2String, fromJson: string2Color)
-          this.color = Colors.blue,
-      final Map<String, dynamic> attributes = const {},
-      final String? $type})
-      : _attributes = attributes,
-        $type = $type ?? 'inProgress',
-        super._();
-
-  factory _$InProgress.fromJson(Map<String, dynamic> json) =>
-      _$$InProgressFromJson(json);
+  _$InProgress(
+      {@Id() this.oid = 0,
+      this.name = 'Planned',
+      this.color = 0xff2196f3,
+      this.attributes = const {}})
+      : super._();
 
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  final Color color;
-  final Map<String, dynamic> _attributes;
+  @Id()
+  int oid;
   @override
   @JsonKey()
-  Map<String, dynamic> get attributes {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_attributes);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  String name;
+  @override
+  @JsonKey()
+  int color;
+  @override
+  @JsonKey()
+  Map<String, dynamic> attributes;
 
   @override
   String toString() {
-    return 'TaskStatus.inProgress(name: $name, color: $color, attributes: $attributes)';
+    return 'TaskStatus.inProgress(oid: $oid, name: $name, color: $color, attributes: $attributes)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InProgress &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality()
-                .equals(other._attributes, _attributes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(_attributes));
 
   @JsonKey(ignore: true)
   @override
@@ -2683,144 +2087,96 @@ class _$InProgress extends InProgress {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)
         $default, {
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         complete,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         todo,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         idea,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         underReview,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         starting,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         planned,
-    required TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    required TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)
         inProgress,
   }) {
-    return inProgress(name, color, attributes);
+    return inProgress(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
   }) {
-    return inProgress?.call(name, color, attributes);
+    return inProgress?.call(oid, name, color, attributes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, @Property() int color,
             Map<String, dynamic> attributes)?
         $default, {
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         complete,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         todo,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         idea,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         underReview,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         starting,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         planned,
-    TResult Function(
-            String name,
-            @JsonKey(toJson: color2String, fromJson: string2Color) Color color,
+    TResult Function(@Id() int oid, String name, int color,
             Map<String, dynamic> attributes)?
         inProgress,
     required TResult orElse(),
   }) {
     if (inProgress != null) {
-      return inProgress(name, color, attributes);
+      return inProgress(oid, name, color, attributes);
     }
     return orElse();
   }
@@ -2873,32 +2229,30 @@ class _$InProgress extends InProgress {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$InProgressToJson(
-      this,
-    );
-  }
 }
 
 abstract class InProgress extends TaskStatus {
-  const factory InProgress(
-      {final String name,
-      @JsonKey(toJson: color2String, fromJson: string2Color) final Color color,
-      final Map<String, dynamic> attributes}) = _$InProgress;
-  const InProgress._() : super._();
+  factory InProgress(
+      {@Id() int oid,
+      String name,
+      int color,
+      Map<String, dynamic> attributes}) = _$InProgress;
+  InProgress._() : super._();
 
-  factory InProgress.fromJson(Map<String, dynamic> json) =
-      _$InProgress.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get name;
+  set name(String value);
   @override
-  @JsonKey(toJson: color2String, fromJson: string2Color)
-  Color get color;
+  int get color;
+  set color(int value);
   @override
   Map<String, dynamic> get attributes;
+  set attributes(Map<String, dynamic> value);
   @override
   @JsonKey(ignore: true)
   _$$InProgressCopyWith<_$InProgress> get copyWith =>

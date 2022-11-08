@@ -14,19 +14,21 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Workspace _$WorkspaceFromJson(Map<String, dynamic> json) {
-  return _Workspace.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Workspace {
+  @Id()
+  int get oid => throw _privateConstructorUsedError;
+  @Id()
+  set oid(int value) => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  User get belongsTo => throw _privateConstructorUsedError;
-  List<Project> get projects => throw _privateConstructorUsedError;
-  List<String> get projectIds => throw _privateConstructorUsedError;
+  set name(String value) => throw _privateConstructorUsedError;
+  ToOne<User> get belongsTo => throw _privateConstructorUsedError;
+  set belongsTo(ToOne<User> value) => throw _privateConstructorUsedError;
+  ToMany<Project> get projects => throw _privateConstructorUsedError;
+  set projects(ToMany<Project> value) => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $WorkspaceCopyWith<Workspace> get copyWith =>
       throw _privateConstructorUsedError;
@@ -37,13 +39,11 @@ abstract class $WorkspaceCopyWith<$Res> {
   factory $WorkspaceCopyWith(Workspace value, $Res Function(Workspace) then) =
       _$WorkspaceCopyWithImpl<$Res>;
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String name,
-      User belongsTo,
-      List<Project> projects,
-      List<String> projectIds});
-
-  $UserCopyWith<$Res> get belongsTo;
+      ToOne<User> belongsTo,
+      ToMany<Project> projects});
 }
 
 /// @nodoc
@@ -56,13 +56,17 @@ class _$WorkspaceCopyWithImpl<$Res> implements $WorkspaceCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? belongsTo = freezed,
     Object? projects = freezed,
-    Object? projectIds = freezed,
   }) {
     return _then(_value.copyWith(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -74,23 +78,12 @@ class _$WorkspaceCopyWithImpl<$Res> implements $WorkspaceCopyWith<$Res> {
       belongsTo: belongsTo == freezed
           ? _value.belongsTo
           : belongsTo // ignore: cast_nullable_to_non_nullable
-              as User,
+              as ToOne<User>,
       projects: projects == freezed
           ? _value.projects
           : projects // ignore: cast_nullable_to_non_nullable
-              as List<Project>,
-      projectIds: projectIds == freezed
-          ? _value.projectIds
-          : projectIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as ToMany<Project>,
     ));
-  }
-
-  @override
-  $UserCopyWith<$Res> get belongsTo {
-    return $UserCopyWith<$Res>(_value.belongsTo, (value) {
-      return _then(_value.copyWith(belongsTo: value));
-    });
   }
 }
 
@@ -101,14 +94,11 @@ abstract class _$$_WorkspaceCopyWith<$Res> implements $WorkspaceCopyWith<$Res> {
       __$$_WorkspaceCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
+      {@Id() int oid,
+      String id,
       String name,
-      User belongsTo,
-      List<Project> projects,
-      List<String> projectIds});
-
-  @override
-  $UserCopyWith<$Res> get belongsTo;
+      ToOne<User> belongsTo,
+      ToMany<Project> projects});
 }
 
 /// @nodoc
@@ -123,13 +113,17 @@ class __$$_WorkspaceCopyWithImpl<$Res> extends _$WorkspaceCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? oid = freezed,
     Object? id = freezed,
     Object? name = freezed,
     Object? belongsTo = freezed,
     Object? projects = freezed,
-    Object? projectIds = freezed,
   }) {
     return _then(_$_Workspace(
+      oid: oid == freezed
+          ? _value.oid
+          : oid // ignore: cast_nullable_to_non_nullable
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -141,120 +135,77 @@ class __$$_WorkspaceCopyWithImpl<$Res> extends _$WorkspaceCopyWithImpl<$Res>
       belongsTo: belongsTo == freezed
           ? _value.belongsTo
           : belongsTo // ignore: cast_nullable_to_non_nullable
-              as User,
+              as ToOne<User>,
       projects: projects == freezed
-          ? _value._projects
+          ? _value.projects
           : projects // ignore: cast_nullable_to_non_nullable
-              as List<Project>,
-      projectIds: projectIds == freezed
-          ? _value._projectIds
-          : projectIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as ToMany<Project>,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@Entity(realClass: Workspace)
 class _$_Workspace extends _Workspace {
-  const _$_Workspace(
-      {required this.id,
+  _$_Workspace(
+      {@Id() this.oid = 0,
+      required this.id,
       required this.name,
       required this.belongsTo,
-      final List<Project> projects = const [],
-      final List<String> projectIds = const []})
-      : _projects = projects,
-        _projectIds = projectIds,
-        super._();
+      required this.projects})
+      : super._();
 
-  factory _$_Workspace.fromJson(Map<String, dynamic> json) =>
-      _$$_WorkspaceFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final String name;
-  @override
-  final User belongsTo;
-  final List<Project> _projects;
   @override
   @JsonKey()
-  List<Project> get projects {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_projects);
-  }
-
-  final List<String> _projectIds;
+  @Id()
+  int oid;
   @override
-  @JsonKey()
-  List<String> get projectIds {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_projectIds);
-  }
+  String id;
+  @override
+  String name;
+  @override
+  ToOne<User> belongsTo;
+  @override
+  ToMany<Project> projects;
 
   @override
   String toString() {
-    return 'Workspace(id: $id, name: $name, belongsTo: $belongsTo, projects: $projects, projectIds: $projectIds)';
+    return 'Workspace(oid: $oid, id: $id, name: $name, belongsTo: $belongsTo, projects: $projects)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Workspace &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.belongsTo, belongsTo) &&
-            const DeepCollectionEquality().equals(other._projects, _projects) &&
-            const DeepCollectionEquality()
-                .equals(other._projectIds, _projectIds));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(belongsTo),
-      const DeepCollectionEquality().hash(_projects),
-      const DeepCollectionEquality().hash(_projectIds));
 
   @JsonKey(ignore: true)
   @override
   _$$_WorkspaceCopyWith<_$_Workspace> get copyWith =>
       __$$_WorkspaceCopyWithImpl<_$_Workspace>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_WorkspaceToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Workspace extends Workspace {
-  const factory _Workspace(
-      {required final String id,
-      required final String name,
-      required final User belongsTo,
-      final List<Project> projects,
-      final List<String> projectIds}) = _$_Workspace;
-  const _Workspace._() : super._();
+  factory _Workspace(
+      {@Id() int oid,
+      required String id,
+      required String name,
+      required ToOne<User> belongsTo,
+      required ToMany<Project> projects}) = _$_Workspace;
+  _Workspace._() : super._();
 
-  factory _Workspace.fromJson(Map<String, dynamic> json) =
-      _$_Workspace.fromJson;
-
+  @override
+  @Id()
+  int get oid;
+  @Id()
+  set oid(int value);
   @override
   String get id;
+  set id(String value);
   @override
   String get name;
+  set name(String value);
   @override
-  User get belongsTo;
+  ToOne<User> get belongsTo;
+  set belongsTo(ToOne<User> value);
   @override
-  List<Project> get projects;
-  @override
-  List<String> get projectIds;
+  ToMany<Project> get projects;
+  set projects(ToMany<Project> value);
   @override
   @JsonKey(ignore: true)
   _$$_WorkspaceCopyWith<_$_Workspace> get copyWith =>

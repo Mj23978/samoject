@@ -1,17 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
 part 'task_details.freezed.dart';
-part 'task_details.g.dart';
+// part 'task_details.g.dart';
 
-@freezed
+@unfreezed
 class TaskDetails with _$TaskDetails {
   const TaskDetails._();
-  const factory TaskDetails({
+
+  @Entity(realClass: TaskDetails)
+  factory TaskDetails({
+    @Id() @Default(0) int oid,
     required String id,
     required String hash,
     @Default("") String content,
-    @Default({}) Map<String, dynamic> attributes,
+    // @Default({}) Map<String, dynamic> attributes,
   }) = _TaskDetails;
 
-  factory TaskDetails.fromJson(Map<String, dynamic> json) => _$TaskDetailsFromJson(json);
+  // factory TaskDetails.fromJson(Map<String, dynamic> json) => _$TaskDetailsFromJson(json);
 }

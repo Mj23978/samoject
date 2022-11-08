@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   flowy_infra_ui
   hotkey_manager
+  objectbox_sync_flutter_libs
   rich_clipboard_linux
   url_launcher_linux
 )

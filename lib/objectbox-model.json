@@ -1,0 +1,631 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4457092672811045211",
+      "lastPropertyId": "5:7904942030907009503",
+      "name": "Workspace",
+      "properties": [
+        {
+          "id": "1:352527237127235439",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4269280095025478687",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:5398075115538317336",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:7904942030907009503",
+          "name": "belongsToId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:8871940445540955345",
+          "relationTarget": "User"
+        }
+      ],
+      "relations": [
+        {
+          "id": "11:857888771549376902",
+          "name": "projects",
+          "targetId": "3:3348388344755759747"
+        }
+      ]
+    },
+    {
+      "id": "2:4758389337228198835",
+      "lastPropertyId": "6:4768188333750703080",
+      "name": "Comment",
+      "properties": [
+        {
+          "id": "1:4264315866317715404",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4110860993506188724",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "4:6058151331346270265",
+          "name": "content",
+          "type": 9
+        },
+        {
+          "id": "6:4768188333750703080",
+          "name": "chatId",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:3348388344755759747",
+      "lastPropertyId": "5:3811844683075990895",
+      "name": "Project",
+      "properties": [
+        {
+          "id": "1:7317595670289190097",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8949070744593014503",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:5016210532765549503",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:3167015192846028779",
+          "name": "settingsId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:5792564026788477082",
+          "relationTarget": "ProjectSettings"
+        },
+        {
+          "id": "5:3811844683075990895",
+          "name": "workspaceIdId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "3:1755622637998952890",
+          "relationTarget": "Workspace"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:2282674462262986181",
+          "name": "spaces",
+          "targetId": "5:416218293506911364"
+        },
+        {
+          "id": "2:4003131609710208149",
+          "name": "tasks",
+          "targetId": "10:668691340192781713"
+        },
+        {
+          "id": "3:8156663267927026675",
+          "name": "users",
+          "targetId": "13:599085024008558693"
+        }
+      ]
+    },
+    {
+      "id": "4:5599679542027812634",
+      "lastPropertyId": "3:6540076496901507940",
+      "name": "ProjectSettings",
+      "properties": [
+        {
+          "id": "1:102737763826407561",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7090682760152044602",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:6540076496901507940",
+          "name": "localId",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:416218293506911364",
+      "lastPropertyId": "7:5489938292971952039",
+      "name": "Space",
+      "properties": [
+        {
+          "id": "1:5103460942873309306",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5227223453920745714",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:3845456524033440797",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:3306899641605640769",
+          "name": "viewId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "4:6434032288057580920",
+          "relationTarget": "SpaceView"
+        },
+        {
+          "id": "5:4325858145163858789",
+          "name": "projectIdId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "5:5603674740139576697",
+          "relationTarget": "Project"
+        },
+        {
+          "id": "6:2776847407272999369",
+          "name": "spaceType",
+          "type": 9
+        },
+        {
+          "id": "7:5489938292971952039",
+          "name": "settingsId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "6:141508014356347336",
+          "relationTarget": "SpaceSettings"
+        }
+      ],
+      "relations": [
+        {
+          "id": "4:5382598089704924904",
+          "name": "subSpaces",
+          "targetId": "5:416218293506911364"
+        }
+      ]
+    },
+    {
+      "id": "6:2568798663836072200",
+      "lastPropertyId": "2:6011230819675171830",
+      "name": "SpaceSettings",
+      "properties": [
+        {
+          "id": "1:4063808901623162172",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6011230819675171830",
+          "name": "selected",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:8141941220174619261",
+      "lastPropertyId": "2:1746396654528960728",
+      "name": "SpaceSettingsBox",
+      "properties": [
+        {
+          "id": "1:2382445159390895882",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1746396654528960728",
+          "name": "selected",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "8:1884178888727387147",
+      "lastPropertyId": "2:8511907499616580854",
+      "name": "SpaceView",
+      "properties": [
+        {
+          "id": "1:8275880959947560202",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8511907499616580854",
+          "name": "onHovered",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "9:126297654268064936",
+      "lastPropertyId": "2:2465385503786269174",
+      "name": "SpaceViewBox",
+      "properties": [
+        {
+          "id": "1:9031599487841101762",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2465385503786269174",
+          "name": "onHovered",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "10:668691340192781713",
+      "lastPropertyId": "8:8021354632851478087",
+      "name": "Task",
+      "properties": [
+        {
+          "id": "1:1177261102363249858",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2182582714712343974",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:4922284296049637426",
+          "name": "taskName",
+          "type": 9
+        },
+        {
+          "id": "4:7127742682436902730",
+          "name": "creatorIdId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "7:6940125123627060583",
+          "relationTarget": "User"
+        },
+        {
+          "id": "5:5708189522931136353",
+          "name": "projectIdId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "8:3245751979421865311",
+          "relationTarget": "Project"
+        },
+        {
+          "id": "6:3273868291894409041",
+          "name": "taskDetailsIdId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "9:1977724266282894780",
+          "relationTarget": "TaskDetails"
+        },
+        {
+          "id": "7:3421369547276579095",
+          "name": "statusId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "10:5834415805734941146",
+          "relationTarget": "TaskStatus"
+        },
+        {
+          "id": "8:8021354632851478087",
+          "name": "taskDetailsHash",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "5:8875648209809234333",
+          "name": "assignesId",
+          "targetId": "13:599085024008558693"
+        },
+        {
+          "id": "6:3588377484197133024",
+          "name": "subTasks",
+          "targetId": "10:668691340192781713"
+        }
+      ]
+    },
+    {
+      "id": "11:188199304217904813",
+      "lastPropertyId": "4:5172373956842404405",
+      "name": "TaskDetails",
+      "properties": [
+        {
+          "id": "1:1147930157334610833",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4326358525293033372",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:7265242882409999090",
+          "name": "hash",
+          "type": 9
+        },
+        {
+          "id": "4:5172373956842404405",
+          "name": "content",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "13:599085024008558693",
+      "lastPropertyId": "10:6500922448306938868",
+      "name": "User",
+      "properties": [
+        {
+          "id": "1:7407905113490621186",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3466097920580937853",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:1059173384060340234",
+          "name": "username",
+          "type": 9
+        },
+        {
+          "id": "4:3135759581543635767",
+          "name": "date",
+          "type": 10
+        },
+        {
+          "id": "5:823982089730389962",
+          "name": "firstName",
+          "type": 9
+        },
+        {
+          "id": "6:7048461634904104579",
+          "name": "lastName",
+          "type": 9
+        },
+        {
+          "id": "7:5613195657322232503",
+          "name": "password",
+          "type": 9
+        },
+        {
+          "id": "8:775481390736405986",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "9:1523467690195499738",
+          "name": "active",
+          "type": 1
+        },
+        {
+          "id": "10:6500922448306938868",
+          "name": "roleName",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "7:5784966577856649252",
+          "name": "createdTasks",
+          "targetId": "10:668691340192781713"
+        },
+        {
+          "id": "8:5177653892162574174",
+          "name": "assignedTasks",
+          "targetId": "10:668691340192781713"
+        },
+        {
+          "id": "9:6144273780863386834",
+          "name": "comments",
+          "targetId": "2:4758389337228198835"
+        },
+        {
+          "id": "10:9039375274924292885",
+          "name": "projects",
+          "targetId": "3:3348388344755759747"
+        }
+      ]
+    },
+    {
+      "id": "17:5185256598283999426",
+      "lastPropertyId": "4:7238738493163669485",
+      "name": "TaskStatus",
+      "properties": [
+        {
+          "id": "1:9076657873575074115",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:811887765216743477",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:3514448248679069502",
+          "name": "color",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "18:5233531745739680630",
+      "lastPropertyId": "9:2481751986101498792",
+      "name": "SpaceBox",
+      "properties": [
+        {
+          "id": "1:5755316987155909844",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7629158890122349122",
+          "name": "id",
+          "type": 9
+        },
+        {
+          "id": "3:6209892199154019287",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:5089385466157395547",
+          "name": "settingsId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "11:9014774979230805758",
+          "relationTarget": "SpaceSettings"
+        },
+        {
+          "id": "6:8650134571625411726",
+          "name": "viewId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "12:1032819308735781024",
+          "relationTarget": "SpaceView"
+        },
+        {
+          "id": "7:50316894840161047",
+          "name": "spaceType",
+          "type": 9
+        },
+        {
+          "id": "9:2481751986101498792",
+          "name": "projectIdId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "13:2366231920119172090",
+          "relationTarget": "Project"
+        }
+      ],
+      "relations": [
+        {
+          "id": "12:2358260114699359082",
+          "name": "subSpaces",
+          "targetId": "5:416218293506911364"
+        }
+      ]
+    },
+    {
+      "id": "21:4722199456347101809",
+      "lastPropertyId": "4:8952288439879732633",
+      "name": "AppConfigs",
+      "properties": [
+        {
+          "id": "1:1095817851718815729",
+          "name": "oid",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6769865188322356",
+          "name": "initialized",
+          "type": 1
+        },
+        {
+          "id": "3:746811092298587212",
+          "name": "showSplash",
+          "type": 1
+        },
+        {
+          "id": "4:8952288439879732633",
+          "name": "meId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "14:5885576689302829196",
+          "relationTarget": "User"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "21:4722199456347101809",
+  "lastIndexId": "14:5885576689302829196",
+  "lastRelationId": "12:2358260114699359082",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    8416600187245671445,
+    6833379649777905168,
+    6608573879314445525,
+    1744098807154474257,
+    7186394406921338542,
+    6014449136680129708
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    1739559391261148613,
+    7994390675229208157,
+    8423738553689208890,
+    8859915711347717922,
+    2808084952509724806,
+    875859673518189166,
+    4066226470755942427,
+    5978417029095110923,
+    8085965844341386634,
+    1136726109744807035,
+    8461391272475480920,
+    2690452863585814450,
+    7747143318943954198,
+    4965528203946182992,
+    7923703706140111229,
+    3914267508000628607,
+    7238738493163669485,
+    3731195532947766412,
+    180219586393936214,
+    1953671405657352601,
+    7010859011007775909,
+    7598963417255254553,
+    4513413153117331644,
+    3589144483930274688,
+    6431793214300499069,
+    6388786091700471094,
+    3729068599794230303
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
